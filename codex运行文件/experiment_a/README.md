@@ -29,7 +29,7 @@ python codex运行文件/experiment_a/run_experiment_a.py --validate-only
 自动支持图按文件名中的空间坐标选取地理位置居中的影像，不读取查询掩膜。正式实验建议明确指定支持影像，便于复现：
 
 ```bash
-python "codex运行文件/experiment_a/run_experiment_a.py" --support PV08_312621_1197085.bmp --weights /path/to/dinov3_vitl16_pretrain_sat493m-eadcf0ff.pth --device cuda
+python "codex运行文件/experiment_a/run_experiment_a.py" --support PV08_331824_1195530.bmp --weights /path/to/dinov3_vitl16_pretrain_sat493m-eadcf0ff.pth --device cuda
 ```
 
 默认使用 512×512 分块、ViT-L/16 最后四层特征、前景/背景加权原型，分数为 `cosine(fg) - cosine(bg)`，阈值为 0。每次运行会在 `codex运行文件/experiment_a/runs/<时间戳>/` 下保存 `summary.json`、逐图指标 CSV 和预测掩膜。
