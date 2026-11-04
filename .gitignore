@@ -8,6 +8,7 @@
 
 # Experiment outputs and Python cache
 /codex运行文件/experiment_a/runs/
+/codex运行文件/kaggle_pv_dinov3_inspect/
 __pycache__/
 *.py[cod]
 .venv/

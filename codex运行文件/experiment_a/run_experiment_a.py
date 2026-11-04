@@ -113,20 +113,11 @@ def choose_support(pairs: list[ImagePair], requested: str) -> ImagePair:
         raise ValueError("Support image is not in the paired dataset: {}".format(requested))
 
     coordinate_pairs = [pair for pair in pairs if pair.x is not None and pair.y is not None]
-    candidates = coordinate_pairs or pairs
-    median_fraction = float(np.median([pair.foreground_fraction for pair in candidates]))
-    if coordinate_pairs:
-        median_x = float(np.median([pair.x for pair in coordinate_pairs]))
-        median_y = float(np.median([pair.y for pair in coordinate_pairs]))
-        span_x = max(1.0, max(pair.x for pair in coordinate_pairs) - min(pair.x for pair in coordinate_pairs))
-        span_y = max(1.0, max(pair.y for pair in coordinate_pairs) - min(pair.y for pair in coordinate_pairs))
-
-        def score(pair: ImagePair) -> float:
-            spatial = math.hypot((pair.x - median_x) / span_x, (pair.y - median_y) / span_y)
-            return spatial + abs(pair.foreground_fraction - median_fraction)
-
-        return min(coordinate_pairs, key=score)
-    return min(candidates, key=lambda pair: abs(pair.foreground_fraction - median_fraction))
+    if not coordinate_pairs:
+        return min(pairs, key=lambda pair: pair.name)
+    median_x = float(np.median([pair.x for pair in coordinate_pairs]))
+    median_y = float(np.median([pair.y for pair in coordinate_pairs]))
+    return min(coordinate_pairs, key=lambda pair: math.hypot(pair.x - median_x, pair.y - median_y))
 
 
 def select_queries(pairs: list[ImagePair], support: ImagePair, buffer_distance: float) -> tuple[list[ImagePair], int]:

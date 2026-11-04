@@ -26,7 +26,7 @@ Kaggle 通常已安装 PyTorch。若本地运行，按本机 CUDA 版本安装 P
 python codex运行文件/experiment_a/run_experiment_a.py --validate-only
 ```
 
-自动支持图按空间坐标中位位置和数据集中位前景比例选取。正式实验建议明确指定支持影像，便于复现：
+自动支持图按文件名中的空间坐标选取地理位置居中的影像，不读取查询掩膜。正式实验建议明确指定支持影像，便于复现：
 
 ```bash
 python "codex运行文件/experiment_a/run_experiment_a.py" --support PV08_312621_1197085.bmp --weights /path/to/dinov3_vitl16_pretrain_sat493m-eadcf0ff.pth --device cuda
