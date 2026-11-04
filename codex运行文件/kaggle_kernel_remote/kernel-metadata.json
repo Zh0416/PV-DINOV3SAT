@@ -1,0 +1,21 @@
+{
+  "id": "zh0416/pv-dinov3sat-experiment-a-run",
+  "id_no": 142719950,
+  "title": "PV DINOv3SAT Experiment A Run",
+  "code_file": "pv-dinov3sat-experiment-a-run.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "zh0416/pv-dinov3sat-experiment-a"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [
+    "yadavdamodar/dinov3-vitl16-pretrain-sat493m/PyTorch/default/1"
+  ]
+}
