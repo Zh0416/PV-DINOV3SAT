@@ -1,0 +1,13 @@
+# Local imagery and labels
+/datasets/
+
+# Downloaded upstream repository and licensed model weights
+/codex运行文件/dinov3/
+/codex运行文件/**/*.pth
+/codex运行文件/**/*.pt
+
+# Experiment outputs and Python cache
+/codex运行文件/experiment_a/runs/
+__pycache__/
+*.py[cod]
+.venv/
