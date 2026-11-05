@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import math
 import shutil
 import subprocess
@@ -15,7 +16,28 @@ SUPPORT_NAME = "PV08_331824_1195530.bmp"
 EXPECTED_SHA256_PREFIX = "eadcf0ff"
 DINOV3_REPOSITORY = "https://github.com/facebookresearch/dinov3.git"
 SPATIAL_BUFFER = 1000
-SMOKE_QUERY_COUNT = 2
+QUERY_NAMES = (
+    "PV08_347185_1164244.bmp",
+    "PV08_318322_1218788.bmp",
+    "PV08_319542_1183980.bmp",
+    "PV08_344239_1199475.bmp",
+    "PV08_337694_1182766.bmp",
+    "PV08_326513_1201232.bmp",
+    "PV08_312621_1197085.bmp",
+    "PV08_348179_1189176.bmp",
+    "PV08_315404_1208378.bmp",
+    "PV08_329573_1189671.bmp",
+    "PV08_342992_1173495.bmp",
+    "PV08_325206_1211345.bmp",
+    "PV08_334930_1197013.bmp",
+    "PV08_338249_1204612.bmp",
+    "PV08_322505_1192968.bmp",
+    "PV08_340747_1192732.bmp",
+    "PV08_331361_1208263.bmp",
+    "PV08_320381_1199142.bmp",
+    "PV08_316218_1191721.bmp",
+    "PV08_331752_1180424.bmp",
+)
 
 
 def sha256_prefix(path: Path, length: int = 8) -> str:
@@ -57,30 +79,28 @@ def member_map(archive: zipfile.ZipFile, predicate) -> dict[str, str]:
     return entries
 
 
-def select_smoke_names(image_names: list[str]) -> list[str]:
+def select_test_names(image_names: list[str]) -> list[str]:
     support = SUPPORT_NAME
     if support not in image_names:
         raise FileNotFoundError("Support image is missing from the uploaded archive: {}".format(support))
     support_parts = support.removesuffix(".bmp").split("_")
     support_x, support_y = int(support_parts[-2]), int(support_parts[-1])
-    candidates = []
-    for name in image_names:
-        if name == support:
-            continue
+    available = set(image_names)
+    if len(set(QUERY_NAMES)) != 20:
+        raise RuntimeError("The fixed test query list must contain exactly 20 unique names.")
+    missing = [name for name in QUERY_NAMES if name not in available]
+    if missing:
+        raise FileNotFoundError("Test queries are missing from the dataset: {}".format(", ".join(missing)))
+    for name in QUERY_NAMES:
         parts = name.removesuffix(".bmp").split("_")
-        if len(parts) < 3:
-            continue
         x, y = int(parts[-2]), int(parts[-1])
         distance = math.hypot(x - support_x, y - support_y)
-        if distance > SPATIAL_BUFFER:
-            candidates.append((distance, name))
-    selected = [name for _, name in sorted(candidates)[:SMOKE_QUERY_COUNT]]
-    if len(selected) != SMOKE_QUERY_COUNT:
-        raise RuntimeError("Not enough query images outside the spatial buffer for the smoke test.")
-    return [support, *selected]
+        if distance <= SPATIAL_BUFFER:
+            raise ValueError("Fixed test query is inside the spatial buffer: {}".format(name))
+    return [support, *QUERY_NAMES]
 
 
-def extract_smoke_subset(image_archive_path: Path, mask_archive_path: Path, dataset_root: Path) -> None:
+def extract_test_subset(image_archive_path: Path, mask_archive_path: Path, dataset_root: Path) -> None:
     images_dir = dataset_root / "images"
     masks_dir = dataset_root / "mask"
     images_dir.mkdir(parents=True, exist_ok=True)
@@ -93,24 +113,26 @@ def extract_smoke_subset(image_archive_path: Path, mask_archive_path: Path, data
         mask_entries = member_map(mask_archive, lambda name: name.lower().endswith("_label.bmp"))
         if len(image_entries) != 663 or len(mask_entries) != 663:
             raise RuntimeError("Expected 663 unique images and masks in the archives.")
-        selected_names = select_smoke_names(sorted(image_entries))
+        selected_names = select_test_names(sorted(image_entries))
         for image_name in selected_names:
             mask_name = Path(image_name).stem + "_label.bmp"
             if mask_name not in mask_entries:
                 raise FileNotFoundError("Mask is missing from the uploaded archive: {}".format(mask_name))
             (images_dir / image_name).write_bytes(image_archive.read(image_entries[image_name]))
             (masks_dir / mask_name).write_bytes(mask_archive.read(mask_entries[mask_name]))
-    print("Smoke-test subset: support={} queries={}".format(selected_names[0], selected_names[1:]), flush=True)
+    print("Fixed benchmark subset: support={} query_count={} queries={}".format(
+        selected_names[0], len(selected_names) - 1, selected_names[1:]
+    ), flush=True)
 
 
-def stage_smoke_subset(source_root: Path, dataset_root: Path) -> None:
+def stage_test_subset(source_root: Path, dataset_root: Path) -> None:
     source_images = source_root / "images"
     source_masks = source_root / "mask"
     image_names = sorted(path.name for path in source_images.glob("*.bmp"))
     mask_names = {path.name for path in source_masks.glob("*_label.bmp")}
     if len(image_names) != 663 or len(mask_names) != 663:
         raise RuntimeError("Expected 663 images and masks in the mounted dataset.")
-    selected_names = select_smoke_names(image_names)
+    selected_names = select_test_names(image_names)
     images_dir = dataset_root / "images"
     masks_dir = dataset_root / "mask"
     images_dir.mkdir(parents=True, exist_ok=True)
@@ -121,13 +143,15 @@ def stage_smoke_subset(source_root: Path, dataset_root: Path) -> None:
             raise FileNotFoundError("Mask is missing from the mounted dataset: {}".format(mask_name))
         shutil.copyfile(source_images / image_name, images_dir / image_name)
         shutil.copyfile(source_masks / mask_name, masks_dir / mask_name)
-    print("Smoke-test subset: support={} queries={}".format(selected_names[0], selected_names[1:]), flush=True)
+    print("Fixed benchmark subset: support={} query_count={} queries={}".format(
+        selected_names[0], len(selected_names) - 1, selected_names[1:]
+    ), flush=True)
 
 
 def main() -> None:
     input_root = Path("/kaggle/input")
     working_root = Path("/kaggle/working")
-    dataset_root = working_root / "experiment_a_smoke_dataset"
+    dataset_root = working_root / "experiment_a_benchmark_v1"
     input_children = sorted(str(path) for path in input_root.iterdir()) if input_root.is_dir() else []
     print("Mounted Kaggle inputs: {}".format(input_children), flush=True)
     candidates = set()
@@ -142,7 +166,7 @@ def main() -> None:
                 candidates.add(image_dir.parent)
 
     if len(candidates) == 1:
-        stage_smoke_subset(next(iter(candidates)), dataset_root)
+        stage_test_subset(next(iter(candidates)), dataset_root)
     elif not candidates:
         image_archive = find_archive(
             input_root,
@@ -157,7 +181,7 @@ def main() -> None:
             lambda members: sum(name.lower().endswith("_label.bmp") for name in members) == 663,
             "663-mask",
         )
-        extract_smoke_subset(image_archive, mask_archive, dataset_root)
+        extract_test_subset(image_archive, mask_archive, dataset_root)
     else:
         raise FileNotFoundError("Found multiple matching 663-pair image/mask directories: {}".format(
             sorted(str(path) for path in candidates)
@@ -185,8 +209,8 @@ def main() -> None:
         code_path = code_dir / "run_experiment_a.py"
     image_count = len(list(images_dir.glob("*.bmp")))
     mask_count = len(list(masks_dir.glob("*_label.bmp")))
-    if image_count != SMOKE_QUERY_COUNT + 1 or mask_count != SMOKE_QUERY_COUNT + 1:
-        raise RuntimeError("Expected exactly the smoke-test subset; found {} images and {} masks.".format(
+    if image_count != len(QUERY_NAMES) + 1 or mask_count != len(QUERY_NAMES) + 1:
+        raise RuntimeError("Expected exactly the fixed benchmark subset; found {} images and {} masks.".format(
             image_count, mask_count
         ))
 
@@ -217,7 +241,7 @@ def main() -> None:
         raise RuntimeError("The Kaggle kernel has no GPU. Enable a GPU accelerator and rerun.")
     print("GPU: {}".format(torch.cuda.get_device_name(0)), flush=True)
 
-    output_dir = working_root / "experiment_a_results"
+    output_dir = working_root / "experiment_a_benchmark_v1_results"
     command = [
         sys.executable,
         str(code_path),
@@ -226,11 +250,21 @@ def main() -> None:
         "--weights", str(weight_path),
         "--support", SUPPORT_NAME,
         "--spatial-buffer", str(SPATIAL_BUFFER),
-        "--limit-query", str(SMOKE_QUERY_COUNT),
+        "--limit-query", str(len(QUERY_NAMES)),
         "--device", "cuda",
         "--output-dir", str(output_dir),
     ]
     subprocess.run(command, check=True, cwd=working_root)
+    summary_path = output_dir / "summary.json"
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    summary["test_manifest_version"] = 1
+    summary["test_manifest"] = {
+        "support_image": SUPPORT_NAME,
+        "query_images": list(QUERY_NAMES),
+        "spatial_buffer_coordinate_units": SPATIAL_BUFFER,
+    }
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    (output_dir / "benchmark_v1.json").write_text(json.dumps(summary["test_manifest"], indent=2), encoding="utf-8")
     print("Experiment outputs: {}".format(output_dir), flush=True)
 
 

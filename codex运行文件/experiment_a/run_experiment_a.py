@@ -20,6 +20,7 @@ from PIL import Image
 SAT_MEAN = (0.430, 0.411, 0.296)
 SAT_STD = (0.213, 0.156, 0.143)
 COORDINATE_PATTERN = re.compile(r"^PV\d+_(\d+)_(\d+)$", re.IGNORECASE)
+TEST_QUERY_COUNT = 20
 
 
 @dataclass(frozen=True)
@@ -43,10 +44,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dinov3-repo", type=Path, default=Path(__file__).resolve().parents[1] / "dinov3")
     parser.add_argument("--weights", type=Path, required=False)
     parser.add_argument("--support", default="auto", help="Image basename or 'auto'.")
+    parser.add_argument("--test-manifest", type=Path, default=None, help="Fixed support/query JSON manifest.")
     parser.add_argument(
         "--spatial-buffer",
         type=float,
-        default=1000.0,
+        default=None,
         help="Exclude query tiles within this filename-coordinate distance of support; use 0 to disable.",
     )
     parser.add_argument("--crop-size", type=int, default=512)
@@ -133,6 +135,19 @@ def select_queries(pairs: list[ImagePair], support: ImagePair, buffer_distance: 
                 continue
         queries.append(pair)
     return queries, excluded
+
+
+def read_test_manifest(path: Path) -> dict[str, Any]:
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    support_name = Path(manifest["support_image"]).name
+    query_names = [Path(name).name for name in manifest["query_images"]]
+    if len(query_names) != TEST_QUERY_COUNT or len(set(query_names)) != TEST_QUERY_COUNT:
+        raise ValueError("Test manifest must contain exactly {} unique query images.".format(TEST_QUERY_COUNT))
+    if support_name in query_names:
+        raise ValueError("The support image must not also appear in the query list.")
+    manifest["support_image"] = support_name
+    manifest["query_images"] = query_names
+    return manifest
 
 
 def audit_data(pairs: list[ImagePair], support: ImagePair, queries: list[ImagePair], excluded: int) -> dict[str, Any]:
@@ -303,10 +318,30 @@ def main() -> None:
     masks_dir = (args.masks_dir or args.data_root / "mask").resolve()
     repo_path = args.dinov3_repo if args.dinov3_repo.is_absolute() else project_root / args.dinov3_repo
     pairs = find_pairs(images_dir, masks_dir)
-    support = choose_support(pairs, args.support)
-    queries, excluded = select_queries(pairs, support, args.spatial_buffer)
-    if args.limit_query > 0:
-        queries = queries[: args.limit_query]
+    manifest = read_test_manifest(args.test_manifest.resolve()) if args.test_manifest else None
+    if manifest:
+        if args.support.lower() != "auto" and Path(args.support).name != manifest["support_image"]:
+            raise ValueError("--support must match the support image in --test-manifest.")
+        spatial_buffer = float(manifest.get("spatial_buffer_coordinate_units", 1000.0))
+        if args.spatial_buffer is not None and args.spatial_buffer != spatial_buffer:
+            raise ValueError("--spatial-buffer must match the fixed test manifest.")
+        support = choose_support(pairs, manifest["support_image"])
+        eligible_queries, excluded = select_queries(pairs, support, spatial_buffer)
+        eligible_by_name = {pair.name: pair for pair in eligible_queries}
+        missing_or_buffered = [name for name in manifest["query_images"] if name not in eligible_by_name]
+        if missing_or_buffered:
+            raise ValueError("Manifest queries are missing or inside the spatial buffer: {}".format(
+                ", ".join(missing_or_buffered)
+            ))
+        queries = [eligible_by_name[name] for name in manifest["query_images"]]
+        if args.limit_query and args.limit_query != TEST_QUERY_COUNT:
+            raise ValueError("Do not reduce --limit-query when using the fixed 20-query manifest.")
+    else:
+        support = choose_support(pairs, args.support)
+        spatial_buffer = args.spatial_buffer if args.spatial_buffer is not None else 1000.0
+        queries, excluded = select_queries(pairs, support, spatial_buffer)
+        if args.limit_query > 0:
+            queries = queries[: args.limit_query]
     audit = audit_data(pairs, support, queries, excluded)
     print(json.dumps(audit, ensure_ascii=False, indent=2))
     if args.validate_only:
@@ -362,7 +397,7 @@ def main() -> None:
         "experiment": "A_frozen_dinov3_sat_foreground_background_prototypes",
         "support": support.name,
         "support_foreground_fraction": support.foreground_fraction,
-        "spatial_buffer_coordinate_units": args.spatial_buffer,
+        "spatial_buffer_coordinate_units": spatial_buffer,
         "queries_excluded_by_spatial_buffer": excluded,
         "query_count": len(rows),
         "backbone": "DINOv3 ViT-L/16 SAT-493M (frozen)",
@@ -371,6 +406,7 @@ def main() -> None:
         "crop_size": args.crop_size,
         "patch_size": args.patch_size,
         "feature_layers": "last 4 normalized patch feature maps, averaged",
+        "test_manifest": str(args.test_manifest.resolve()) if args.test_manifest else None,
         "segmentation_head": None,
         "segmentation_method": "frozen foreground/background prototype cosine matching; bilinear upsampling; fixed threshold",
         "prototype": "mask-fraction weighted foreground and background means",

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "name": "DINOv3-SAT fixed one-shot 20-query benchmark",
+  "support_image": "PV08_331824_1195530.bmp",
+  "spatial_buffer_coordinate_units": 1000,
+  "coordinate_units_note": "Distance uses numeric coordinates parsed from filenames; their physical unit has not been independently verified.",
+  "query_selection": "Deterministic greedy farthest-point sampling in filename-coordinate Euclidean space. Start with the eligible image farthest from support, then repeatedly select the image maximizing its minimum distance to the selected set; break ties by filename. Masks and model scores are not used for selection.",
+  "query_images": [
+    "PV08_347185_1164244.bmp",
+    "PV08_318322_1218788.bmp",
+    "PV08_319542_1183980.bmp",
+    "PV08_344239_1199475.bmp",
+    "PV08_337694_1182766.bmp",
+    "PV08_326513_1201232.bmp",
+    "PV08_312621_1197085.bmp",
+    "PV08_348179_1189176.bmp",
+    "PV08_315404_1208378.bmp",
+    "PV08_329573_1189671.bmp",
+    "PV08_342992_1173495.bmp",
+    "PV08_325206_1211345.bmp",
+    "PV08_334930_1197013.bmp",
+    "PV08_338249_1204612.bmp",
+    "PV08_322505_1192968.bmp",
+    "PV08_340747_1192732.bmp",
+    "PV08_331361_1208263.bmp",
+    "PV08_320381_1199142.bmp",
+    "PV08_316218_1191721.bmp",
+    "PV08_331752_1180424.bmp"
+  ]
+}

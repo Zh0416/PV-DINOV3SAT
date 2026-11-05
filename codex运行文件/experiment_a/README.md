@@ -36,6 +36,24 @@ python "codex运行文件/experiment_a/run_experiment_a.py" --support PV08_33182
 
 快速检查单张查询图时可加 `--limit-query 1 --no-save-predictions`。正式报告至少同时记录支持影像、空间缓冲距离、mIoU、Dice、精确率和召回率；阈值若需要调整，只能用验证区域选择，不能根据测试标签选择。
 
+## 固定 1-shot / 20-query 测试集
+
+后续模型版本统一使用 [`benchmark_v1.json`](benchmark_v1.json)：支持图固定为 `PV08_331824_1195530.bmp`，查询图固定为清单中的 20 张。清单按文件名坐标做确定性最远点抽样，并排除距支持图不超过 1000 个坐标单位的图像；抽样不查看掩膜或模型结果。坐标的物理单位尚未独立核实，因此这里把缓冲记作“文件名坐标单位”。更换支持图或查询图应创建新的 benchmark 版本，不覆盖 v1。
+
+用本地 GPU 按固定清单运行：
+
+```bash
+python "codex运行文件/experiment_a/run_experiment_a.py" --test-manifest "codex运行文件/experiment_a/benchmark_v1.json" --weights /path/to/dinov3_vitl16_pretrain_sat493m-eadcf0ff.pth --device cuda
+```
+
+Kaggle Notebook 使用同一组影像和掩膜，结果保存在 `codex运行文件/kaggle_run_output/benchmark_v1/`。每个版本都应保留逐图指标，便于确认变化是普遍提升还是由少数查询图带动。
+
+### Benchmark v1 初始基线
+
+2026-11-05 在 Kaggle Notebook 第 6 版、Tesla T4 上完成 20 张查询测试。冻结 DINOv3-SAT 原型匹配得到 micro 前景 IoU `0.4743`、micro mIoU `0.6761`、micro Dice `0.6434`、Precision `0.4809`、Recall `0.9719`；macro mIoU `0.6980`、macro Dice `0.6314`。逐图指标、20 张预测掩膜和完整运行日志均保存在上述目录，且逐图混淆矩阵计数已用本地真值掩膜复核。
+
+该固定集可作为后续版本的开发对比基准。由于反复据此调整模型会逐渐对这 20 张图过拟合，最终报告仍应另留未参与调参的区域级测试集。
+
 ## 实验边界
 
 A 是冻结特征的直接匹配诊断，不进行光伏数据训练。这个目录当前没有明确的 train/validation/test 区域清单；因此，当前默认的全数据查询结果是初步诊断，不能单独作为无空间泄漏的正式泛化结果。应根据真实区域/日期信息建立独立划分后再报告跨区域结果。
