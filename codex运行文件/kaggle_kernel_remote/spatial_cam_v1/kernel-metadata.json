@@ -1,0 +1,20 @@
+{
+  "id": "zh0416/pv-dinov3sat-spatial-cam-v1",
+  "title": "PV DINOv3SAT Spatial CAM v1",
+  "code_file": "spatial-cam-v1-run.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "zh0416/pv-dinov3sat-experiment-a"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [
+    "yadavdamodar/dinov3-vitl16-pretrain-sat493m/PyTorch/default/1"
+  ]
+}

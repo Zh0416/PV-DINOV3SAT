@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "benchmark_manifest": "../experiment_a/benchmark_v1.json",
+  "data_root": "../experiment_a/benchmark_v1_data",
+  "support_image": "PV08_331824_1195530.bmp",
+  "backbone": "DINOv3 ViT-L/16 SAT-493M",
+  "checkpoint": "dinov3_vitl16_pretrain_sat493m-eadcf0ff.pth",
+  "transformer_block_1_indexed": 24,
+  "transformer_block_zero_indexed": 23,
+  "patch_size": 16,
+  "crop_size": 512,
+  "image_size": [1024, 1024],
+  "sat_mean_rgb": [0.43, 0.411, 0.296],
+  "sat_std_rgb": [0.213, 0.156, 0.143],
+  "support_mask_values": {
+    "background": 0,
+    "photovoltaic": 12
+  },
+  "normalization": "per-channel (RGB - mean) / std",
+  "tile_layout": "non-overlapping 2x2 crops in row-major image position; each 512x512 crop produces a 32x32 patch grid; tiles are stitched to 64x64",
+  "prototype": "L2-normalize each support token; area-average binary PV mask to 64x64 fractions; weighted sum support tokens by fractions; L2-normalize the sum",
+  "score_formula": "S_fg(u,v) = cosine(F_query(u,v), p_fg)",
+  "cam_formula": "A_fg = (S_fg - min(S_fg)) / (max(S_fg) - min(S_fg) + 1e-8); constant maps are set to zero; bilinear upsample to 1024x1024 with align_corners=False",
+  "raw_score_display_range": [-1.0, 1.0],
+  "normalized_cam_display_range": [0.0, 1.0],
+  "query_masks_used": false,
+  "training_or_parameter_updates": false
+}

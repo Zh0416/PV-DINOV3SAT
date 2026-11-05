@@ -9,10 +9,13 @@
 # Experiment outputs and Python cache
 /codex运行文件/experiment_a/runs/
 /codex运行文件/experiment_a/benchmark_v1_data/
+/codex运行文件/spatial_cam_v1/benchmark_v1_results/
 /codex运行文件/kaggle_pv_dinov3_inspect/
 /codex运行文件/kaggle_dataset_upload/
 /codex运行文件/kaggle_dataset_upload_benchmark_v1/
+/codex运行文件/kaggle_dataset_upload_spatial_cam_v1/
 /codex运行文件/kaggle_experiment_a_kernel/
+/codex运行文件/kaggle_spatial_cam_kernel/
 /codex运行文件/kaggle_run_output/
 __pycache__/
 *.py[cod]
