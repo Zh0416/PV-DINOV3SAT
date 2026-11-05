@@ -371,6 +371,8 @@ def main() -> None:
         "crop_size": args.crop_size,
         "patch_size": args.patch_size,
         "feature_layers": "last 4 normalized patch feature maps, averaged",
+        "segmentation_head": None,
+        "segmentation_method": "frozen foreground/background prototype cosine matching; bilinear upsampling; fixed threshold",
         "prototype": "mask-fraction weighted foreground and background means",
         "score": "cosine(foreground prototype) - cosine(background prototype)",
         "threshold": args.threshold,
