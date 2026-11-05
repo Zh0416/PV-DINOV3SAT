@@ -2,8 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import math
-import shutil
 import subprocess
 import sys
 import zipfile
@@ -79,28 +77,12 @@ def member_map(archive: zipfile.ZipFile, predicate) -> dict[str, str]:
     return entries
 
 
-def select_test_names(image_names: list[str]) -> list[str]:
-    support = SUPPORT_NAME
-    if support not in image_names:
-        raise FileNotFoundError("Support image is missing from the uploaded archive: {}".format(support))
-    support_parts = support.removesuffix(".bmp").split("_")
-    support_x, support_y = int(support_parts[-2]), int(support_parts[-1])
-    available = set(image_names)
-    if len(set(QUERY_NAMES)) != 20:
-        raise RuntimeError("The fixed test query list must contain exactly 20 unique names.")
-    missing = [name for name in QUERY_NAMES if name not in available]
-    if missing:
-        raise FileNotFoundError("Test queries are missing from the dataset: {}".format(", ".join(missing)))
-    for name in QUERY_NAMES:
-        parts = name.removesuffix(".bmp").split("_")
-        x, y = int(parts[-2]), int(parts[-1])
-        distance = math.hypot(x - support_x, y - support_y)
-        if distance <= SPATIAL_BUFFER:
-            raise ValueError("Fixed test query is inside the spatial buffer: {}".format(name))
-    return [support, *QUERY_NAMES]
-
-
-def extract_test_subset(image_archive_path: Path, mask_archive_path: Path, dataset_root: Path) -> None:
+def extract_benchmark_dataset(
+    image_archive_path: Path,
+    mask_archive_path: Path,
+    dataset_root: Path,
+    expected_names: list[str],
+) -> None:
     images_dir = dataset_root / "images"
     masks_dir = dataset_root / "mask"
     images_dir.mkdir(parents=True, exist_ok=True)
@@ -111,47 +93,79 @@ def extract_test_subset(image_archive_path: Path, mask_archive_path: Path, datas
             lambda name: name.lower().endswith(".bmp") and not name.lower().endswith("_label.bmp"),
         )
         mask_entries = member_map(mask_archive, lambda name: name.lower().endswith("_label.bmp"))
-        if len(image_entries) != 663 or len(mask_entries) != 663:
-            raise RuntimeError("Expected 663 unique images and masks in the archives.")
-        selected_names = select_test_names(sorted(image_entries))
-        for image_name in selected_names:
+        mask_names = {Path(name).stem.removesuffix("_label") + ".bmp" for name in mask_entries}
+        expected = set(expected_names)
+        if set(image_entries) != expected or mask_names != expected:
+            raise RuntimeError("The uploaded archives must contain exactly the 21 benchmark image/mask pairs.")
+        for image_name in expected_names:
+            member_name = image_entries[image_name]
+            (images_dir / image_name).write_bytes(image_archive.read(member_name))
+        for image_name in expected_names:
             mask_name = Path(image_name).stem + "_label.bmp"
-            if mask_name not in mask_entries:
-                raise FileNotFoundError("Mask is missing from the uploaded archive: {}".format(mask_name))
-            (images_dir / image_name).write_bytes(image_archive.read(image_entries[image_name]))
-            (masks_dir / mask_name).write_bytes(mask_archive.read(mask_entries[mask_name]))
-    print("Fixed benchmark subset: support={} query_count={} queries={}".format(
-        selected_names[0], len(selected_names) - 1, selected_names[1:]
+            member_name = mask_entries[mask_name]
+            (masks_dir / mask_name).write_bytes(mask_archive.read(member_name))
+    print("Extracted {} benchmark image/mask pairs; layer weights use the single support image.".format(
+        len(expected_names)
     ), flush=True)
 
 
-def stage_test_subset(source_root: Path, dataset_root: Path) -> None:
-    source_images = source_root / "images"
-    source_masks = source_root / "mask"
-    image_names = sorted(path.name for path in source_images.glob("*.bmp"))
-    mask_names = {path.name for path in source_masks.glob("*_label.bmp")}
-    if len(image_names) != 663 or len(mask_names) != 663:
-        raise RuntimeError("Expected 663 images and masks in the mounted dataset.")
-    selected_names = select_test_names(image_names)
-    images_dir = dataset_root / "images"
-    masks_dir = dataset_root / "mask"
-    images_dir.mkdir(parents=True, exist_ok=True)
-    masks_dir.mkdir(parents=True, exist_ok=True)
-    for image_name in selected_names:
-        mask_name = Path(image_name).stem + "_label.bmp"
-        if mask_name not in mask_names:
-            raise FileNotFoundError("Mask is missing from the mounted dataset: {}".format(mask_name))
-        shutil.copyfile(source_images / image_name, images_dir / image_name)
-        shutil.copyfile(source_masks / mask_name, masks_dir / mask_name)
-    print("Fixed benchmark subset: support={} query_count={} queries={}".format(
-        selected_names[0], len(selected_names) - 1, selected_names[1:]
-    ), flush=True)
+def stage_code_bundle(input_root: Path, code_dir: Path) -> tuple[Path, Path, Path]:
+    required_names = {"run_experiment_a.py", "layer_selection_experiment.py", "benchmark_v1.json"}
+    direct_bundles = []
+    for layer_path in input_root.rglob("layer_selection_experiment.py"):
+        parent = layer_path.parent
+        paths = {name: parent / name for name in required_names}
+        if all(path.is_file() for path in paths.values()):
+            direct_bundles.append(paths)
+    if len(direct_bundles) == 1:
+        code_dir.mkdir(parents=True, exist_ok=True)
+        staged = {}
+        for name, source in direct_bundles[0].items():
+            destination = code_dir / name
+            destination.write_bytes(source.read_bytes())
+            staged[name] = destination
+        return (
+            staged["run_experiment_a.py"],
+            staged["layer_selection_experiment.py"],
+            staged["benchmark_v1.json"],
+        )
+    if len(direct_bundles) > 1:
+        raise FileNotFoundError("Found multiple mounted layer-selection code bundles.")
+
+    bundles = []
+    for path in input_root.rglob("*.zip"):
+        try:
+            members = archive_members(path)
+        except zipfile.BadZipFile:
+            continue
+        by_basename = {}
+        for member in members:
+            by_basename.setdefault(PurePosixPath(member).name, []).append(member)
+        if required_names.issubset(by_basename) and all(len(by_basename[name]) == 1 for name in required_names):
+            bundles.append((path, by_basename))
+    if len(bundles) != 1:
+        raise FileNotFoundError("Expected one layer-selection code bundle; found {}.".format(len(bundles)))
+
+    code_dir.mkdir(parents=True, exist_ok=True)
+    bundle_path, by_basename = bundles[0]
+    with zipfile.ZipFile(bundle_path) as archive:
+        staged = {}
+        for name in required_names:
+            destination = code_dir / name
+            destination.write_bytes(archive.read(by_basename[name][0]))
+            staged[name] = destination
+    return (
+        staged["run_experiment_a.py"],
+        staged["layer_selection_experiment.py"],
+        staged["benchmark_v1.json"],
+    )
 
 
 def main() -> None:
     input_root = Path("/kaggle/input")
     working_root = Path("/kaggle/working")
-    dataset_root = working_root / "experiment_a_benchmark_v1"
+    dataset_root = None
+    expected_names = [SUPPORT_NAME, *QUERY_NAMES]
     input_children = sorted(str(path) for path in input_root.iterdir()) if input_root.is_dir() else []
     print("Mounted Kaggle inputs: {}".format(input_children), flush=True)
     candidates = set()
@@ -160,59 +174,45 @@ def main() -> None:
             mask_dir = image_dir.parent / "mask"
             if not image_dir.is_dir() or not mask_dir.is_dir():
                 continue
-            image_count = len(list(image_dir.glob("*.bmp")))
-            mask_count = len(list(mask_dir.glob("*_label.bmp")))
-            if image_count == 663 and mask_count == 663:
+            image_names = {path.name for path in image_dir.glob("*.bmp")}
+            mask_names = {path.name.removesuffix("_label.bmp") + ".bmp" for path in mask_dir.glob("*_label.bmp")}
+            if image_names == set(expected_names) and mask_names == set(expected_names):
                 candidates.add(image_dir.parent)
 
     if len(candidates) == 1:
-        stage_test_subset(next(iter(candidates)), dataset_root)
+        dataset_root = next(iter(candidates))
     elif not candidates:
         image_archive = find_archive(
             input_root,
             lambda members: sum(
                 name.lower().endswith(".bmp") and not name.lower().endswith("_label.bmp")
                 for name in members
-            ) == 663,
-            "663-image",
+            ) == len(expected_names),
+            "benchmark-image",
         )
         mask_archive = find_archive(
             input_root,
-            lambda members: sum(name.lower().endswith("_label.bmp") for name in members) == 663,
-            "663-mask",
+            lambda members: sum(name.lower().endswith("_label.bmp") for name in members) == len(expected_names),
+            "benchmark-mask",
         )
-        extract_test_subset(image_archive, mask_archive, dataset_root)
+        dataset_root = working_root / "benchmark_v1_data"
+        extract_benchmark_dataset(image_archive, mask_archive, dataset_root, expected_names)
     else:
-        raise FileNotFoundError("Found multiple matching 663-pair image/mask directories: {}".format(
+        raise FileNotFoundError("Found multiple matching 21-pair benchmark directories: {}".format(
             sorted(str(path) for path in candidates)
         ))
 
     images_dir = dataset_root / "images"
     masks_dir = dataset_root / "mask"
-    code_matches = list(input_root.rglob("run_experiment_a.py")) if input_root.is_dir() else []
-    if len(code_matches) == 1:
-        code_path = code_matches[0]
-    elif len(code_matches) > 1:
-        raise FileNotFoundError("Found multiple mounted copies of run_experiment_a.py: {}".format(
-            [str(path) for path in code_matches]
-        ))
-    else:
-        code_archive = find_archive(
-            input_root,
-            lambda members: any(Path(name).name == "run_experiment_a.py" for name in members),
-            "experiment code",
-        )
-        code_dir = working_root / "experiment_a_code"
-        code_dir.mkdir(parents=True, exist_ok=True)
-        with zipfile.ZipFile(code_archive) as archive:
-            archive.extractall(code_dir)
-        code_path = code_dir / "run_experiment_a.py"
     image_count = len(list(images_dir.glob("*.bmp")))
     mask_count = len(list(masks_dir.glob("*_label.bmp")))
-    if image_count != len(QUERY_NAMES) + 1 or mask_count != len(QUERY_NAMES) + 1:
-        raise RuntimeError("Expected exactly the fixed benchmark subset; found {} images and {} masks.".format(
+    if image_count != len(expected_names) or mask_count != len(expected_names):
+        raise RuntimeError("Expected exactly the 21 fixed benchmark pairs; found {} images and {} masks.".format(
             image_count, mask_count
         ))
+
+    code_dir = working_root / "layer_selection_code"
+    code_path, layer_path, manifest_path = stage_code_bundle(input_root, code_dir)
 
     weight_matches = list(input_root.rglob(WEIGHT_NAME))
     if len(weight_matches) != 1:
@@ -241,16 +241,18 @@ def main() -> None:
         raise RuntimeError("The Kaggle kernel has no GPU. Enable a GPU accelerator and rerun.")
     print("GPU: {}".format(torch.cuda.get_device_name(0)), flush=True)
 
-    output_dir = working_root / "experiment_a_benchmark_v1_results"
+    output_dir = working_root / "layer_selection_v1_results"
     command = [
         sys.executable,
-        str(code_path),
+        str(layer_path),
         "--data-root", str(dataset_root),
         "--dinov3-repo", str(repo_path),
         "--weights", str(weight_path),
-        "--support", SUPPORT_NAME,
+        "--test-manifest", str(manifest_path),
         "--spatial-buffer", str(SPATIAL_BUFFER),
-        "--limit-query", str(len(QUERY_NAMES)),
+        "--train-episodes", "200",
+        "--learning-rate", "0.05",
+        "--seed", "20261105",
         "--device", "cuda",
         "--output-dir", str(output_dir),
     ]

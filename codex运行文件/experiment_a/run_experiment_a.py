@@ -34,17 +34,23 @@ class ImagePair:
 
 
 def parse_args() -> argparse.Namespace:
-    project_root = Path(__file__).resolve().parents[2]
+    experiment_dir = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser(
         description="Experiment A: frozen DINOv3-SAT foreground/background prototype matching."
     )
-    parser.add_argument("--data-root", type=Path, default=project_root / "datasets")
+    parser.add_argument("--data-root", type=Path, default=experiment_dir / "benchmark_v1_data")
     parser.add_argument("--images-dir", type=Path, default=None)
     parser.add_argument("--masks-dir", type=Path, default=None)
     parser.add_argument("--dinov3-repo", type=Path, default=Path(__file__).resolve().parents[1] / "dinov3")
     parser.add_argument("--weights", type=Path, required=False)
     parser.add_argument("--support", default="auto", help="Image basename or 'auto'.")
-    parser.add_argument("--test-manifest", type=Path, default=None, help="Fixed support/query JSON manifest.")
+    parser.add_argument(
+        "--test-manifest",
+        type=Path,
+        default=experiment_dir / "benchmark_v1.json",
+        help="Fixed support/query JSON manifest.",
+    )
+    parser.add_argument("--all-data", action="store_true", help="Skip the fixed manifest and evaluate all available pairs.")
     parser.add_argument(
         "--spatial-buffer",
         type=float,
@@ -318,7 +324,7 @@ def main() -> None:
     masks_dir = (args.masks_dir or args.data_root / "mask").resolve()
     repo_path = args.dinov3_repo if args.dinov3_repo.is_absolute() else project_root / args.dinov3_repo
     pairs = find_pairs(images_dir, masks_dir)
-    manifest = read_test_manifest(args.test_manifest.resolve()) if args.test_manifest else None
+    manifest = None if args.all_data else read_test_manifest(args.test_manifest.resolve())
     if manifest:
         if args.support.lower() != "auto" and Path(args.support).name != manifest["support_image"]:
             raise ValueError("--support must match the support image in --test-manifest.")
@@ -406,7 +412,7 @@ def main() -> None:
         "crop_size": args.crop_size,
         "patch_size": args.patch_size,
         "feature_layers": "last 4 normalized patch feature maps, averaged",
-        "test_manifest": str(args.test_manifest.resolve()) if args.test_manifest else None,
+        "test_manifest": None if args.all_data else str(args.test_manifest.resolve()),
         "segmentation_head": None,
         "segmentation_method": "frozen foreground/background prototype cosine matching; bilinear upsampling; fixed threshold",
         "prototype": "mask-fraction weighted foreground and background means",
