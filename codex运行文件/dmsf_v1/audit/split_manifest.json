@@ -1,0 +1,1510 @@
+{
+  "version": 1,
+  "status": "provisional_coordinate_group_split",
+  "units": "filename coordinate units; CRS, physical units and footprint unknown",
+  "rule": "Connected components of Euclidean distance <=1000. Entire legacy-exposed components quarantined. Remaining groups sorted by SHA256(dmsf-spatial-v1 + sorted names); first ceil(20%) test, next ceil(20%) validation, remainder train.",
+  "radius": 1000.0,
+  "mask_values_or_metrics_used_for_assignment": false,
+  "legacy_names": [
+    "PV08_312621_1197085.bmp",
+    "PV08_315404_1208378.bmp",
+    "PV08_316218_1191721.bmp",
+    "PV08_318322_1218788.bmp",
+    "PV08_319542_1183980.bmp",
+    "PV08_320381_1199142.bmp",
+    "PV08_322505_1192968.bmp",
+    "PV08_325206_1211345.bmp",
+    "PV08_326513_1201232.bmp",
+    "PV08_329573_1189671.bmp",
+    "PV08_331361_1208263.bmp",
+    "PV08_331752_1180424.bmp",
+    "PV08_331824_1195530.bmp",
+    "PV08_334930_1197013.bmp",
+    "PV08_337694_1182766.bmp",
+    "PV08_338249_1204612.bmp",
+    "PV08_340747_1192732.bmp",
+    "PV08_342992_1173495.bmp",
+    "PV08_344239_1199475.bmp",
+    "PV08_347185_1164244.bmp",
+    "PV08_348179_1189176.bmp"
+  ],
+  "groups": [
+    {
+      "group_id": "04afc20dcfddef26",
+      "allocation_hash": "04afc20dcfddef262e9982b357040b4e9ec36d88c506d57911fa9768386ca3c5",
+      "members": [
+        "PV08_312621_1197085.bmp",
+        "PV08_312695_1197171.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "f652858734de9114",
+      "allocation_hash": "f652858734de911414997fe688048f3fbfa6eb6162bca68647bdd7c091c690e3",
+      "members": [
+        "PV08_314139_1209745.bmp",
+        "PV08_314140_1209573.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "1bfa53446c926511",
+      "allocation_hash": "1bfa53446c9265113c1d1e372b20728c984cff2192c91c38602e51e529eadf0c",
+      "members": [
+        "PV08_314619_1199320.bmp",
+        "PV08_315505_1198888.bmp",
+        "PV08_315505_1198974.bmp",
+        "PV08_315505_1199061.bmp",
+        "PV08_315579_1198974.bmp",
+        "PV08_315579_1199061.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "a5244870c63cb137",
+      "allocation_hash": "a5244870c63cb137dcb5836bfe2c8a21a30ef806ab104ab367936743439ab811",
+      "members": [
+        "PV08_314910_1196475.bmp",
+        "PV08_314981_1195612.bmp",
+        "PV08_314984_1196474.bmp",
+        "PV08_315058_1196560.bmp",
+        "PV08_315058_1196646.bmp",
+        "PV08_315058_1196733.bmp",
+        "PV08_315125_1194576.bmp",
+        "PV08_315125_1194663.bmp",
+        "PV08_315132_1196646.bmp",
+        "PV08_315132_1196732.bmp",
+        "PV08_315199_1194576.bmp",
+        "PV08_315199_1194662.bmp",
+        "PV08_315273_1194576.bmp",
+        "PV08_315273_1194662.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "05a3b883f765ce1a",
+      "allocation_hash": "05a3b883f765ce1a0d16e322a1bcc7d914c62d72e9dd9036a93a0d93528a295d",
+      "members": [
+        "PV08_315330_1208463.bmp",
+        "PV08_315404_1208378.bmp",
+        "PV08_315404_1208464.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "4410f73ef6bb9f2f",
+      "allocation_hash": "4410f73ef6bb9f2ff36440630af569c73bfa1530cd2a3da8f120a9c7690cd58c",
+      "members": [
+        "PV08_316218_1191721.bmp",
+        "PV08_316218_1191807.bmp",
+        "PV08_316292_1191720.bmp",
+        "PV08_316292_1191806.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "6e303e8bdca9508f",
+      "allocation_hash": "6e303e8bdca9508fd041636301a98b9028b1d886ee387ca20c41f7722511534a",
+      "members": [
+        "PV08_316633_1211844.bmp",
+        "PV08_316707_1211758.bmp",
+        "PV08_316707_1211845.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "e15f099b7c23da2d",
+      "allocation_hash": "e15f099b7c23da2daf6efc5d0357c53c01af38ce2cad4c9a0167c1c98251a9fe",
+      "members": [
+        "PV08_316684_1203206.bmp",
+        "PV08_316756_1203725.bmp",
+        "PV08_316756_1203811.bmp",
+        "PV08_316757_1203293.bmp",
+        "PV08_316757_1203379.bmp",
+        "PV08_316830_1203811.bmp",
+        "PV08_316904_1203812.bmp",
+        "PV08_316905_1203293.bmp",
+        "PV08_317420_1204073.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "8c0e31a41fe852cb",
+      "allocation_hash": "8c0e31a41fe852cbf3962ddac44080435f37589c2b0432975d352963b049670f",
+      "members": [
+        "PV08_317940_1196982.bmp",
+        "PV08_318234_1196462.bmp",
+        "PV08_318235_1196549.bmp",
+        "PV08_318308_1196548.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "b1748e6396c0e1bd",
+      "allocation_hash": "b1748e6396c0e1bd4f235351768d1c97fa33f1b060df771966af64ad707f4754",
+      "members": [
+        "PV08_318068_1207796.bmp",
+        "PV08_318141_1207883.bmp",
+        "PV08_318142_1207710.bmp",
+        "PV08_318142_1207797.bmp",
+        "PV08_318215_1207797.bmp",
+        "PV08_318216_1207711.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "329ff2142ce3de37",
+      "allocation_hash": "329ff2142ce3de37b23bd112fbb10915b974d0b0da717013b49c773c44a7dbe1",
+      "members": [
+        "PV08_318230_1195164.bmp",
+        "PV08_318304_1195077.bmp",
+        "PV08_318304_1195164.bmp",
+        "PV08_318377_1195077.bmp",
+        "PV08_318378_1195163.bmp",
+        "PV08_318452_1195163.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "52a211a7bd0557c8",
+      "allocation_hash": "52a211a7bd0557c8284f555d5a46534354700e3c2426e6b7510f486d9fc0879c",
+      "members": [
+        "PV08_318322_1218788.bmp",
+        "PV08_318396_1218789.bmp",
+        "PV08_318397_1218703.bmp",
+        "PV08_318471_1218704.bmp",
+        "PV08_318693_1218708.bmp",
+        "PV08_318842_1218625.bmp",
+        "PV08_318915_1218626.bmp",
+        "PV08_318991_1218541.bmp",
+        "PV08_319064_1218543.bmp",
+        "PV08_319073_1217937.bmp",
+        "PV08_319074_1217850.bmp",
+        "PV08_319148_1217852.bmp",
+        "PV08_319149_1217765.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "d0e12747db428f2a",
+      "allocation_hash": "d0e12747db428f2a2552ef3c939da893ba18d5d133a3546785485a9c255901c7",
+      "members": [
+        "PV08_318725_1191092.bmp",
+        "PV08_318726_1191179.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "c05cd61202216232",
+      "allocation_hash": "c05cd61202216232564aac671ea7d5f8eb34512d1444b092687922a5c39a1243",
+      "members": [
+        "PV08_318897_1204166.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "510bfd3b44740246",
+      "allocation_hash": "510bfd3b447402467f1eee0ed095ca36b9587437eb5eab823685c2f9a451f10d",
+      "members": [
+        "PV08_319260_1194119.bmp",
+        "PV08_319260_1194206.bmp",
+        "PV08_319333_1193859.bmp",
+        "PV08_319333_1193945.bmp",
+        "PV08_319334_1194119.bmp",
+        "PV08_319408_1194205.bmp",
+        "PV08_319408_1194291.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "684b0ee626d3e327",
+      "allocation_hash": "684b0ee626d3e327027be6a85787f9a22c40a96a890a6dd28282ee1329dcce7f",
+      "members": [
+        "PV08_319542_1183980.bmp",
+        "PV08_319616_1183978.bmp",
+        "PV08_319617_1184065.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "83ce5f65574b04a0",
+      "allocation_hash": "83ce5f65574b04a0de1fc2d6247b7951ea268b96fd2388360262c5317f0ba77d",
+      "members": [
+        "PV08_320307_1199056.bmp",
+        "PV08_320381_1199056.bmp",
+        "PV08_320381_1199142.bmp",
+        "PV08_320381_1199229.bmp",
+        "PV08_320455_1199142.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "f3a48e0e844f4052",
+      "allocation_hash": "f3a48e0e844f40525dfe3e4b53cafc7a29b175a3c637c7bd8212ffe75e7a351e",
+      "members": [
+        "PV08_321045_1198274.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "8a044ec467eb5f8f",
+      "allocation_hash": "8a044ec467eb5f8f590b21f2e36b796a9afe6cfe4a2c5952f152fe69e70626e5",
+      "members": [
+        "PV08_321262_1195929.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "fb54605e11589fa2",
+      "allocation_hash": "fb54605e11589fa2907d5f805932178a65958ce0ebb9a44777ce65a8a7e3a627",
+      "members": [
+        "PV08_322226_1213915.bmp",
+        "PV08_322227_1213828.bmp",
+        "PV08_322299_1214003.bmp",
+        "PV08_322300_1213916.bmp",
+        "PV08_322373_1214004.bmp",
+        "PV08_322374_1213917.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "9c839a5c8c9112e7",
+      "allocation_hash": "9c839a5c8c9112e7fa18e58dec6fa92749d7231b2d234363b0226b96da9d9008",
+      "members": [
+        "PV08_322265_1190276.bmp",
+        "PV08_322266_1190363.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "8b5e4ee730920c3d",
+      "allocation_hash": "8b5e4ee730920c3d69e796a9584346222c1303ca1051980c47e359bdd0aeb1b0",
+      "members": [
+        "PV08_322499_1207921.bmp",
+        "PV08_322500_1207834.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "246b90129af5f4a8",
+      "allocation_hash": "246b90129af5f4a820393baa7cb8e2c3097441fa3e7f4db852c745241de91067",
+      "members": [
+        "PV08_322505_1192968.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "0596749815858483",
+      "allocation_hash": "059674981585848395891270f287a5b5eb493f3d5805cf4dd84fb9a0efe89cc8",
+      "members": [
+        "PV08_322732_1205836.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "5e0cf5a8fed89e95",
+      "allocation_hash": "5e0cf5a8fed89e959cb418adde5133ea01df535b3fccb0c8eb9083d15bde1596",
+      "members": [
+        "PV08_322966_1197922.bmp",
+        "PV08_323039_1197835.bmp",
+        "PV08_323040_1197922.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "f1d7d01e0766161c",
+      "allocation_hash": "f1d7d01e0766161cbe61621103039f0afe68c44f22f6a6c68e406862c82ba85a",
+      "members": [
+        "PV08_323332_1196616.bmp",
+        "PV08_323332_1196703.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "0aebc95ea61e59fa",
+      "allocation_hash": "0aebc95ea61e59fa00cbdab8af446cd6e8f716e88ed8cc2110e4564daf8505d7",
+      "members": [
+        "PV08_323775_1214112.bmp",
+        "PV08_323776_1214025.bmp",
+        "PV08_323777_1213938.bmp",
+        "PV08_323850_1214026.bmp",
+        "PV08_323851_1213939.bmp",
+        "PV08_323852_1213852.bmp",
+        "PV08_323925_1213853.bmp",
+        "PV08_323926_1213766.bmp",
+        "PV08_324000_1213768.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "30c20b9565f4783e",
+      "allocation_hash": "30c20b9565f4783e87beedfa7ae427d5d5bfbf99888728533486d5562ad2fc73",
+      "members": [
+        "PV08_324695_1189291.bmp",
+        "PV08_324767_1189116.bmp",
+        "PV08_324768_1189203.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "6d1f350c99a505b8",
+      "allocation_hash": "6d1f350c99a505b866fa8250154832db65c23662aaa7bd6541a369c742e63fd8",
+      "members": [
+        "PV08_325059_1211343.bmp",
+        "PV08_325132_1211344.bmp",
+        "PV08_325134_1211169.bmp",
+        "PV08_325135_1211082.bmp",
+        "PV08_325206_1211345.bmp",
+        "PV08_325209_1210996.bmp",
+        "PV08_325209_1211083.bmp",
+        "PV08_325210_1210909.bmp",
+        "PV08_325211_1210822.bmp",
+        "PV08_325212_1210647.bmp",
+        "PV08_325212_1210735.bmp",
+        "PV08_325284_1210910.bmp",
+        "PV08_325285_1210735.bmp",
+        "PV08_325285_1210823.bmp",
+        "PV08_325286_1210648.bmp",
+        "PV08_325287_1210561.bmp",
+        "PV08_325360_1210649.bmp",
+        "PV08_325361_1210562.bmp",
+        "PV08_325431_1210999.bmp",
+        "PV08_325432_1210824.bmp",
+        "PV08_325432_1210912.bmp",
+        "PV08_325506_1210825.bmp",
+        "PV08_325507_1210738.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "982f1817a6cae1f4",
+      "allocation_hash": "982f1817a6cae1f4a5c7eb4e968197ab6e19eb9cc269eb4fcab319f7656eb178",
+      "members": [
+        "PV08_325229_1191552.bmp",
+        "PV08_325303_1191551.bmp",
+        "PV08_325304_1191726.bmp",
+        "PV08_325305_1191813.bmp",
+        "PV08_325305_1191900.bmp",
+        "PV08_325306_1191987.bmp",
+        "PV08_325378_1191725.bmp",
+        "PV08_325378_1191812.bmp",
+        "PV08_325379_1191899.bmp",
+        "PV08_325380_1191987.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "8a19281792f214e7",
+      "allocation_hash": "8a19281792f214e79a83810a4daecfec50086276f03a4fc0ea4c226ecc276342",
+      "members": [
+        "PV08_325626_1198701.bmp",
+        "PV08_325626_1198789.bmp",
+        "PV08_325700_1198527.bmp",
+        "PV08_325700_1198701.bmp",
+        "PV08_325700_1198788.bmp",
+        "PV08_325774_1198527.bmp",
+        "PV08_325774_1198701.bmp",
+        "PV08_325774_1198788.bmp",
+        "PV08_325847_1198090.bmp",
+        "PV08_325847_1198177.bmp",
+        "PV08_326365_1199224.bmp",
+        "PV08_326365_1199311.bmp",
+        "PV08_326587_1198962.bmp",
+        "PV08_326660_1198875.bmp",
+        "PV08_326660_1198962.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "be37f84b735e7a0e",
+      "allocation_hash": "be37f84b735e7a0e5c64cc17ec274cf9879768dbaa87672084dd4ba8d425abb4",
+      "members": [
+        "PV08_325996_1200272.bmp",
+        "PV08_326070_1200272.bmp",
+        "PV08_326070_1200359.bmp",
+        "PV08_326513_1201232.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "f6e8da84997f1c9b",
+      "allocation_hash": "f6e8da84997f1c9bdbfd4c7a6f37f66554d86159ac915bdc87b66ef2e5063b3c",
+      "members": [
+        "PV08_326128_1193726.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "98e02e6c65b966af",
+      "allocation_hash": "98e02e6c65b966af97af63faabc22e0fbd8b021a87626a939369b92a280bc7c9",
+      "members": [
+        "PV08_326283_1195383.bmp",
+        "PV08_326283_1195470.bmp",
+        "PV08_326357_1195383.bmp",
+        "PV08_326357_1195470.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "bf6784db745f0fee",
+      "allocation_hash": "bf6784db745f0feef7bdbceec6c77534796eca07fea5a23e622b6cc7084297ee",
+      "members": [
+        "PV08_326402_1209701.bmp",
+        "PV08_326403_1209526.bmp",
+        "PV08_326403_1209614.bmp",
+        "PV08_326404_1209439.bmp",
+        "PV08_326406_1209090.bmp",
+        "PV08_326406_1209177.bmp",
+        "PV08_326476_1209615.bmp",
+        "PV08_326476_1209702.bmp",
+        "PV08_326477_1209527.bmp",
+        "PV08_326478_1209353.bmp",
+        "PV08_326478_1209440.bmp",
+        "PV08_326480_1209091.bmp",
+        "PV08_326480_1209178.bmp",
+        "PV08_326550_1209615.bmp",
+        "PV08_326774_1209356.bmp",
+        "PV08_326847_1209444.bmp",
+        "PV08_326848_1209356.bmp",
+        "PV08_327518_1208577.bmp",
+        "PV08_327661_1209190.bmp",
+        "PV08_327661_1209278.bmp",
+        "PV08_327662_1209103.bmp",
+        "PV08_327735_1209191.bmp",
+        "PV08_327735_1209278.bmp",
+        "PV08_327736_1209103.bmp",
+        "PV08_327808_1209279.bmp",
+        "PV08_327808_1209367.bmp",
+        "PV08_327809_1209192.bmp",
+        "PV08_327882_1209280.bmp",
+        "PV08_327882_1209367.bmp",
+        "PV08_327883_1209192.bmp",
+        "PV08_327956_1209281.bmp",
+        "PV08_327957_1209193.bmp",
+        "PV08_328030_1209281.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "c473832f8d8cb88f",
+      "allocation_hash": "c473832f8d8cb88f69bb619a492989431747d882f23161723135ecd1b6e23681",
+      "members": [
+        "PV08_326580_1204114.bmp",
+        "PV08_326581_1204027.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "572adaac024e0e64",
+      "allocation_hash": "572adaac024e0e6412d0679dbae3ba871f8987ed11e3043b2f68151f77ff3614",
+      "members": [
+        "PV08_327613_1204556.bmp",
+        "PV08_327687_1204556.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "712330644f5b3265",
+      "allocation_hash": "712330644f5b3265365e10e16478952e6bb53d1f7dc380d3cf2b50a6e276eff5",
+      "members": [
+        "PV08_328133_1196336.bmp",
+        "PV08_328207_1196335.bmp",
+        "PV08_328207_1196423.bmp",
+        "PV08_328207_1196510.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "6912d9ac0b69adb9",
+      "allocation_hash": "6912d9ac0b69adb9d9fc3f1ea2f9389cfe8b9f402d10f85cb89c2c71bad9da7f",
+      "members": [
+        "PV08_328136_1186189.bmp",
+        "PV08_328209_1186100.bmp",
+        "PV08_328210_1186188.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "a7652e1ca767cc2f",
+      "allocation_hash": "a7652e1ca767cc2fc6df17b8f3924bfc8b5ed4da15e3e405e42c6d2ae0cbd6fe",
+      "members": [
+        "PV08_328557_1192221.bmp",
+        "PV08_328631_1192133.bmp",
+        "PV08_328631_1192220.bmp",
+        "PV08_329371_1192476.bmp",
+        "PV08_329372_1192564.bmp",
+        "PV08_329445_1192388.bmp",
+        "PV08_329445_1192476.bmp",
+        "PV08_329446_1192563.bmp",
+        "PV08_329519_1192387.bmp",
+        "PV08_329519_1192475.bmp",
+        "PV08_329520_1192563.bmp",
+        "PV08_329592_1192387.bmp",
+        "PV08_329593_1192474.bmp",
+        "PV08_329593_1192562.bmp",
+        "PV08_330406_1192555.bmp",
+        "PV08_330406_1192643.bmp",
+        "PV08_331067_1191935.bmp",
+        "PV08_331067_1192023.bmp",
+        "PV08_331141_1191935.bmp",
+        "PV08_331141_1192022.bmp",
+        "PV08_331292_1192548.bmp",
+        "PV08_331293_1192636.bmp",
+        "PV08_331293_1192723.bmp",
+        "PV08_331366_1192547.bmp",
+        "PV08_331367_1192635.bmp",
+        "PV08_331367_1192723.bmp",
+        "PV08_331440_1192547.bmp",
+        "PV08_331440_1192634.bmp",
+        "PV08_331732_1192017.bmp",
+        "PV08_331733_1192105.bmp",
+        "PV08_331806_1192016.bmp",
+        "PV08_331807_1192104.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "b1d88af794bb6b0f",
+      "allocation_hash": "b1d88af794bb6b0f305a1df1bd2d244320ba508ea899128ee685dec5f42d4382",
+      "members": [
+        "PV08_328866_1194844.bmp",
+        "PV08_328940_1194844.bmp",
+        "PV08_329385_1195192.bmp",
+        "PV08_329385_1195279.bmp",
+        "PV08_329459_1195191.bmp",
+        "PV08_329459_1195279.bmp",
+        "PV08_329611_1196680.bmp",
+        "PV08_329611_1196768.bmp",
+        "PV08_329613_1197556.bmp",
+        "PV08_329613_1197644.bmp",
+        "PV08_329683_1196067.bmp",
+        "PV08_329684_1196154.bmp",
+        "PV08_329684_1196242.bmp",
+        "PV08_329684_1196417.bmp",
+        "PV08_329685_1196680.bmp",
+        "PV08_329687_1197556.bmp",
+        "PV08_329687_1197644.bmp",
+        "PV08_329757_1195979.bmp",
+        "PV08_329757_1196066.bmp",
+        "PV08_329758_1196241.bmp",
+        "PV08_329831_1195978.bmp",
+        "PV08_329831_1196066.bmp",
+        "PV08_329832_1196241.bmp",
+        "PV08_330351_1197291.bmp",
+        "PV08_330352_1197379.bmp",
+        "PV08_330425_1197291.bmp",
+        "PV08_330425_1197379.bmp",
+        "PV08_330499_1197291.bmp",
+        "PV08_330499_1197379.bmp",
+        "PV08_330499_1197466.bmp",
+        "PV08_330796_1198343.bmp",
+        "PV08_330870_1198343.bmp",
+        "PV08_330944_1198167.bmp",
+        "PV08_331311_1197201.bmp",
+        "PV08_331312_1197288.bmp",
+        "PV08_331385_1197200.bmp",
+        "PV08_331385_1197288.bmp",
+        "PV08_331459_1197200.bmp",
+        "PV08_331459_1197288.bmp",
+        "PV08_331824_1195530.bmp",
+        "PV08_331824_1195618.bmp",
+        "PV08_331824_1195793.bmp",
+        "PV08_331897_1195530.bmp",
+        "PV08_331898_1195617.bmp",
+        "PV08_332124_1197286.bmp",
+        "PV08_332124_1197374.bmp",
+        "PV08_332198_1197374.bmp",
+        "PV08_332270_1196670.bmp",
+        "PV08_332863_1197459.bmp",
+        "PV08_332937_1197459.bmp",
+        "PV08_333306_1197458.bmp",
+        "PV08_333306_1197546.bmp",
+        "PV08_333307_1197634.bmp",
+        "PV08_333380_1197546.bmp",
+        "PV08_333380_1197634.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "ce92c05aeeb5e984",
+      "allocation_hash": "ce92c05aeeb5e984ffafd82bb3bb509e36126b8ea8e98e1ac22e5f09bb8fbd55",
+      "members": [
+        "PV08_328877_1199660.bmp",
+        "PV08_328877_1199747.bmp",
+        "PV08_328951_1199660.bmp",
+        "PV08_328951_1199747.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "3bd15e4a93000e54",
+      "allocation_hash": "3bd15e4a93000e549b2daf20f55bd723a47c895af0fb932afa6e7f9ee0a42ced",
+      "members": [
+        "PV08_329571_1189496.bmp",
+        "PV08_329573_1189671.bmp",
+        "PV08_329645_1189495.bmp",
+        "PV08_329646_1189582.bmp",
+        "PV08_329719_1189494.bmp",
+        "PV08_329720_1189582.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "4c54bbe07aa600f0",
+      "allocation_hash": "4c54bbe07aa600f0aec390d91dfbe064d435f7c83d82070fa592e508b04c95f9",
+      "members": [
+        "PV08_330186_1207200.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "448933e7f94bd8e7",
+      "allocation_hash": "448933e7f94bd8e73bdef7db273928e17e5f21614287a41436909b29c46af4e4",
+      "members": [
+        "PV08_331131_1190530.bmp",
+        "PV08_331131_1190618.bmp",
+        "PV08_331204_1190442.bmp",
+        "PV08_331205_1190530.bmp",
+        "PV08_331277_1190353.bmp",
+        "PV08_331278_1190441.bmp",
+        "PV08_331350_1190177.bmp",
+        "PV08_331350_1190265.bmp",
+        "PV08_331351_1190352.bmp",
+        "PV08_331423_1190088.bmp",
+        "PV08_331424_1190176.bmp",
+        "PV08_331424_1190264.bmp",
+        "PV08_331490_1189297.bmp",
+        "PV08_331491_1189385.bmp",
+        "PV08_331492_1189473.bmp",
+        "PV08_331492_1189561.bmp",
+        "PV08_331497_1190087.bmp",
+        "PV08_331497_1190175.bmp",
+        "PV08_332241_1190782.bmp",
+        "PV08_332241_1190870.bmp",
+        "PV08_332314_1190781.bmp",
+        "PV08_332315_1190869.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "ffbdc66d21656499",
+      "allocation_hash": "ffbdc66d21656499cca527824a6906ace8c33e590262c908700e3c3f1660cd29",
+      "members": [
+        "PV08_331139_1208261.bmp",
+        "PV08_331140_1208173.bmp",
+        "PV08_331213_1208261.bmp",
+        "PV08_331213_1208349.bmp",
+        "PV08_331286_1208438.bmp",
+        "PV08_331287_1208262.bmp",
+        "PV08_331287_1208350.bmp",
+        "PV08_331288_1208174.bmp",
+        "PV08_331360_1208351.bmp",
+        "PV08_331361_1208263.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "e8088fcb31f4e8a0",
+      "allocation_hash": "e8088fcb31f4e8a0b9d4f30e118939b1cf51e91f28b698c1db7357cf20efc1a4",
+      "members": [
+        "PV08_331252_1187545.bmp",
+        "PV08_331476_1187717.bmp",
+        "PV08_331476_1187805.bmp",
+        "PV08_331550_1187804.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "b1030e59f454de67",
+      "allocation_hash": "b1030e59f454de670cbff9e624173152c0c99e03f469603d828e8acab1b97e07",
+      "members": [
+        "PV08_331752_1180424.bmp",
+        "PV08_331753_1180512.bmp",
+        "PV08_331754_1180600.bmp",
+        "PV08_331825_1180422.bmp",
+        "PV08_331827_1180510.bmp",
+        "PV08_331828_1180598.bmp",
+        "PV08_331901_1180508.bmp",
+        "PV08_331970_1180243.bmp",
+        "PV08_332044_1180242.bmp",
+        "PV08_332045_1180330.bmp",
+        "PV08_332047_1180417.bmp",
+        "PV08_332118_1180240.bmp",
+        "PV08_332119_1180328.bmp",
+        "PV08_332121_1180416.bmp",
+        "PV08_332192_1180238.bmp",
+        "PV08_332194_1180414.bmp",
+        "PV08_332326_1179445.bmp",
+        "PV08_332400_1179443.bmp",
+        "PV08_332402_1179531.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "1732bffcf147cb25",
+      "allocation_hash": "1732bffcf147cb259bc0e80126557f0e8840618bf96fe6a30440f18e809a7041",
+      "members": [
+        "PV08_333154_1195787.bmp",
+        "PV08_333154_1195875.bmp",
+        "PV08_333228_1195699.bmp",
+        "PV08_333228_1195787.bmp",
+        "PV08_333228_1195875.bmp",
+        "PV08_333301_1195698.bmp",
+        "PV08_333302_1195786.bmp",
+        "PV08_333743_1195256.bmp",
+        "PV08_333817_1195256.bmp",
+        "PV08_333817_1195344.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "f430f327738d075b",
+      "allocation_hash": "f430f327738d075b840993ad0b115f206d9e029813d144051e358d7895672fb4",
+      "members": [
+        "PV08_333310_1180917.bmp",
+        "PV08_333384_1180915.bmp",
+        "PV08_334055_1181341.bmp",
+        "PV08_334056_1181429.bmp",
+        "PV08_334200_1181162.bmp",
+        "PV08_334272_1181072.bmp",
+        "PV08_334343_1180894.bmp",
+        "PV08_334345_1180982.bmp",
+        "PV08_334417_1180893.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "17c559ca128de4ce",
+      "allocation_hash": "17c559ca128de4cec49345b4940466c1e2c1018f4cd473fd9ec7e9cfcdef81eb",
+      "members": [
+        "PV08_333452_1203178.bmp",
+        "PV08_333526_1203354.bmp",
+        "PV08_333526_1203442.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "508af98df001ed7d",
+      "allocation_hash": "508af98df001ed7d3755425ae19a99a12e8c957e093f9ed1fafee8798216a04b",
+      "members": [
+        "PV08_333787_1183283.bmp",
+        "PV08_333788_1183371.bmp",
+        "PV08_333789_1183459.bmp",
+        "PV08_333935_1183280.bmp",
+        "PV08_333936_1183368.bmp",
+        "PV08_334009_1183279.bmp",
+        "PV08_334379_1183360.bmp",
+        "PV08_334453_1183359.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "0797acf8f4a75bbc",
+      "allocation_hash": "0797acf8f4a75bbc2a72b9dc4dafc321b88132c31f67ffd2704dd72f24ff1ac8",
+      "members": [
+        "PV08_333799_1191822.bmp",
+        "PV08_333799_1191910.bmp",
+        "PV08_333873_1191821.bmp",
+        "PV08_333873_1191910.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "615cce7934322ed2",
+      "allocation_hash": "615cce7934322ed2847c4edcbded646e0e94f1908e631f3a86f8271ab32e3268",
+      "members": [
+        "PV08_334416_1201596.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "3a67bf54ded7d083",
+      "allocation_hash": "3a67bf54ded7d083cbc554af24a8d5ebe3db7587f226e3a1c010e8bb70738f7e",
+      "members": [
+        "PV08_334824_1190579.bmp",
+        "PV08_334825_1190755.bmp",
+        "PV08_334826_1190843.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "d742365eaaafe31e",
+      "allocation_hash": "d742365eaaafe31ea0ce90dec2c31082c77e7515fe0724e8a669806e2e3cb760",
+      "members": [
+        "PV08_334855_1196660.bmp",
+        "PV08_334856_1196748.bmp",
+        "PV08_334856_1196925.bmp",
+        "PV08_334929_1196660.bmp",
+        "PV08_334929_1196748.bmp",
+        "PV08_334930_1196925.bmp",
+        "PV08_334930_1197013.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "45e9891b1005808f",
+      "allocation_hash": "45e9891b1005808f4ca7f029439786ef48155b9522fa3ceba3e201e052f4cc5e",
+      "members": [
+        "PV08_335834_1181832.bmp",
+        "PV08_335906_1181654.bmp",
+        "PV08_335907_1181742.bmp",
+        "PV08_335908_1181831.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "e4b1d8db84943880",
+      "allocation_hash": "e4b1d8db84943880f6ec04fcf77ef2ca2713228c7e87baf0a00695b39aaf5a60",
+      "members": [
+        "PV08_335867_1191803.bmp",
+        "PV08_335867_1191891.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "532c7ffac1519fcb",
+      "allocation_hash": "532c7ffac1519fcb33cd1d44c4e898e6c5e3350064ccce718bfc9c19b3245962",
+      "members": [
+        "PV08_335952_1193744.bmp",
+        "PV08_336026_1193743.bmp",
+        "PV08_336026_1193831.bmp",
+        "PV08_336027_1193920.bmp",
+        "PV08_336176_1194183.bmp",
+        "PV08_336176_1194272.bmp",
+        "PV08_336250_1194183.bmp",
+        "PV08_336250_1194271.bmp",
+        "PV08_336616_1193650.bmp",
+        "PV08_336617_1193739.bmp",
+        "PV08_336690_1193562.bmp",
+        "PV08_336690_1193650.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "a404b617ee96424b",
+      "allocation_hash": "a404b617ee96424b873e0c9e50dbf2af68ce24089e7a96461c9072b4ffe3d64f",
+      "members": [
+        "PV08_336037_1196568.bmp",
+        "PV08_336111_1196567.bmp",
+        "PV08_336185_1196567.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "7d49ddc99940feaf",
+      "allocation_hash": "7d49ddc99940feafb89d2d0d6594394e4d8d2d1b5b5e30f794c5eac1cdb25cd1",
+      "members": [
+        "PV08_336410_1201688.bmp",
+        "PV08_336484_1201688.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "18356ff87aeae0cc",
+      "allocation_hash": "18356ff87aeae0cc9eb5e43163e089dd290a8d80ad742715b381ec3c47e1eeb5",
+      "members": [
+        "PV08_336479_1203807.bmp",
+        "PV08_336479_1203896.bmp",
+        "PV08_336553_1203808.bmp",
+        "PV08_336627_1203808.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "2c2eef035c7d2466",
+      "allocation_hash": "2c2eef035c7d24661c1951ee09dd7da1fa5471d4e0f01b25d7bb3e5a8273bd05",
+      "members": [
+        "PV08_336630_1186231.bmp",
+        "PV08_336703_1186230.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "f579e56eace71829",
+      "allocation_hash": "f579e56eace71829bdbba8a34da20dff782638d7b3afbb33425fc6c3b800f62d",
+      "members": [
+        "PV08_336908_1184813.bmp",
+        "PV08_336981_1184724.bmp",
+        "PV08_336982_1184812.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "83272b14078f390b",
+      "allocation_hash": "83272b14078f390b15f96ee7ce20743534698776ac149eee43a475e8151a2dd3",
+      "members": [
+        "PV08_337369_1202220.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "b19d7bbeb164c302",
+      "allocation_hash": "b19d7bbeb164c3023a31d143d14533dac26d8b2ed1975fdd3bae4ca8c2a3a0ae",
+      "members": [
+        "PV08_337694_1182766.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "8db99db35f103f2f",
+      "allocation_hash": "8db99db35f103f2fe7b89b061eecec962c0b35bfcc581dc0f5116221827dd5b9",
+      "members": [
+        "PV08_337849_1178518.bmp",
+        "PV08_337923_1178516.bmp",
+        "PV08_338075_1178777.bmp",
+        "PV08_338149_1178775.bmp",
+        "PV08_338222_1178774.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "2c338f62585c723f",
+      "allocation_hash": "2c338f62585c723f871632f3ede2844c60239b633f5b726cad3cfa2cb4566ac1",
+      "members": [
+        "PV08_338015_1184705.bmp",
+        "PV08_338088_1184615.bmp",
+        "PV08_338089_1184704.bmp",
+        "PV08_338311_1184788.bmp",
+        "PV08_338312_1184877.bmp",
+        "PV08_338627_1186553.bmp",
+        "PV08_338628_1186642.bmp",
+        "PV08_338701_1186552.bmp",
+        "PV08_338702_1186641.bmp",
+        "PV08_338977_1184865.bmp",
+        "PV08_339136_1185837.bmp",
+        "PV08_339276_1185214.bmp",
+        "PV08_339277_1185303.bmp",
+        "PV08_339349_1185124.bmp",
+        "PV08_339350_1185213.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "36376a42f89b6dec",
+      "allocation_hash": "36376a42f89b6dec977f53beffa995e62ce003e6b0d84ed9f7e61b05c9a41373",
+      "members": [
+        "PV08_338031_1196471.bmp",
+        "PV08_338033_1197267.bmp",
+        "PV08_338033_1197356.bmp",
+        "PV08_338107_1197267.bmp",
+        "PV08_338107_1197356.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "2e189e77982f6769",
+      "allocation_hash": "2e189e77982f6769194f79aa64c622fed6cffd56072b8b4b1d1fda7e711081ab",
+      "members": [
+        "PV08_338183_1200718.bmp",
+        "PV08_338257_1200718.bmp",
+        "PV08_338257_1200806.bmp",
+        "PV08_338700_1199921.bmp",
+        "PV08_338774_1199213.bmp",
+        "PV08_338774_1199302.bmp",
+        "PV08_338774_1199921.bmp",
+        "PV08_338848_1198770.bmp",
+        "PV08_338848_1199213.bmp",
+        "PV08_338922_1199213.bmp",
+        "PV08_339734_1199212.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "8e6f7ad0fd3d04b0",
+      "allocation_hash": "8e6f7ad0fd3d04b02595c820a9f630a7f66dad9982dbf45dd29fda9e6b58e9fc",
+      "members": [
+        "PV08_338249_1204435.bmp",
+        "PV08_338249_1204523.bmp",
+        "PV08_338249_1204612.bmp",
+        "PV08_338250_1204169.bmp",
+        "PV08_338250_1204258.bmp",
+        "PV08_338250_1204346.bmp",
+        "PV08_338323_1204435.bmp",
+        "PV08_338323_1204524.bmp",
+        "PV08_338323_1204612.bmp",
+        "PV08_338324_1204170.bmp",
+        "PV08_338324_1204258.bmp",
+        "PV08_338324_1204347.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "929fcd09fd9d58fc",
+      "allocation_hash": "929fcd09fd9d58fccc5ea53bea93b9c1d4b7501671ecee1b6735fc24e4d96cdb",
+      "members": [
+        "PV08_339060_1195227.bmp",
+        "PV08_339061_1195315.bmp",
+        "PV08_339061_1195404.bmp",
+        "PV08_339134_1195226.bmp",
+        "PV08_339135_1195315.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "db866a60dcd5c131",
+      "allocation_hash": "db866a60dcd5c13163776751e85c484e242921a85a5a4709c0d00773c9fde0da",
+      "members": [
+        "PV08_339197_1192834.bmp",
+        "PV08_339345_1192921.bmp",
+        "PV08_339345_1193010.bmp",
+        "PV08_339346_1193099.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "0e89bc0af1f13449",
+      "allocation_hash": "0e89bc0af1f134492f24fee8a06cd190e0e6417301ce00dd172738c8ce15474d",
+      "members": [
+        "PV08_340100_1186175.bmp",
+        "PV08_340174_1186174.bmp",
+        "PV08_340175_1186263.bmp",
+        "PV08_340248_1186173.bmp",
+        "PV08_340468_1186081.bmp",
+        "PV08_340542_1186079.bmp",
+        "PV08_340543_1186168.bmp",
+        "PV08_340617_1186167.bmp",
+        "PV08_340618_1186256.bmp",
+        "PV08_340691_1186255.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "97c6fa8a28628c96",
+      "allocation_hash": "97c6fa8a28628c96fe0ebdc10368e92d683894c8ec9204b18991454e5b4ce020",
+      "members": [
+        "PV08_340170_1195575.bmp",
+        "PV08_340170_1195664.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "27abebcc44a445a7",
+      "allocation_hash": "27abebcc44a445a770a96ce9cd233d905a710e968162fdfd779f0e08993e5b79",
+      "members": [
+        "PV08_340235_1175797.bmp",
+        "PV08_340236_1175886.bmp",
+        "PV08_340238_1175975.bmp",
+        "PV08_340828_1175958.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "16e1cba9e844561d",
+      "allocation_hash": "16e1cba9e844561de88fb209c7030dd883dc5d912e68c47adc70043ab23bfb50",
+      "members": [
+        "PV08_340673_1192733.bmp",
+        "PV08_340674_1192822.bmp",
+        "PV08_340747_1192732.bmp",
+        "PV08_340747_1192821.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "c26d6da739b971d5",
+      "allocation_hash": "c26d6da739b971d51cc45b03fcc73f3139f7dfcb6d336a7972c503d001b22a32",
+      "members": [
+        "PV08_340741_1179243.bmp",
+        "PV08_340813_1179153.bmp",
+        "PV08_340815_1179242.bmp",
+        "PV08_340816_1179330.bmp",
+        "PV08_340887_1179151.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "127a1303accb3684",
+      "allocation_hash": "127a1303accb3684b0e63bba2dcdcedf41268e30e50722704aa00f36aaba6f0c",
+      "members": [
+        "PV08_341059_1196725.bmp",
+        "PV08_341133_1196636.bmp",
+        "PV08_341133_1196725.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "3795236e2e5e4401",
+      "allocation_hash": "3795236e2e5e4401b2329aac28ce34cdcefda56476150e58e7b39f904d83e3fb",
+      "members": [
+        "PV08_341074_1177194.bmp",
+        "PV08_341147_1177192.bmp",
+        "PV08_341149_1177280.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "0d9b230e070942be",
+      "allocation_hash": "0d9b230e070942be5a144a26792cfb90e335a065823ae5a48edaad1585e53bdb",
+      "members": [
+        "PV08_341728_1198944.bmp",
+        "PV08_341728_1199033.bmp",
+        "PV08_341728_1199121.bmp",
+        "PV08_341728_1199210.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "3f655ca7e9740977",
+      "allocation_hash": "3f655ca7e97409774f7769e42679b266a17f7552c967d20d12f93079fe30a0f3",
+      "members": [
+        "PV08_342215_1184007.bmp",
+        "PV08_342216_1184096.bmp",
+        "PV08_342288_1183917.bmp",
+        "PV08_342289_1184006.bmp",
+        "PV08_342363_1184005.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "1e531e74cba33deb",
+      "allocation_hash": "1e531e74cba33deb0828e8479593ac491438c2c636a87f1a5f99b1021be5b786",
+      "members": [
+        "PV08_342289_1191385.bmp",
+        "PV08_342290_1191474.bmp",
+        "PV08_342878_1191201.bmp",
+        "PV08_342952_1191201.bmp",
+        "PV08_342953_1191290.bmp",
+        "PV08_343180_1192088.bmp",
+        "PV08_343254_1192088.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "d6919573f6dc4dd7",
+      "allocation_hash": "d6919573f6dc4dd779956abdde3dc445f3aaf0e4b1b49f76b5a3f45afda284a7",
+      "members": [
+        "PV08_342351_1189873.bmp",
+        "PV08_342425_1189872.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "17db19f21761b12b",
+      "allocation_hash": "17db19f21761b12b0d1cc2f83880a7a51fb5d9ca762b5c554b194ace594bd128",
+      "members": [
+        "PV08_342991_1173406.bmp",
+        "PV08_342992_1173495.bmp",
+        "PV08_343064_1173403.bmp",
+        "PV08_343066_1173492.bmp",
+        "PV08_344021_1173284.bmp",
+        "PV08_344095_1173282.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "7e8f4ea94319c08f",
+      "allocation_hash": "7e8f4ea94319c08f5d6fc2d66496296f988bf207120f7851b69957f715f0accb",
+      "members": [
+        "PV08_343195_1195025.bmp",
+        "PV08_343269_1195025.bmp",
+        "PV08_343271_1195470.bmp",
+        "PV08_343343_1195025.bmp",
+        "PV08_344080_1194664.bmp",
+        "PV08_344154_1194663.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "937af790bc5b8d2c",
+      "allocation_hash": "937af790bc5b8d2c1784abb9aee9fb169582816781afaf561bef37c24dac3175",
+      "members": [
+        "PV08_343549_1184427.bmp",
+        "PV08_343623_1184426.bmp",
+        "PV08_343624_1184515.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "d11e562177509b87",
+      "allocation_hash": "d11e562177509b87997f934e223fbbb8c0635e65d4758a9637afaa439039aeb3",
+      "members": [
+        "PV08_343851_1193151.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "b36b4f9acdb5d5ff",
+      "allocation_hash": "b36b4f9acdb5d5ff2ca9b8060f89b4c04176792838f570a308403541d589e3bf",
+      "members": [
+        "PV08_343870_1199386.bmp",
+        "PV08_343870_1199476.bmp",
+        "PV08_343944_1199386.bmp",
+        "PV08_343944_1199476.bmp",
+        "PV08_344018_1199475.bmp",
+        "PV08_344018_1199565.bmp",
+        "PV08_344091_1199297.bmp",
+        "PV08_344091_1199386.bmp",
+        "PV08_344092_1199475.bmp",
+        "PV08_344092_1199565.bmp",
+        "PV08_344092_1199654.bmp",
+        "PV08_344165_1199297.bmp",
+        "PV08_344165_1199386.bmp",
+        "PV08_344165_1199475.bmp",
+        "PV08_344239_1199386.bmp",
+        "PV08_344239_1199475.bmp",
+        "PV08_344460_1198584.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "088f8d5b97d61098",
+      "allocation_hash": "088f8d5b97d610985cf9bd0bd7764c2cf3da73014c3d8bac3c3ef49faa34b4c7",
+      "members": [
+        "PV08_344168_1186822.bmp",
+        "PV08_344242_1186820.bmp",
+        "PV08_344393_1187085.bmp",
+        "PV08_344394_1187175.bmp",
+        "PV08_344467_1187173.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "3ffe360a9f840057",
+      "allocation_hash": "3ffe360a9f8400578b4fc9cb6a3f9d560cfaf01f883f067d20403d0d2e8558fd",
+      "members": [
+        "PV08_344683_1167113.bmp",
+        "PV08_344685_1167202.bmp",
+        "PV08_344688_1167291.bmp",
+        "PV08_344690_1167380.bmp",
+        "PV08_344692_1167469.bmp",
+        "PV08_344757_1167110.bmp",
+        "PV08_344759_1167199.bmp",
+        "PV08_344761_1167289.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "bcb98f4d98b243d2",
+      "allocation_hash": "bcb98f4d98b243d2388081430d0f5a8054eee45cec5e383fccec4e6b513e556c",
+      "members": [
+        "PV08_344820_1176201.bmp",
+        "PV08_344822_1176290.bmp",
+        "PV08_344825_1176468.bmp",
+        "PV08_344894_1176198.bmp",
+        "PV08_344895_1176288.bmp",
+        "PV08_344899_1176466.bmp",
+        "PV08_344901_1176555.bmp",
+        "PV08_344973_1176464.bmp",
+        "PV08_344974_1176553.bmp",
+        "PV08_344976_1176642.bmp",
+        "PV08_345048_1176551.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "20664b14c5353c9d",
+      "allocation_hash": "20664b14c5353c9de048ea05a63b1d55a6a79f124808072003cd486b92b07628",
+      "members": [
+        "PV08_346069_1193579.bmp",
+        "PV08_346069_1193669.bmp",
+        "PV08_346142_1193579.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "test"
+    },
+    {
+      "group_id": "ed7d9ed3ae4b5c0f",
+      "allocation_hash": "ed7d9ed3ae4b5c0f409173b6d7d64250558111ee87a5f78a7e445bb6e76e09af",
+      "members": [
+        "PV08_346827_1164616.bmp",
+        "PV08_346901_1164613.bmp",
+        "PV08_347185_1164244.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    },
+    {
+      "group_id": "3d38ed1d8b2427e0",
+      "allocation_hash": "3d38ed1d8b2427e0fcb6819e9c197fa890f120836b3d7261692dffa248e91203",
+      "members": [
+        "PV08_346875_1192590.bmp",
+        "PV08_346949_1192589.bmp",
+        "PV08_346950_1192678.bmp",
+        "PV08_347239_1191692.bmp",
+        "PV08_347313_1191691.bmp",
+        "PV08_347313_1191781.bmp",
+        "PV08_347829_1191686.bmp",
+        "PV08_347903_1191685.bmp",
+        "PV08_347972_1190969.bmp",
+        "PV08_347977_1191685.bmp",
+        "PV08_348049_1191415.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "validation"
+    },
+    {
+      "group_id": "63d1e80a2e64e9f1",
+      "allocation_hash": "63d1e80a2e64e9f16120d959192d27da3d6013c7905943376ac868764747becd",
+      "members": [
+        "PV08_347225_1168354.bmp",
+        "PV08_347227_1168443.bmp",
+        "PV08_347230_1168532.bmp",
+        "PV08_348105_1168141.bmp",
+        "PV08_348107_1168231.bmp",
+        "PV08_348110_1168320.bmp",
+        "PV08_348181_1168228.bmp",
+        "PV08_348183_1168317.bmp",
+        "PV08_348561_1168661.bmp",
+        "PV08_348566_1168840.bmp",
+        "PV08_348635_1168658.bmp",
+        "PV08_348709_1168655.bmp",
+        "PV08_348923_1168378.bmp",
+        "PV08_348997_1168375.bmp",
+        "PV08_349365_1168361.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "d4e588e65a7b0cc4",
+      "allocation_hash": "d4e588e65a7b0cc488d5ef63cb75ba2fbebb7bbf1f345e20b18845c700648d3f",
+      "members": [
+        "PV08_347764_1166455.bmp",
+        "PV08_347838_1166452.bmp",
+        "PV08_347841_1166541.bmp",
+        "PV08_347909_1166359.bmp",
+        "PV08_347912_1166449.bmp",
+        "PV08_347914_1166538.bmp",
+        "PV08_347983_1166356.bmp",
+        "PV08_347986_1166446.bmp",
+        "PV08_347988_1166535.bmp",
+        "PV08_348062_1166532.bmp"
+      ],
+      "legacy_exposed": false,
+      "split": "train"
+    },
+    {
+      "group_id": "d7da28d87ef8dd4e",
+      "allocation_hash": "d7da28d87ef8dd4e717d31e5e548744b6d7e5d0f0eadbaf7b0d9a57f608516a3",
+      "members": [
+        "PV08_348105_1189177.bmp",
+        "PV08_348106_1189266.bmp",
+        "PV08_348179_1189176.bmp",
+        "PV08_348180_1189265.bmp"
+      ],
+      "legacy_exposed": true,
+      "split": "legacy_development"
+    }
+  ],
+  "sample_counts": {
+    "legacy_development": 202,
+    "train": 260,
+    "test": 90,
+    "validation": 111
+  },
+  "group_counts": {
+    "legacy_development": 21,
+    "train": 45,
+    "test": 16,
+    "validation": 16
+  },
+  "minimum_cross_split_coordinate_distance": {
+    "legacy_development__test": 1188.8990705690705,
+    "legacy_development__train": 1005.2591705624973,
+    "legacy_development__validation": 1362.6609996620582,
+    "test__train": 1034.174550063963,
+    "test__validation": 1210.2334485544513,
+    "train__validation": 1123.58933779206
+  },
+  "coordinate_min": [
+    312621,
+    1164244
+  ],
+  "coordinate_max": [
+    349365,
+    1218789
+  ],
+  "test_access_policy": "Only structural validation/hashes so far; no test CAM, loss, metric or visual panel. No test-based prompt/threshold/hyperparameter selection.",
+  "limitation": "Coordinate separation is verified; true region/date independence and non-overlapping footprints are NOT established without source georeferencing."
+}

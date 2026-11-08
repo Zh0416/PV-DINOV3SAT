@@ -1,0 +1,1588 @@
+{
+  "version": "pv896-external-lock-v1",
+  "dataset": "zh0416/pv-896",
+  "dataset_manifest_sha256": "6ec028cd1f43255a61a969057799662270fc770498aab8b40fde8f7b6b338522",
+  "source_dataset_independence": "PV-896 README states no PV08 or G:/pv imagery; original GF source scenes are distinct by documented provenance.",
+  "label_definition": "grayscale 0=background, 255=photovoltaic; support labels only for prototypes/calibration, query labels only for fixed post-lock scoring",
+  "selection_rule": "All 6 scenes with bbox latitude >26 degrees are queries; SHA-256 first 8 sample IDs per scene. SHA-256 first 8 of 10 scenes with bbox latitude <24 degrees each provide the lowest-SHA labeled-positive support. Query assignment cycles through fixed supports. No model predictions or query mask contents used for selection.",
+  "geography_rule": "Support scene envelopes are entirely below 24 N; query scene envelopes are entirely above 26 N. Bboxes are derived from CSV EPSG:4326 affine transforms.",
+  "gsd_rule": "Approximate WGS84 meters per pixel at tile center computed from angular affine resolution; not a source-certified sensor GSD.",
+  "date_rule": "Acquisition dates parsed from original GeoTIFF filenames in manifest; not scene submission date.",
+  "image_size": [
+    896,
+    896
+  ],
+  "dino_geometry": "Four independent 448x448 crops, 28x28 tokens each, stitched to 56x56.",
+  "support_count": 8,
+  "query_count": 48,
+  "support_scenes": [
+    "0807_Q_934ae716b5714f",
+    "0820_Q_f598280265d142",
+    "0820_Q_32f2300fdd3147",
+    "0812_Q_0a5aa4566e4f48",
+    "0910_Q_f31b2f78ddfe4a",
+    "0817_Q_c6cd6e69bfce41",
+    "0820_Q_921ef0a25d7045",
+    "0820_Q_8a2f89c3a6d04f"
+  ],
+  "query_scenes": [
+    "0918_Q_d858345d662a44",
+    "0918_Q_4a6bb66935b24c",
+    "0825_Q_d92146f808cb47",
+    "0922_Q_039af681c3cb48",
+    "0825_Q_89716191c11a4d",
+    "0825_Q_733feba5ac7648"
+  ],
+  "scene_envelopes_lonlat": {
+    "0807_Q_934ae716b5714f": [
+      111.78566546767955,
+      21.24066546763609,
+      112.80552158278796,
+      22.13160071943508
+    ],
+    "0812_Q_0a5aa4566e4f48": [
+      115.21280575545097,
+      22.756888489219556,
+      116.14978417271762,
+      23.55573741008325
+    ],
+    "0812_Q_5746fe6e20e244": [
+      109.30967585846122,
+      21.464468296440167,
+      109.63385864785843,
+      21.736871736690265
+    ],
+    "0817_Q_c6cd6e69bfce41": [
+      107.0958273381809,
+      21.25807553957855,
+      108.07884892091519,
+      22.14901079137754
+    ],
+    "0820_Q_32f2300fdd3147": [
+      107.86378806261725,
+      21.012109548137943,
+      109.00820640766598,
+      22.019092752469017
+    ],
+    "0820_Q_3c16aaef706f45": [
+      110.56718931680325,
+      21.048691133206262,
+      111.77075355196477,
+      22.032283523450165
+    ],
+    "0820_Q_8a2f89c3a6d04f": [
+      109.47326678795338,
+      20.065065224415214,
+      110.53808632238447,
+      21.17310248390657
+    ],
+    "0820_Q_921ef0a25d7045": [
+      109.66018005607663,
+      20.957999151257262,
+      110.83977111240222,
+      22.04359284210507
+    ],
+    "0820_Q_f598280265d142": [
+      108.81318615997837,
+      20.981303017296028,
+      109.90846026289276,
+      22.08952594412208
+    ],
+    "0825_Q_733feba5ac7648": [
+      118.64804773651906,
+      37.331408989923325,
+      119.08403904563804,
+      37.64517788418806
+    ],
+    "0825_Q_89716191c11a4d": [
+      120.40857913674843,
+      27.235575539581415,
+      121.3547661871086,
+      28.02521582735158
+    ],
+    "0825_Q_d92146f808cb47": [
+      118.58730702851267,
+      37.02676488703804,
+      119.01434786003288,
+      37.33150031152271
+    ],
+    "0910_Q_f31b2f78ddfe4a": [
+      110.8200568878866,
+      19.326308006619627,
+      111.15082797430982,
+      19.890444427743073
+    ],
+    "0918_Q_4a6bb66935b24c": [
+      118.31990412635203,
+      34.48587510940919,
+      119.47206942328265,
+      35.309496029017986
+    ],
+    "0918_Q_d858345d662a44": [
+      120.7424204923059,
+      28.988764394607426,
+      121.97214652534278,
+      29.956179454808055
+    ],
+    "0922_Q_039af681c3cb48": [
+      120.80272661850715,
+      32.42649280570228,
+      121.33210791347031,
+      32.89785971217633
+    ]
+  },
+  "supports": [
+    {
+      "sample_id": "pv000019",
+      "source_scene": "0807_Q_934ae716b5714f",
+      "image": "正样本/images/pv000019.bmp",
+      "label": "正样本/labels/pv000019.bmp",
+      "image_sha256": "553a753d669516275aa6c736ca04c9a56600b9b9dc0699b143512f39f9bfb616",
+      "label_sha256": "dd04e36cd0e5a71a4ba155814ae6b3404a71e1fd9bf2677e37b7bddad96a25ee",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260104",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        112.1724280576078,
+        21.922104316557284,
+        112.18854316552148,
+        21.93821942447096
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.8581402923502888,
+        1.9915345161448768
+      ]
+    },
+    {
+      "sample_id": "pv000919",
+      "source_scene": "0820_Q_f598280265d142",
+      "image": "困难正样本/images/pv000919.bmp",
+      "label": "困难正样本/labels/pv000919.bmp",
+      "image_sha256": "301899fcda60e8cebf23d2b12644c172112099caff7a8e0044507fef5876b330",
+      "label_sha256": "9b3f46472bfdc326958675bb2954d3aef62d7b10687c2d5ebb00f6d571619878",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260110",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        109.24767506030804,
+        21.43479577507651,
+        109.26879604851851,
+        21.454636083229406
+      ],
+      "angular_pixel_size_degrees": [
+        2.35725314849e-05,
+        2.21432010635e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.44351170725138,
+        2.451758197868289
+      ]
+    },
+    {
+      "sample_id": "pv000427",
+      "source_scene": "0820_Q_32f2300fdd3147",
+      "image": "正样本/images/pv000427.bmp",
+      "label": "正样本/labels/pv000427.bmp",
+      "image_sha256": "bad7533b739856aa64c0e1b753d08fab8455a9ca2f95a8304f808b2658827f2f",
+      "label_sha256": "0140de1054c2ba9b9a20d7a3bbfcd6a1ba64d7c709874141cb2757f0b6576f53",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20251113",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        108.95083451174006,
+        21.602116608703756,
+        108.97197152602855,
+        21.621972615549723
+      ],
+      "angular_pixel_size_degrees": [
+        2.3590417732699973e-05,
+        2.216072192630003e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4425665050081484,
+        2.453747325492349
+      ]
+    },
+    {
+      "sample_id": "pv002150",
+      "source_scene": "0812_Q_0a5aa4566e4f48",
+      "image": "困难正样本/images/pv002150.bmp",
+      "label": "困难正样本/labels/pv002150.bmp",
+      "image_sha256": "7c805bd1e3b05022220b8ad2abfbf2650cda0af5c253a576f4f5ec873870209d",
+      "label_sha256": "d43ccb1cff447ea134aa587698366812a036896ba4aef573430522f47a1bfb35",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260124",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        115.46143884897627,
+        22.85818345324838,
+        115.47755395688995,
+        22.874298561162057
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.8457417610616353,
+        1.9917649337955086
+      ]
+    },
+    {
+      "sample_id": "pv003505",
+      "source_scene": "0910_Q_f31b2f78ddfe4a",
+      "image": "正样本/images/pv003505.bmp",
+      "label": "正样本/labels/pv003505.bmp",
+      "image_sha256": "bb8f7e4ad2b652583ee59fecfd6c501c90e160d2caa1f25a378a42fc8c5a9639",
+      "label_sha256": "22e097eaca21a108b0539d3b0997920c49a47e28d30f6b2bbf7098c7c1e2a021",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20210330",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        110.88306090434816,
+        19.631975549539103,
+        110.89881190846354,
+        19.647708437777606
+      ],
+      "angular_pixel_size_degrees": [
+        1.75792456645e-05,
+        1.75590270519e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.8437639674733224,
+        1.9437810662072117
+      ]
+    },
+    {
+      "sample_id": "pv000272",
+      "source_scene": "0817_Q_c6cd6e69bfce41",
+      "image": "正样本/images/pv000272.bmp",
+      "label": "正样本/labels/pv000272.bmp",
+      "image_sha256": "3036fbfd7c634bc5d60bb25c6b3c5276d4d72bfe3cdb50195ba21f5a73cf4e5b",
+      "label_sha256": "379bac00ce01af5a8b69499a4b160a9274eac5c2fd93287f656dac65ecd1cd82",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260113",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        107.78647482019562,
+        21.985557553967386,
+        107.8025899281093,
+        22.001672661881063
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.857315432029521,
+        1.9915498931837081
+      ]
+    },
+    {
+      "sample_id": "pv000733",
+      "source_scene": "0820_Q_921ef0a25d7045",
+      "image": "正样本/images/pv000733.bmp",
+      "label": "正样本/labels/pv000733.bmp",
+      "image_sha256": "f0b7867dfaca6d91e55ec5b09f4e4a82a979868395efb7ed8a96aedf72e620a3",
+      "label_sha256": "801ecf86674413fb6959f95b1349aa52db39906734c7bb26cddc9b1f6bbb293d",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260113",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        109.94979832054531,
+        21.536226600168366,
+        109.97091631899616,
+        21.556067738121197
+      ],
+      "angular_pixel_size_degrees": [
+        2.35691946996e-05,
+        2.21441271795e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4414729578271834,
+        2.451890485455373
+      ]
+    },
+    {
+      "sample_id": "pv002784",
+      "source_scene": "0820_Q_8a2f89c3a6d04f",
+      "image": "困难正样本/images/pv002784.bmp",
+      "label": "困难正样本/labels/pv002784.bmp",
+      "image_sha256": "233b2de2dbfffa56a458aed987c810383344922ff6fa4e36dd307b32ef0d02ee",
+      "label_sha256": "845cf98fbf24a6b37c9caf35f157d95f26447ddd240b4665f8631ed5bc9d085d",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260113",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        109.8811976518481,
+        20.371121551845054,
+        109.90219409337209,
+        20.390958536030322
+      ],
+      "angular_pixel_size_degrees": [
+        2.34335284866e-05,
+        2.21394912782e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.446295030504445,
+        2.4510424943702946
+      ]
+    }
+  ],
+  "episodes": [
+    {
+      "sample_id": "pv003594",
+      "source_scene": "0918_Q_d858345d662a44",
+      "image": "负样本/images/pv003594.bmp",
+      "label": "负样本/labels/pv003594.bmp",
+      "image_sha256": "7f937c3b7bbc8e9d0b1965475b870af5d3bd766be3ffa88a0a98c1ddbb902c60",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20210426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.76986783061348,
+        29.148573372103694,
+        121.79234324113895,
+        29.16854949429073
+      ],
+      "angular_pixel_size_degrees": [
+        2.50841635329e-05,
+        2.22947792266e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4404331900464222,
+        2.471116901398904
+      ],
+      "support_sample_id": "pv000019"
+    },
+    {
+      "sample_id": "pv003586",
+      "source_scene": "0918_Q_d858345d662a44",
+      "image": "负样本/images/pv003586.bmp",
+      "label": "负样本/labels/pv003586.bmp",
+      "image_sha256": "ae277483f18ea1bce53aa1e78069f10b5ad1c0c787a209acb8711c89f3ec471c",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20210426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.73133855542694,
+        29.22847786085183,
+        121.75381396595242,
+        29.248453983038864
+      ],
+      "angular_pixel_size_degrees": [
+        2.50841635329e-05,
+        2.22947792266e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.43854164964602,
+        2.471146420396219
+      ],
+      "support_sample_id": "pv000919"
+    },
+    {
+      "sample_id": "pv001229",
+      "source_scene": "0918_Q_d858345d662a44",
+      "image": "正样本/images/pv001229.bmp",
+      "label": "正样本/labels/pv001229.bmp",
+      "image_sha256": "5509aa88eced266ca49e03769681071b5d80400ab58a59cce83bbad414e8ba38",
+      "label_sha256": "e18d6e3956a034800daf8f56e130207c0b38348b63d3535230bfcfe03be07704",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20210426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.75702473888462,
+        29.137158445139672,
+        121.7795001494101,
+        29.157134567326707
+      ],
+      "angular_pixel_size_degrees": [
+        2.50841635329e-05,
+        2.22947792266e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.440703022865423,
+        2.4711126885868873
+      ],
+      "support_sample_id": "pv000427"
+    },
+    {
+      "sample_id": "pv003574",
+      "source_scene": "0918_Q_d858345d662a44",
+      "image": "困难正样本/images/pv003574.bmp",
+      "label": "困难正样本/labels/pv003574.bmp",
+      "image_sha256": "7e734804ca3d71ec03ea93a9736b99684b6c528c1d59d961ae453a722b7649da",
+      "label_sha256": "a938e3c4e8d520062ba2dc3f4fdefc0fdce3c4816ce9801beb64d8948dbcead7",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20210426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.64143691332502,
+        29.502436107988288,
+        121.6639123238505,
+        29.522412230175323
+      ],
+      "angular_pixel_size_degrees": [
+        2.50841635329e-05,
+        2.22947792266e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.432020396008442,
+        2.471248015208469
+      ],
+      "support_sample_id": "pv002150"
+    },
+    {
+      "sample_id": "pv003602",
+      "source_scene": "0918_Q_d858345d662a44",
+      "image": "正样本/images/pv003602.bmp",
+      "label": "正样本/labels/pv003602.bmp",
+      "image_sha256": "21a089475df7eedea59cc515ea260e47ad5fe564076029eeadb39d2ae6ccf9bb",
+      "label_sha256": "29a5973c61bab76a8e24b42ac866f483f11a1dd8789ca51d36f016f3663e800c",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20210426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.67996618851156,
+        29.011594248535463,
+        121.70244159903703,
+        29.0315703707225
+      ],
+      "angular_pixel_size_degrees": [
+        2.50841635329e-05,
+        2.22947792266e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.443664790154116,
+        2.4710664170258885
+      ],
+      "support_sample_id": "pv003505"
+    },
+    {
+      "sample_id": "pv003589",
+      "source_scene": "0918_Q_d858345d662a44",
+      "image": "负样本/images/pv003589.bmp",
+      "label": "负样本/labels/pv003589.bmp",
+      "image_sha256": "effb33280576e0c154b79154e384cd46364a8ddd24b506a45bc5baf5d380d63d",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20210426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.52584908776542,
+        29.17140322603173,
+        121.5483244982909,
+        29.191379348218767
+      ],
+      "angular_pixel_size_degrees": [
+        2.50841635329e-05,
+        2.22947792266e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.439893233928388,
+        2.4711253301669394
+      ],
+      "support_sample_id": "pv000272"
+    },
+    {
+      "sample_id": "pv001216",
+      "source_scene": "0918_Q_d858345d662a44",
+      "image": "正样本/images/pv001216.bmp",
+      "label": "正样本/labels/pv001216.bmp",
+      "image_sha256": "9f8d4a353dcd2fc25fcc38c87c39b748dac743481575a37a0ef5c075d3d9089b",
+      "label_sha256": "9cdc47c7e49f03d346d0ef64ea077263f1946bcf570558993bcdf4f2dc6b4e44",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20210426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.88545565617308,
+        29.570925669772404,
+        121.90793106669855,
+        29.59090179195944
+      ],
+      "angular_pixel_size_degrees": [
+        2.50841635329e-05,
+        2.22947792266e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4303813911099654,
+        2.471273506761195
+      ],
+      "support_sample_id": "pv000733"
+    },
+    {
+      "sample_id": "pv001213",
+      "source_scene": "0918_Q_d858345d662a44",
+      "image": "正样本/images/pv001213.bmp",
+      "label": "正样本/labels/pv001213.bmp",
+      "image_sha256": "08da953229c34b9d61a770954e06a65fde196cd28995cceded520394cc841823",
+      "label_sha256": "ae7c3a7f8b5300e61f3352afb6a225a8e4f650892b9a0fee35a35e6ce2805735",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20210426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.93682802308845,
+        29.60517045066446,
+        121.95930343361393,
+        29.625146572851495
+      ],
+      "angular_pixel_size_degrees": [
+        2.50841635329e-05,
+        2.22947792266e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.42956058647864,
+        2.4712862663662705
+      ],
+      "support_sample_id": "pv002784"
+    },
+    {
+      "sample_id": "pv001208",
+      "source_scene": "0918_Q_4a6bb66935b24c",
+      "image": "正样本/images/pv001208.bmp",
+      "label": "正样本/labels/pv001208.bmp",
+      "image_sha256": "2edd61a9d025aaa748eb0ae1e7df349c74b99bf73eab94eeb0dd3a309deb8ba6",
+      "label_sha256": "2cfbe033ca78f2dffa0e61d5fcc44cd4fe92445bd65cdfc102cba7d45fdb9a2f",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230501",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        119.43468352869198,
+        34.62362355589429,
+        119.4584745525224,
+        34.6437118710067
+      ],
+      "angular_pixel_size_degrees": [
+        2.65524819536e-05,
+        2.24199945451e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4346797837648864,
+        2.487136506893563
+      ],
+      "support_sample_id": "pv000019"
+    },
+    {
+      "sample_id": "pv001197",
+      "source_scene": "0918_Q_4a6bb66935b24c",
+      "image": "正样本/images/pv001197.bmp",
+      "label": "正样本/labels/pv001197.bmp",
+      "image_sha256": "98cdc472ac9bf0e65ab2ee7a28d5ce33fdc983192abaab580735cb7a25cfa4d0",
+      "label_sha256": "3d0b211832e5e42bca018e4cd31064e090ca9d816200d71696b99a11481cc88c",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230501",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        119.16278611348712,
+        34.72693489075811,
+        119.18657713731754,
+        34.74702320587052
+      ],
+      "angular_pixel_size_degrees": [
+        2.65524819536e-05,
+        2.24199945451e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4316573061407145,
+        2.4871787418718534
+      ],
+      "support_sample_id": "pv000919"
+    },
+    {
+      "sample_id": "pv001872",
+      "source_scene": "0918_Q_4a6bb66935b24c",
+      "image": "负样本/images/pv001872.bmp",
+      "label": "负样本/labels/pv001872.bmp",
+      "image_sha256": "1ccc02057f32e533db5d4c9f025b0f19f9b025aa43a8876e8ed44fa248770863",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230501",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.52382718775569,
+        34.71545585355102,
+        118.54761821158611,
+        34.73554416866343
+      ],
+      "angular_pixel_size_degrees": [
+        2.65524819536e-05,
+        2.24199945451e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4319935283487117,
+        2.487174046209167
+      ],
+      "support_sample_id": "pv000427"
+    },
+    {
+      "sample_id": "pv001871",
+      "source_scene": "0918_Q_4a6bb66935b24c",
+      "image": "负样本/images/pv001871.bmp",
+      "label": "负样本/labels/pv001871.bmp",
+      "image_sha256": "d9ae00bbf4840837b2dd3cdd96ce5a104bf75f85418ca0dd56a5a9ad1c7160b4",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230501",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        119.06762201816541,
+        34.72693489075811,
+        119.09141304199584,
+        34.74702320587052
+      ],
+      "angular_pixel_size_degrees": [
+        2.65524819536e-05,
+        2.24199945451e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4316573061407145,
+        2.4871787418718534
+      ],
+      "support_sample_id": "pv002150"
+    },
+    {
+      "sample_id": "pv003554",
+      "source_scene": "0918_Q_4a6bb66935b24c",
+      "image": "负样本/images/pv003554.bmp",
+      "label": "负样本/labels/pv003554.bmp",
+      "image_sha256": "c55b257f8d8ccdfe2979274837a3c6640586479c2a5e8802b50a6c5a2b29dd25",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230501",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        119.35311430413051,
+        34.612144518687195,
+        119.37690532796094,
+        34.632232833799605
+      ],
+      "angular_pixel_size_degrees": [
+        2.65524819536e-05,
+        2.24199945451e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4350151252157315,
+        2.487131817738549
+      ],
+      "support_sample_id": "pv003505"
+    },
+    {
+      "sample_id": "pv003541",
+      "source_scene": "0918_Q_4a6bb66935b24c",
+      "image": "负样本/images/pv003541.bmp",
+      "label": "负样本/labels/pv003541.bmp",
+      "image_sha256": "b1d91e46b58c0a25febb88ad3cf589560cbbe6d50a1fca4e7695b014fcdce4cb",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230501",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        119.16278611348712,
+        34.692497779136836,
+        119.18657713731754,
+        34.71258609424925
+      ],
+      "angular_pixel_size_degrees": [
+        2.65524819536e-05,
+        2.24199945451e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.432665679322178,
+        2.4871646570448034
+      ],
+      "support_sample_id": "pv000272"
+    },
+    {
+      "sample_id": "pv003536",
+      "source_scene": "0918_Q_4a6bb66935b24c",
+      "image": "负样本/images/pv003536.bmp",
+      "label": "负样本/labels/pv003536.bmp",
+      "image_sha256": "626e760c13ced23e5acd07d30500b5a5d4064918688983b146663c6c77355d18",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230501",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        119.13559637196663,
+        34.71545585355102,
+        119.15938739579705,
+        34.73554416866343
+      ],
+      "angular_pixel_size_degrees": [
+        2.65524819536e-05,
+        2.24199945451e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4319935283487117,
+        2.487174046209167
+      ],
+      "support_sample_id": "pv000733"
+    },
+    {
+      "sample_id": "pv001209",
+      "source_scene": "0918_Q_4a6bb66935b24c",
+      "image": "正样本/images/pv001209.bmp",
+      "label": "正样本/labels/pv001209.bmp",
+      "image_sha256": "83539cdc0e10c82f4b3d03f095fa7b1ab3af43f413b5ab58ab2e2b36dcbc5491",
+      "label_sha256": "d52a673edf4227fbfc2b059fe069b1f2122d7d0fa32cf6130b37cf70a14963b6",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230501",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        119.43468352869198,
+        34.612144518687195,
+        119.4584745525224,
+        34.632232833799605
+      ],
+      "angular_pixel_size_degrees": [
+        2.65524819536e-05,
+        2.24199945451e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        2.4350151252157315,
+        2.487131817738549
+      ],
+      "support_sample_id": "pv002784"
+    },
+    {
+      "sample_id": "pv001832",
+      "source_scene": "0825_Q_d92146f808cb47",
+      "image": "负样本/images/pv001832.bmp",
+      "label": "负样本/labels/pv001832.bmp",
+      "image_sha256": "3a82293f2d66db6c22910e477a171cc9c0300d739fb465a4cf9143eb720e67c6",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.76617229825936,
+        37.25249483110076,
+        118.7818230093622,
+        37.26829592718515
+      ],
+      "angular_pixel_size_degrees": [
+        1.74673114987e-05,
+        1.76351518799e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5494760142955422,
+        1.9571932922515753
+      ],
+      "support_sample_id": "pv000019"
+    },
+    {
+      "sample_id": "pv003465",
+      "source_scene": "0825_Q_d92146f808cb47",
+      "image": "正样本/images/pv003465.bmp",
+      "label": "正样本/labels/pv003465.bmp",
+      "image_sha256": "6357140af26575db833a2aa495dfc93d4100ebaf65d5b99cf573a3a215b42176",
+      "label_sha256": "64eba80b64e6abc7952d3140937a402c695efa7978736075d8c5c30faf9c28bf",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.74828577128469,
+        37.13511526018815,
+        118.76393648238752,
+        37.15091635627254
+      ],
+      "angular_pixel_size_degrees": [
+        1.74673114987e-05,
+        1.76351518799e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5518772270308752,
+        1.9571544188461374
+      ],
+      "support_sample_id": "pv000919"
+    },
+    {
+      "sample_id": "pv001110",
+      "source_scene": "0825_Q_d92146f808cb47",
+      "image": "正样本/images/pv001110.bmp",
+      "label": "正样本/labels/pv001110.bmp",
+      "image_sha256": "c1c30892426793f389bf008a9ec0cde62a8fa0399cadae01e115b6d26b0e05a2",
+      "label_sha256": "a8b303065dcc5b0d7aa8fdb9a537739ac857090c57a59ba0c4da3c0c9e1b72bc",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.97186735846805,
+        37.234436435575745,
+        118.98751806957088,
+        37.25023753166013
+      ],
+      "angular_pixel_size_degrees": [
+        1.74673114987e-05,
+        1.76351518799e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5498458564778157,
+        1.957187308754618
+      ],
+      "support_sample_id": "pv000427"
+    },
+    {
+      "sample_id": "pv001139",
+      "source_scene": "0825_Q_d92146f808cb47",
+      "image": "正样本/images/pv001139.bmp",
+      "label": "正样本/labels/pv001139.bmp",
+      "image_sha256": "2c258478d8357e19d7728fad6dbe62dd5b4dc67c566ef6782236598a10a4defb",
+      "label_sha256": "85e7899a7ce18bbe05dd9ff71e8c7c5f8c57258c43cbf6eda07cae89b83c2b45",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.93609430451872,
+        37.1892904467632,
+        118.95174501562155,
+        37.20509154284759
+      ],
+      "angular_pixel_size_degrees": [
+        1.74673114987e-05,
+        1.76351518799e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5507697862098526,
+        1.95717235473174
+      ],
+      "support_sample_id": "pv002150"
+    },
+    {
+      "sample_id": "pv001085",
+      "source_scene": "0825_Q_d92146f808cb47",
+      "image": "正样本/images/pv001085.bmp",
+      "label": "正样本/labels/pv001085.bmp",
+      "image_sha256": "361065558f48c0a6f7252beb57e1062054e22c985441bcd1acf04d3ef9814ec0",
+      "label_sha256": "d23b1d5128eece38270f39119eb86c57ba0b0e68fab4443f04e4dd79c849ff89",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.81983187918337,
+        37.297640819913305,
+        118.8354825902862,
+        37.31344191599769
+      ],
+      "angular_pixel_size_degrees": [
+        1.74673114987e-05,
+        1.76351518799e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5485507334277004,
+        1.957208255692821
+      ],
+      "support_sample_id": "pv003505"
+    },
+    {
+      "sample_id": "pv003440",
+      "source_scene": "0825_Q_d92146f808cb47",
+      "image": "困难正样本/images/pv003440.bmp",
+      "label": "困难正样本/labels/pv003440.bmp",
+      "image_sha256": "7d3f96bde54e4ddd5db4e7cce77c9fbe5d1d40d36d3718a30d6225e36f9512ed",
+      "label_sha256": "038e1fb8f8f32ef53163417d3316e3ce9f485fbc573fbd54213b70379743f8f8",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.75722903477202,
+        37.180261249000694,
+        118.77287974587486,
+        37.19606234508508
+      ],
+      "angular_pixel_size_degrees": [
+        1.74673114987e-05,
+        1.76351518799e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5509544562823478,
+        1.9571693647385848
+      ],
+      "support_sample_id": "pv000272"
+    },
+    {
+      "sample_id": "pv001105",
+      "source_scene": "0825_Q_d92146f808cb47",
+      "image": "正样本/images/pv001105.bmp",
+      "label": "正样本/labels/pv001105.bmp",
+      "image_sha256": "1681dbfedf0d60bb5de0ea9b11f04fd1d2db72f4b74a438ca62eda495fc30706",
+      "label_sha256": "e116efdef680fedf38aad20f716d90510a1085b109f9fdf57639051e9f2fe475",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.92715104103138,
+        37.234436435575745,
+        118.94280175213422,
+        37.25023753166013
+      ],
+      "angular_pixel_size_degrees": [
+        1.74673114987e-05,
+        1.76351518799e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5498458564778157,
+        1.957187308754618
+      ],
+      "support_sample_id": "pv000733"
+    },
+    {
+      "sample_id": "pv001158",
+      "source_scene": "0825_Q_d92146f808cb47",
+      "image": "正样本/images/pv001158.bmp",
+      "label": "正样本/labels/pv001158.bmp",
+      "image_sha256": "f21b19f8355b45a8001514b282e08c625780f79502335d684fe5b3d6e277dc8e",
+      "label_sha256": "b1663d8fd02d59bc110ad14a944df9cb2d9a0e82d886a0af2e15d51fed67c490",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.90032125056938,
+        37.15317365571317,
+        118.91597196167221,
+        37.168974751797556
+      ],
+      "angular_pixel_size_degrees": [
+        1.74673114987e-05,
+        1.76351518799e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5515082346720186,
+        1.9571603963872712
+      ],
+      "support_sample_id": "pv002784"
+    },
+    {
+      "sample_id": "pv001902",
+      "source_scene": "0922_Q_039af681c3cb48",
+      "image": "负样本/images/pv001902.bmp",
+      "label": "负样本/labels/pv001902.bmp",
+      "image_sha256": "df5d270a5b21ef21dbacd5aab744bfdea2bfa628036aca64216b7e74913f00db",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.80272661850715,
+        32.619874100665996,
+        120.81964748181647,
+        32.63679496397532
+      ],
+      "angular_pixel_size_degrees": [
+        1.88848920863e-05,
+        1.88848920863e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.772215529208568,
+        2.094293774501938
+      ],
+      "support_sample_id": "pv000019"
+    },
+    {
+      "sample_id": "pv003652",
+      "source_scene": "0922_Q_039af681c3cb48",
+      "image": "负样本/images/pv003652.bmp",
+      "label": "负样本/labels/pv003652.bmp",
+      "image_sha256": "5c227d4133676abb83f35002f78d465857c1d5546dd709c425e892ce6344d222",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.0347841724636,
+        32.51351438843595,
+        121.05170503577293,
+        32.530435251745274
+      ],
+      "angular_pixel_size_degrees": [
+        1.88848920863e-05,
+        1.88848920863e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7743086670564994,
+        2.0942582835706665
+      ],
+      "support_sample_id": "pv000919"
+    },
+    {
+      "sample_id": "pv001266",
+      "source_scene": "0922_Q_039af681c3cb48",
+      "image": "正样本/images/pv001266.bmp",
+      "label": "正样本/labels/pv001266.bmp",
+      "image_sha256": "cd44bf052f52ad275ae7e0b147e72526bfade43e8bd4680455ddd6447b801ab7",
+      "label_sha256": "1a91375690d07c5357a6216f4a343c06019467a52fb3959a623455a5a1b1251c",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.1024676257009,
+        32.51351438843595,
+        121.11938848901022,
+        32.530435251745274
+      ],
+      "angular_pixel_size_degrees": [
+        1.88848920863e-05,
+        1.88848920863e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7743086670564994,
+        2.0942582835706665
+      ],
+      "support_sample_id": "pv000427"
+    },
+    {
+      "sample_id": "pv001894",
+      "source_scene": "0922_Q_039af681c3cb48",
+      "image": "负样本/images/pv001894.bmp",
+      "label": "负样本/labels/pv001894.bmp",
+      "image_sha256": "5108521261ded423cc450e58e6855576d3fa367535849dbf22d40fa22cf5932c",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.84140287749989,
+        32.80358633088152,
+        120.85832374080921,
+        32.820507194190846
+      ],
+      "angular_pixel_size_degrees": [
+        1.88848920863e-05,
+        1.88848920863e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7685857137783871,
+        2.09435522227692
+      ],
+      "support_sample_id": "pv002150"
+    },
+    {
+      "sample_id": "pv001900",
+      "source_scene": "0922_Q_039af681c3cb48",
+      "image": "负样本/images/pv001900.bmp",
+      "label": "负样本/labels/pv001900.bmp",
+      "image_sha256": "74bd50284901b42c3ed3ca937ab1ec29e8a2f0eeea37471b44fc0d2240fec100",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.95743165447811,
+        32.69722661865148,
+        120.97435251778744,
+        32.7141474819608
+      ],
+      "angular_pixel_size_degrees": [
+        1.88848920863e-05,
+        1.88848920863e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7706894068765677,
+        2.0943196249250997
+      ],
+      "support_sample_id": "pv003505"
+    },
+    {
+      "sample_id": "pv001248",
+      "source_scene": "0922_Q_039af681c3cb48",
+      "image": "正样本/images/pv001248.bmp",
+      "label": "正样本/labels/pv001248.bmp",
+      "image_sha256": "7e6ddc7100f6082e07eced20253ec767a380d28d8fa9d4248e3063ccf93f9489",
+      "label_sha256": "828d53d00a59dce5190dca149e7e053dc9652a46f0472931e6523d1740cf6d5a",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.92842446023356,
+        32.66821942440692,
+        120.94534532354288,
+        32.685140287716244
+      ],
+      "angular_pixel_size_degrees": [
+        1.88848920863e-05,
+        1.88848920863e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7712620815151154,
+        2.094309927198397
+      ],
+      "support_sample_id": "pv000272"
+    },
+    {
+      "sample_id": "pv003633",
+      "source_scene": "0922_Q_039af681c3cb48",
+      "image": "困难正样本/images/pv003633.bmp",
+      "label": "困难正样本/labels/pv003633.bmp",
+      "image_sha256": "b5b934bc458e1165bbe6bb85c2c45c0e60c4ae0934419438da61c30c9f4eec79",
+      "label_sha256": "515345d121ccc06f0edb439aa2ef2cb3f4a86fd356648c0cfcf50a5153c07137",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.9671007192263,
+        32.64888129491055,
+        120.98402158253562,
+        32.665802158219876
+      ],
+      "angular_pixel_size_degrees": [
+        1.88848920863e-05,
+        1.88848920863e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7716436121242727,
+        2.0943034645907854
+      ],
+      "support_sample_id": "pv000733"
+    },
+    {
+      "sample_id": "pv003624",
+      "source_scene": "0922_Q_039af681c3cb48",
+      "image": "负样本/images/pv003624.bmp",
+      "label": "负样本/labels/pv003624.bmp",
+      "image_sha256": "b95c6dc327a439d170a558b00509b795aa645eb477ec94e5006a6980503c7339",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": false,
+      "acquisition_date_from_source_filename": "20230426",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.91875539548538,
+        32.68755755390329,
+        120.9356762587947,
+        32.70447841721261
+      ],
+      "angular_pixel_size_degrees": [
+        1.88848920863e-05,
+        1.88848920863e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7708803489124134,
+        2.0943163918413132
+      ],
+      "support_sample_id": "pv002784"
+    },
+    {
+      "sample_id": "pv001047",
+      "source_scene": "0825_Q_89716191c11a4d",
+      "image": "正样本/images/pv001047.bmp",
+      "label": "正样本/labels/pv001047.bmp",
+      "image_sha256": "bd6469faaf643b5f122d34d7ccea80489e2818c73e79bb0153d5f45d1fab9809",
+      "label_sha256": "26260e1b1b70f00ec101110c0587bae9ca4a2ceef0e73a4c72732dcefa24169b",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260111",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.5835431655255,
+        27.63154676260319,
+        120.59965827343918,
+        27.647661870516867
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7749485732769674,
+        1.9930511929345107
+      ],
+      "support_sample_id": "pv000019"
+    },
+    {
+      "sample_id": "pv001026",
+      "source_scene": "0825_Q_89716191c11a4d",
+      "image": "正样本/images/pv001026.bmp",
+      "label": "正样本/labels/pv001026.bmp",
+      "image_sha256": "1d6ece9bd4e9c8149bbfa1cadfb8365d84c4b808431de4ce47f4bb380fac2678",
+      "label_sha256": "f49ac65424500543005ffbe533658661f3c4093d03d813df745328ac3bc9ff11",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260111",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.87821942451845,
+        27.8525539568479,
+        120.89433453243213,
+        27.868669064761576
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7713689525886007,
+        1.9931149034409958
+      ],
+      "support_sample_id": "pv000919"
+    },
+    {
+      "sample_id": "pv003335",
+      "source_scene": "0825_Q_89716191c11a4d",
+      "image": "困难正样本/images/pv003335.bmp",
+      "label": "困难正样本/labels/pv003335.bmp",
+      "image_sha256": "071b3352292806d5a423805894c1e3008bc552701d64e4caf2bdefee4484b20d",
+      "label_sha256": "0ca77de8050993cb42101f07bf0a4060c7c3323673a2e363cdcefc6806bef9ea",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260111",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.85059352523785,
+        27.84334532375437,
+        120.86670863315153,
+        27.859460431668047
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7715186295477565,
+        1.9931122420355292
+      ],
+      "support_sample_id": "pv000427"
+    },
+    {
+      "sample_id": "pv001782",
+      "source_scene": "0825_Q_89716191c11a4d",
+      "image": "负样本/images/pv001782.bmp",
+      "label": "负样本/labels/pv001782.bmp",
+      "image_sha256": "e6316945e34bcebf8fe1c3f521ba29d12c4b6669080888b3b49c4d7597ef653e",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260111",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.27419064754022,
+        27.889388489222018,
+        121.2903057554539,
+        27.905503597135695
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7707697876210655,
+        1.99312555495153
+      ],
+      "support_sample_id": "pv002150"
+    },
+    {
+      "sample_id": "pv001802",
+      "source_scene": "0825_Q_89716191c11a4d",
+      "image": "负样本/images/pv001802.bmp",
+      "label": "负样本/labels/pv001802.bmp",
+      "image_sha256": "b05592b95cf20254555ae2366b02291673008d949507654640153594e1e2de43",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260111",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        121.09922661876315,
+        27.336870503610243,
+        121.11534172667683,
+        27.35298561152392
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.779680350624984,
+        1.9929667799140538
+      ],
+      "support_sample_id": "pv003505"
+    },
+    {
+      "sample_id": "pv003387",
+      "source_scene": "0825_Q_89716191c11a4d",
+      "image": "负样本/images/pv003387.bmp",
+      "label": "负样本/labels/pv003387.bmp",
+      "image_sha256": "4e73dc62ec5f540b6a2c27ceb850a06b46eeac51aea59192596ee0a60db479bb",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260111",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.41778776984196,
+        27.36449640289083,
+        120.43390287775564,
+        27.380611510804506
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7792387422652858,
+        1.9929746674871411
+      ],
+      "support_sample_id": "pv000272"
+    },
+    {
+      "sample_id": "pv001033",
+      "source_scene": "0825_Q_89716191c11a4d",
+      "image": "正样本/images/pv001033.bmp",
+      "label": "正样本/labels/pv001033.bmp",
+      "image_sha256": "c7af7bb0d74ae781ccad9461d02fc2d725b0ebcc79fcfa14666a2ac28fa24669",
+      "label_sha256": "fd7d1908fba9500a118bd7f1df0389ffe31ad9b65bd6678366fdc39b1d65ce56",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260111",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.87821942451845,
+        27.834136690660838,
+        120.89433453243213,
+        27.850251798574515
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7716682607864183,
+        1.993109581219471
+      ],
+      "support_sample_id": "pv000733"
+    },
+    {
+      "sample_id": "pv003350",
+      "source_scene": "0825_Q_89716191c11a4d",
+      "image": "负样本/images/pv003350.bmp",
+      "label": "负样本/labels/pv003350.bmp",
+      "image_sha256": "e1ad9c2eed995eecf00089b051a66c00b10a7e63676e26a8e6a76f49dff4f32c",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20260111",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        120.66642086336726,
+        27.677589928070837,
+        120.68253597128094,
+        27.693705035984514
+      ],
+      "angular_pixel_size_degrees": [
+        1.79856115108e-05,
+        1.79856115108e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.7742049930279638,
+        1.9930644377884155
+      ],
+      "support_sample_id": "pv002784"
+    },
+    {
+      "sample_id": "pv001731",
+      "source_scene": "0825_Q_733feba5ac7648",
+      "image": "负样本/images/pv001731.bmp",
+      "label": "负样本/labels/pv001731.bmp",
+      "image_sha256": "e0286b09ba2f0f082d3d403ded2b3fe932975a157c6bebbeb5db7398ff93d96d",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.7017082053337,
+        37.62034725226783,
+        118.71735917540464,
+        37.63614856348979
+      ],
+      "angular_pixel_size_degrees": [
+        1.74676005256e-05,
+        1.76353919888e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.54193422532243,
+        1.9573420573352096
+      ],
+      "support_sample_id": "pv000019"
+    },
+    {
+      "sample_id": "pv003266",
+      "source_scene": "0825_Q_733feba5ac7648",
+      "image": "困难正样本/images/pv003266.bmp",
+      "label": "困难正样本/labels/pv003266.bmp",
+      "image_sha256": "a53d0fee420852e223d5e3019bfaf27758b14d41c0372fcfbae4bbdcaa905a61",
+      "label_sha256": "2b79062eb2eda697625bfd4f5e3c1490bd0d92c6bc260631aa150d0aaa699142",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.79114232002478,
+        37.557142007379966,
+        118.80679329009571,
+        37.57294331860193
+      ],
+      "angular_pixel_size_degrees": [
+        1.74676005256e-05,
+        1.76353919888e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5432390229817972,
+        1.957321044007987
+      ],
+      "support_sample_id": "pv000919"
+    },
+    {
+      "sample_id": "pv003321",
+      "source_scene": "0825_Q_733feba5ac7648",
+      "image": "正样本/images/pv003321.bmp",
+      "label": "正样本/labels/pv003321.bmp",
+      "image_sha256": "7adf7cf26c4a20ab8320f331809e3810ec1cb2c1b778d45eaff6965e99a53802",
+      "label_sha256": "5b31f386ab87bc83ccbf4aabc1776e06f41db1be363041e94e766ab3aff78dd2",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.86268961177764,
+        37.45781947969905,
+        118.87834058184858,
+        37.47362079092101
+      ],
+      "angular_pixel_size_degrees": [
+        1.74676005256e-05,
+        1.76353919888e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5452856121243814,
+        1.957288048728926
+      ],
+      "support_sample_id": "pv000427"
+    },
+    {
+      "sample_id": "pv003254",
+      "source_scene": "0825_Q_733feba5ac7648",
+      "image": "负样本/images/pv003254.bmp",
+      "label": "负样本/labels/pv003254.bmp",
+      "image_sha256": "29485d7721faf3f57bd0454e84c32adf1392badeb015c0e609b05b42da59e723",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.90740666912318,
+        37.59325929017303,
+        118.92305763919411,
+        37.609060601394994
+      ],
+      "angular_pixel_size_degrees": [
+        1.74676005256e-05,
+        1.76353919888e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5424936549229125,
+        1.9573330500770516
+      ],
+      "support_sample_id": "pv002150"
+    },
+    {
+      "sample_id": "pv000993",
+      "source_scene": "0825_Q_733feba5ac7648",
+      "image": "正样本/images/pv000993.bmp",
+      "label": "正样本/labels/pv000993.bmp",
+      "image_sha256": "ac4ba84ee4cd61314e5df4b0cc5df6b136d7ed907b2499a572ca820da1a3bf39",
+      "label_sha256": "7a4e092935b69b61eace1fdf4d5244dbadf12f8fd0495eb3a99961f4f1baeb32",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.99684078381425,
+        37.51199540388864,
+        119.01249175388519,
+        37.527796715110604
+      ],
+      "angular_pixel_size_degrees": [
+        1.74676005256e-05,
+        1.76353919888e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5441698678881475,
+        1.9573060422476587
+      ],
+      "support_sample_id": "pv003505"
+    },
+    {
+      "sample_id": "pv003284",
+      "source_scene": "0825_Q_733feba5ac7648",
+      "image": "负样本/images/pv003284.bmp",
+      "label": "负样本/labels/pv003284.bmp",
+      "image_sha256": "4d4bd816df07a5bff2a1c5da2424cd5a0ef73a3f54f15472c8f50feb2a4ef889",
+      "label_sha256": "6c35d1e02edf25b2dc92af1fa30e671d59ad44738914aa39100cc6dfe7bd21e8",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.90740666912318,
+        37.53908336598344,
+        118.92305763919411,
+        37.5548846772054
+      ],
+      "angular_pixel_size_degrees": [
+        1.74676005256e-05,
+        1.76353919888e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5436114763268722,
+        1.9573150425252783
+      ],
+      "support_sample_id": "pv000272"
+    },
+    {
+      "sample_id": "pv001012",
+      "source_scene": "0825_Q_733feba5ac7648",
+      "image": "正样本/images/pv001012.bmp",
+      "label": "正样本/labels/pv001012.bmp",
+      "image_sha256": "cf65afb300bf7cdd444f129afb0c6c3b0174d8fca254c04de8fe87b403fe2f65",
+      "label_sha256": "1a7317f30d12170be985579d370ee11f8dc2d47c6b0e0d115d5a4f04741c3e74",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.85374620030854,
+        37.475878121095576,
+        118.86939717037947,
+        37.49167943231754
+      ],
+      "angular_pixel_size_degrees": [
+        1.74676005256e-05,
+        1.76353919888e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.544913851329845,
+        1.9572940455232952
+      ],
+      "support_sample_id": "pv000733"
+    },
+    {
+      "sample_id": "pv000978",
+      "source_scene": "0825_Q_733feba5ac7648",
+      "image": "正样本/images/pv000978.bmp",
+      "label": "正样本/labels/pv000978.bmp",
+      "image_sha256": "64be4ad596e964ede897e6bc7cb83978c08b8658126222316db28119a5b78ee3",
+      "label_sha256": "a0b57217fb597245da1813058b589ad960f97c0ee6dcf277b9d81e05eada894f",
+      "source_label_uncertain_filename": true,
+      "acquisition_date_from_source_filename": "20250921",
+      "crs": "EPSG:4326",
+      "bbox_lonlat": [
+        118.809029142963,
+        37.52102472458691,
+        118.82468011303393,
+        37.53682603580887
+      ],
+      "angular_pixel_size_degrees": [
+        1.74676005256e-05,
+        1.76353919888e-05
+      ],
+      "approx_gsd_m_at_tile_center": [
+        1.5439837758345432,
+        1.957309042080278
+      ],
+      "support_sample_id": "pv002784"
+    }
+  ],
+  "checkpoint_policy": "Use all 30 already validation-selected stage3 checkpoints without external selection or tuning.",
+  "prediction_threshold": "Fixed logits >= 0; never selected on PV-896 query labels."
+}

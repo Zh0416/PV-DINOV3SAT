@@ -1,0 +1,23 @@
+{
+  "version": "dmsf-global-scalar-v1",
+  "seeds": [42, 43, 44],
+  "random_text_seed": 4242,
+  "epochs": 20,
+  "batch_size": 4,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "gradient_clip_norm": 1.0,
+  "source_calibration_episodes": 32,
+  "support_calibration_shrink": 0.25,
+  "support_calibration_blocks_per_axis": 4,
+  "beta_initial_values": [0.7, 1.7346010553881064],
+  "normalizations": ["minmax", "calibrated"],
+  "text_inputs": ["real", "random"],
+  "head": "Conv3x3(257,64),ReLU,Conv1x1(64,1)",
+  "loss": "BCEWithLogits + Dice + 0.2 * spatial_CAM_Dice",
+  "training_labels": "nearest binary 1024->64",
+  "evaluation": "bilinear logits to 1024, threshold zero, validation query-group macro Dice checkpoint selection; earliest tie",
+  "dataset": "zh0416/pv-dinov3sat-663-v1",
+  "split_sha256": "8c543737bb06a1a361e43e564f96bd59aa9f4ccca4666a10efb41c17cb9c743c",
+  "test_policy": "Previously used 90-image test partition is not accessed for this experiment; external dataset evaluation requires a new locked protocol"
+}

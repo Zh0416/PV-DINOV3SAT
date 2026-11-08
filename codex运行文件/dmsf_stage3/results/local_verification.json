@@ -1,0 +1,340 @@
+{
+  "verified_runs": 30,
+  "verified_validation_queries_per_run": 95,
+  "real_fixture_cpu_recomputations": 30,
+  "test_access": false,
+  "frozen_encoders_unchanged": true,
+  "source_hashes_match": true,
+  "runs": [
+    {
+      "variant": "seed_42/fusion_calibrated_beta07_random",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.8807616593976636,
+      "fixture_confusion": {
+        "tp": 55483,
+        "fp": 4405,
+        "fn": 5377,
+        "tn": 983311
+      }
+    },
+    {
+      "variant": "seed_42/fusion_calibrated_beta07_real",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.880593229256941,
+      "fixture_confusion": {
+        "tp": 55440,
+        "fp": 4346,
+        "fn": 5420,
+        "tn": 983370
+      }
+    },
+    {
+      "variant": "seed_42/fusion_calibrated_weight085_random",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.8808136285794022,
+      "fixture_confusion": {
+        "tp": 55518,
+        "fp": 4437,
+        "fn": 5342,
+        "tn": 983279
+      }
+    },
+    {
+      "variant": "seed_42/fusion_calibrated_weight085_real",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.8808949316738697,
+      "fixture_confusion": {
+        "tp": 55545,
+        "fp": 4470,
+        "fn": 5315,
+        "tn": 983246
+      }
+    },
+    {
+      "variant": "seed_42/fusion_minmax_beta07_random",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.8792106222203415,
+      "fixture_confusion": {
+        "tp": 55474,
+        "fp": 4141,
+        "fn": 5386,
+        "tn": 983575
+      }
+    },
+    {
+      "variant": "seed_42/fusion_minmax_beta07_real",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.880322738597036,
+      "fixture_confusion": {
+        "tp": 55738,
+        "fp": 4380,
+        "fn": 5122,
+        "tn": 983336
+      }
+    },
+    {
+      "variant": "seed_42/fusion_minmax_weight085_random",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.8796523463081175,
+      "fixture_confusion": {
+        "tp": 55439,
+        "fp": 4074,
+        "fn": 5421,
+        "tn": 983642
+      }
+    },
+    {
+      "variant": "seed_42/fusion_minmax_weight085_real",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.879579321202545,
+      "fixture_confusion": {
+        "tp": 55540,
+        "fp": 4184,
+        "fn": 5320,
+        "tn": 983532
+      }
+    },
+    {
+      "variant": "seed_42/spatial_calibrated",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.8807378965947728,
+      "fixture_confusion": {
+        "tp": 55526,
+        "fp": 4448,
+        "fn": 5334,
+        "tn": 983268
+      }
+    },
+    {
+      "variant": "seed_42/spatial_minmax",
+      "best_epoch": 18,
+      "validation_macro_group_dice": 0.8795776766645641,
+      "fixture_confusion": {
+        "tp": 55582,
+        "fp": 4268,
+        "fn": 5278,
+        "tn": 983448
+      }
+    },
+    {
+      "variant": "seed_43/fusion_calibrated_beta07_random",
+      "best_epoch": 15,
+      "validation_macro_group_dice": 0.8792441439819284,
+      "fixture_confusion": {
+        "tp": 55479,
+        "fp": 4723,
+        "fn": 5381,
+        "tn": 982993
+      }
+    },
+    {
+      "variant": "seed_43/fusion_calibrated_beta07_real",
+      "best_epoch": 15,
+      "validation_macro_group_dice": 0.8792802349223564,
+      "fixture_confusion": {
+        "tp": 55490,
+        "fp": 4725,
+        "fn": 5370,
+        "tn": 982991
+      }
+    },
+    {
+      "variant": "seed_43/fusion_calibrated_weight085_random",
+      "best_epoch": 15,
+      "validation_macro_group_dice": 0.879239467620334,
+      "fixture_confusion": {
+        "tp": 55470,
+        "fp": 4712,
+        "fn": 5390,
+        "tn": 983004
+      }
+    },
+    {
+      "variant": "seed_43/fusion_calibrated_weight085_real",
+      "best_epoch": 15,
+      "validation_macro_group_dice": 0.879253546803145,
+      "fixture_confusion": {
+        "tp": 55486,
+        "fp": 4723,
+        "fn": 5374,
+        "tn": 982993
+      }
+    },
+    {
+      "variant": "seed_43/fusion_minmax_beta07_random",
+      "best_epoch": 1,
+      "validation_macro_group_dice": 0.8794532568809968,
+      "fixture_confusion": {
+        "tp": 56498,
+        "fp": 2994,
+        "fn": 4362,
+        "tn": 984722
+      }
+    },
+    {
+      "variant": "seed_43/fusion_minmax_beta07_real",
+      "best_epoch": 15,
+      "validation_macro_group_dice": 0.8797374634461597,
+      "fixture_confusion": {
+        "tp": 55633,
+        "fp": 4703,
+        "fn": 5227,
+        "tn": 983013
+      }
+    },
+    {
+      "variant": "seed_43/fusion_minmax_weight085_random",
+      "best_epoch": 15,
+      "validation_macro_group_dice": 0.8795335054416764,
+      "fixture_confusion": {
+        "tp": 55490,
+        "fp": 4580,
+        "fn": 5370,
+        "tn": 983136
+      }
+    },
+    {
+      "variant": "seed_43/fusion_minmax_weight085_real",
+      "best_epoch": 15,
+      "validation_macro_group_dice": 0.8800358069025762,
+      "fixture_confusion": {
+        "tp": 55633,
+        "fp": 4669,
+        "fn": 5227,
+        "tn": 983047
+      }
+    },
+    {
+      "variant": "seed_43/spatial_calibrated",
+      "best_epoch": 15,
+      "validation_macro_group_dice": 0.879233092032922,
+      "fixture_confusion": {
+        "tp": 55475,
+        "fp": 4720,
+        "fn": 5385,
+        "tn": 982996
+      }
+    },
+    {
+      "variant": "seed_43/spatial_minmax",
+      "best_epoch": 1,
+      "validation_macro_group_dice": 0.8793784710296553,
+      "fixture_confusion": {
+        "tp": 56507,
+        "fp": 3015,
+        "fn": 4353,
+        "tn": 984701
+      }
+    },
+    {
+      "variant": "seed_44/fusion_calibrated_beta07_random",
+      "best_epoch": 7,
+      "validation_macro_group_dice": 0.8805538726346888,
+      "fixture_confusion": {
+        "tp": 55916,
+        "fp": 4634,
+        "fn": 4944,
+        "tn": 983082
+      }
+    },
+    {
+      "variant": "seed_44/fusion_calibrated_beta07_real",
+      "best_epoch": 7,
+      "validation_macro_group_dice": 0.8805580294354008,
+      "fixture_confusion": {
+        "tp": 55917,
+        "fp": 4632,
+        "fn": 4943,
+        "tn": 983084
+      }
+    },
+    {
+      "variant": "seed_44/fusion_calibrated_weight085_random",
+      "best_epoch": 7,
+      "validation_macro_group_dice": 0.880550322414209,
+      "fixture_confusion": {
+        "tp": 55915,
+        "fp": 4625,
+        "fn": 4945,
+        "tn": 983091
+      }
+    },
+    {
+      "variant": "seed_44/fusion_calibrated_weight085_real",
+      "best_epoch": 7,
+      "validation_macro_group_dice": 0.8805435824285943,
+      "fixture_confusion": {
+        "tp": 55915,
+        "fp": 4626,
+        "fn": 4945,
+        "tn": 983090
+      }
+    },
+    {
+      "variant": "seed_44/fusion_minmax_beta07_random",
+      "best_epoch": 9,
+      "validation_macro_group_dice": 0.8806113858510786,
+      "fixture_confusion": {
+        "tp": 56092,
+        "fp": 4611,
+        "fn": 4768,
+        "tn": 983105
+      }
+    },
+    {
+      "variant": "seed_44/fusion_minmax_beta07_real",
+      "best_epoch": 7,
+      "validation_macro_group_dice": 0.8805717749686732,
+      "fixture_confusion": {
+        "tp": 56005,
+        "fp": 4483,
+        "fn": 4855,
+        "tn": 983233
+      }
+    },
+    {
+      "variant": "seed_44/fusion_minmax_weight085_random",
+      "best_epoch": 9,
+      "validation_macro_group_dice": 0.8806838671126476,
+      "fixture_confusion": {
+        "tp": 56086,
+        "fp": 4605,
+        "fn": 4774,
+        "tn": 983111
+      }
+    },
+    {
+      "variant": "seed_44/fusion_minmax_weight085_real",
+      "best_epoch": 9,
+      "validation_macro_group_dice": 0.8805706492264586,
+      "fixture_confusion": {
+        "tp": 56044,
+        "fp": 4553,
+        "fn": 4816,
+        "tn": 983163
+      }
+    },
+    {
+      "variant": "seed_44/spatial_calibrated",
+      "best_epoch": 7,
+      "validation_macro_group_dice": 0.8805047425502699,
+      "fixture_confusion": {
+        "tp": 55914,
+        "fp": 4629,
+        "fn": 4946,
+        "tn": 983087
+      }
+    },
+    {
+      "variant": "seed_44/spatial_minmax",
+      "best_epoch": 9,
+      "validation_macro_group_dice": 0.8806578120673105,
+      "fixture_confusion": {
+        "tp": 56101,
+        "fp": 4621,
+        "fn": 4759,
+        "tn": 983095
+      }
+    }
+  ]
+}

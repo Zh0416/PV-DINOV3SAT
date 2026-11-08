@@ -1,0 +1,1075 @@
+{
+  "status": "proposal_not_executed",
+  "split_sha256": "8c543737bb06a1a361e43e564f96bd59aa9f4ccca4666a10efb41c17cb9c743c",
+  "mask_data_read": false,
+  "support_count_per_episode": 1,
+  "support_rule": "One filename-SHA256-selected support per held-out group. Queries use the NEXT group support in sorted group-ID order. Support pool images never act as queries.",
+  "invalid_support_policy": "If a predetermined support has no foreground after nearest downsampling, fail and report coverage; do not silently pick a convenient test sample.",
+  "training_annotation_images": 260,
+  "held_out": {
+    "validation": {
+      "support_pool_size": 16,
+      "query_count": 95,
+      "query_group_count": 15,
+      "support_pool": {
+        "2e189e77982f6769": "PV08_339734_1199212.bmp",
+        "30c20b9565f4783e": "PV08_324767_1189116.bmp",
+        "329ff2142ce3de37": "PV08_318377_1195077.bmp",
+        "36376a42f89b6dec": "PV08_338107_1197267.bmp",
+        "3795236e2e5e4401": "PV08_341147_1177192.bmp",
+        "3a67bf54ded7d083": "PV08_334826_1190843.bmp",
+        "3d38ed1d8b2427e0": "PV08_348049_1191415.bmp",
+        "3f655ca7e9740977": "PV08_342288_1183917.bmp",
+        "3ffe360a9f840057": "PV08_344759_1167199.bmp",
+        "448933e7f94bd8e7": "PV08_331350_1190265.bmp",
+        "45e9891b1005808f": "PV08_335907_1181742.bmp",
+        "4c54bbe07aa600f0": "PV08_330186_1207200.bmp",
+        "508af98df001ed7d": "PV08_333789_1183459.bmp",
+        "510bfd3b44740246": "PV08_319333_1193859.bmp",
+        "532c7ffac1519fcb": "PV08_336027_1193920.bmp",
+        "572adaac024e0e64": "PV08_327687_1204556.bmp"
+      },
+      "episodes": [
+        {
+          "query": "PV08_338183_1200718.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_338257_1200718.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_338257_1200806.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_338700_1199921.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_338774_1199213.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_338774_1199302.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_338774_1199921.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_338848_1198770.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_338848_1199213.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_338922_1199213.bmp",
+          "query_group": "2e189e77982f6769",
+          "support": "PV08_324767_1189116.bmp",
+          "support_group": "30c20b9565f4783e"
+        },
+        {
+          "query": "PV08_324695_1189291.bmp",
+          "query_group": "30c20b9565f4783e",
+          "support": "PV08_318377_1195077.bmp",
+          "support_group": "329ff2142ce3de37"
+        },
+        {
+          "query": "PV08_324768_1189203.bmp",
+          "query_group": "30c20b9565f4783e",
+          "support": "PV08_318377_1195077.bmp",
+          "support_group": "329ff2142ce3de37"
+        },
+        {
+          "query": "PV08_318230_1195164.bmp",
+          "query_group": "329ff2142ce3de37",
+          "support": "PV08_338107_1197267.bmp",
+          "support_group": "36376a42f89b6dec"
+        },
+        {
+          "query": "PV08_318304_1195077.bmp",
+          "query_group": "329ff2142ce3de37",
+          "support": "PV08_338107_1197267.bmp",
+          "support_group": "36376a42f89b6dec"
+        },
+        {
+          "query": "PV08_318304_1195164.bmp",
+          "query_group": "329ff2142ce3de37",
+          "support": "PV08_338107_1197267.bmp",
+          "support_group": "36376a42f89b6dec"
+        },
+        {
+          "query": "PV08_318378_1195163.bmp",
+          "query_group": "329ff2142ce3de37",
+          "support": "PV08_338107_1197267.bmp",
+          "support_group": "36376a42f89b6dec"
+        },
+        {
+          "query": "PV08_318452_1195163.bmp",
+          "query_group": "329ff2142ce3de37",
+          "support": "PV08_338107_1197267.bmp",
+          "support_group": "36376a42f89b6dec"
+        },
+        {
+          "query": "PV08_338031_1196471.bmp",
+          "query_group": "36376a42f89b6dec",
+          "support": "PV08_341147_1177192.bmp",
+          "support_group": "3795236e2e5e4401"
+        },
+        {
+          "query": "PV08_338033_1197267.bmp",
+          "query_group": "36376a42f89b6dec",
+          "support": "PV08_341147_1177192.bmp",
+          "support_group": "3795236e2e5e4401"
+        },
+        {
+          "query": "PV08_338033_1197356.bmp",
+          "query_group": "36376a42f89b6dec",
+          "support": "PV08_341147_1177192.bmp",
+          "support_group": "3795236e2e5e4401"
+        },
+        {
+          "query": "PV08_338107_1197356.bmp",
+          "query_group": "36376a42f89b6dec",
+          "support": "PV08_341147_1177192.bmp",
+          "support_group": "3795236e2e5e4401"
+        },
+        {
+          "query": "PV08_341074_1177194.bmp",
+          "query_group": "3795236e2e5e4401",
+          "support": "PV08_334826_1190843.bmp",
+          "support_group": "3a67bf54ded7d083"
+        },
+        {
+          "query": "PV08_341149_1177280.bmp",
+          "query_group": "3795236e2e5e4401",
+          "support": "PV08_334826_1190843.bmp",
+          "support_group": "3a67bf54ded7d083"
+        },
+        {
+          "query": "PV08_334824_1190579.bmp",
+          "query_group": "3a67bf54ded7d083",
+          "support": "PV08_348049_1191415.bmp",
+          "support_group": "3d38ed1d8b2427e0"
+        },
+        {
+          "query": "PV08_334825_1190755.bmp",
+          "query_group": "3a67bf54ded7d083",
+          "support": "PV08_348049_1191415.bmp",
+          "support_group": "3d38ed1d8b2427e0"
+        },
+        {
+          "query": "PV08_346875_1192590.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_346949_1192589.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_346950_1192678.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_347239_1191692.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_347313_1191691.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_347313_1191781.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_347829_1191686.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_347903_1191685.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_347972_1190969.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_347977_1191685.bmp",
+          "query_group": "3d38ed1d8b2427e0",
+          "support": "PV08_342288_1183917.bmp",
+          "support_group": "3f655ca7e9740977"
+        },
+        {
+          "query": "PV08_342215_1184007.bmp",
+          "query_group": "3f655ca7e9740977",
+          "support": "PV08_344759_1167199.bmp",
+          "support_group": "3ffe360a9f840057"
+        },
+        {
+          "query": "PV08_342216_1184096.bmp",
+          "query_group": "3f655ca7e9740977",
+          "support": "PV08_344759_1167199.bmp",
+          "support_group": "3ffe360a9f840057"
+        },
+        {
+          "query": "PV08_342289_1184006.bmp",
+          "query_group": "3f655ca7e9740977",
+          "support": "PV08_344759_1167199.bmp",
+          "support_group": "3ffe360a9f840057"
+        },
+        {
+          "query": "PV08_342363_1184005.bmp",
+          "query_group": "3f655ca7e9740977",
+          "support": "PV08_344759_1167199.bmp",
+          "support_group": "3ffe360a9f840057"
+        },
+        {
+          "query": "PV08_344683_1167113.bmp",
+          "query_group": "3ffe360a9f840057",
+          "support": "PV08_331350_1190265.bmp",
+          "support_group": "448933e7f94bd8e7"
+        },
+        {
+          "query": "PV08_344685_1167202.bmp",
+          "query_group": "3ffe360a9f840057",
+          "support": "PV08_331350_1190265.bmp",
+          "support_group": "448933e7f94bd8e7"
+        },
+        {
+          "query": "PV08_344688_1167291.bmp",
+          "query_group": "3ffe360a9f840057",
+          "support": "PV08_331350_1190265.bmp",
+          "support_group": "448933e7f94bd8e7"
+        },
+        {
+          "query": "PV08_344690_1167380.bmp",
+          "query_group": "3ffe360a9f840057",
+          "support": "PV08_331350_1190265.bmp",
+          "support_group": "448933e7f94bd8e7"
+        },
+        {
+          "query": "PV08_344692_1167469.bmp",
+          "query_group": "3ffe360a9f840057",
+          "support": "PV08_331350_1190265.bmp",
+          "support_group": "448933e7f94bd8e7"
+        },
+        {
+          "query": "PV08_344757_1167110.bmp",
+          "query_group": "3ffe360a9f840057",
+          "support": "PV08_331350_1190265.bmp",
+          "support_group": "448933e7f94bd8e7"
+        },
+        {
+          "query": "PV08_344761_1167289.bmp",
+          "query_group": "3ffe360a9f840057",
+          "support": "PV08_331350_1190265.bmp",
+          "support_group": "448933e7f94bd8e7"
+        },
+        {
+          "query": "PV08_331131_1190530.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331131_1190618.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331204_1190442.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331205_1190530.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331277_1190353.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331278_1190441.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331350_1190177.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331351_1190352.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331423_1190088.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331424_1190176.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331424_1190264.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331490_1189297.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331491_1189385.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331492_1189473.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331492_1189561.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331497_1190087.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_331497_1190175.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_332241_1190782.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_332241_1190870.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_332314_1190781.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_332315_1190869.bmp",
+          "query_group": "448933e7f94bd8e7",
+          "support": "PV08_335907_1181742.bmp",
+          "support_group": "45e9891b1005808f"
+        },
+        {
+          "query": "PV08_335834_1181832.bmp",
+          "query_group": "45e9891b1005808f",
+          "support": "PV08_330186_1207200.bmp",
+          "support_group": "4c54bbe07aa600f0"
+        },
+        {
+          "query": "PV08_335906_1181654.bmp",
+          "query_group": "45e9891b1005808f",
+          "support": "PV08_330186_1207200.bmp",
+          "support_group": "4c54bbe07aa600f0"
+        },
+        {
+          "query": "PV08_335908_1181831.bmp",
+          "query_group": "45e9891b1005808f",
+          "support": "PV08_330186_1207200.bmp",
+          "support_group": "4c54bbe07aa600f0"
+        },
+        {
+          "query": "PV08_333787_1183283.bmp",
+          "query_group": "508af98df001ed7d",
+          "support": "PV08_319333_1193859.bmp",
+          "support_group": "510bfd3b44740246"
+        },
+        {
+          "query": "PV08_333788_1183371.bmp",
+          "query_group": "508af98df001ed7d",
+          "support": "PV08_319333_1193859.bmp",
+          "support_group": "510bfd3b44740246"
+        },
+        {
+          "query": "PV08_333935_1183280.bmp",
+          "query_group": "508af98df001ed7d",
+          "support": "PV08_319333_1193859.bmp",
+          "support_group": "510bfd3b44740246"
+        },
+        {
+          "query": "PV08_333936_1183368.bmp",
+          "query_group": "508af98df001ed7d",
+          "support": "PV08_319333_1193859.bmp",
+          "support_group": "510bfd3b44740246"
+        },
+        {
+          "query": "PV08_334009_1183279.bmp",
+          "query_group": "508af98df001ed7d",
+          "support": "PV08_319333_1193859.bmp",
+          "support_group": "510bfd3b44740246"
+        },
+        {
+          "query": "PV08_334379_1183360.bmp",
+          "query_group": "508af98df001ed7d",
+          "support": "PV08_319333_1193859.bmp",
+          "support_group": "510bfd3b44740246"
+        },
+        {
+          "query": "PV08_334453_1183359.bmp",
+          "query_group": "508af98df001ed7d",
+          "support": "PV08_319333_1193859.bmp",
+          "support_group": "510bfd3b44740246"
+        },
+        {
+          "query": "PV08_319260_1194119.bmp",
+          "query_group": "510bfd3b44740246",
+          "support": "PV08_336027_1193920.bmp",
+          "support_group": "532c7ffac1519fcb"
+        },
+        {
+          "query": "PV08_319260_1194206.bmp",
+          "query_group": "510bfd3b44740246",
+          "support": "PV08_336027_1193920.bmp",
+          "support_group": "532c7ffac1519fcb"
+        },
+        {
+          "query": "PV08_319333_1193945.bmp",
+          "query_group": "510bfd3b44740246",
+          "support": "PV08_336027_1193920.bmp",
+          "support_group": "532c7ffac1519fcb"
+        },
+        {
+          "query": "PV08_319334_1194119.bmp",
+          "query_group": "510bfd3b44740246",
+          "support": "PV08_336027_1193920.bmp",
+          "support_group": "532c7ffac1519fcb"
+        },
+        {
+          "query": "PV08_319408_1194205.bmp",
+          "query_group": "510bfd3b44740246",
+          "support": "PV08_336027_1193920.bmp",
+          "support_group": "532c7ffac1519fcb"
+        },
+        {
+          "query": "PV08_319408_1194291.bmp",
+          "query_group": "510bfd3b44740246",
+          "support": "PV08_336027_1193920.bmp",
+          "support_group": "532c7ffac1519fcb"
+        },
+        {
+          "query": "PV08_335952_1193744.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336026_1193743.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336026_1193831.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336176_1194183.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336176_1194272.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336250_1194183.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336250_1194271.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336616_1193650.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336617_1193739.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336690_1193562.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_336690_1193650.bmp",
+          "query_group": "532c7ffac1519fcb",
+          "support": "PV08_327687_1204556.bmp",
+          "support_group": "572adaac024e0e64"
+        },
+        {
+          "query": "PV08_327613_1204556.bmp",
+          "query_group": "572adaac024e0e64",
+          "support": "PV08_339734_1199212.bmp",
+          "support_group": "2e189e77982f6769"
+        }
+      ]
+    },
+    "test": {
+      "support_pool_size": 16,
+      "query_count": 74,
+      "query_group_count": 15,
+      "support_pool": {
+        "0596749815858483": "PV08_322732_1205836.bmp",
+        "0797acf8f4a75bbc": "PV08_333873_1191910.bmp",
+        "088f8d5b97d61098": "PV08_344393_1187085.bmp",
+        "0aebc95ea61e59fa": "PV08_323777_1213938.bmp",
+        "0d9b230e070942be": "PV08_341728_1199121.bmp",
+        "0e89bc0af1f13449": "PV08_340542_1186079.bmp",
+        "127a1303accb3684": "PV08_341133_1196636.bmp",
+        "1732bffcf147cb25": "PV08_333228_1195875.bmp",
+        "17c559ca128de4ce": "PV08_333452_1203178.bmp",
+        "18356ff87aeae0cc": "PV08_336627_1203808.bmp",
+        "1bfa53446c926511": "PV08_314619_1199320.bmp",
+        "1e531e74cba33deb": "PV08_342878_1191201.bmp",
+        "20664b14c5353c9d": "PV08_346069_1193669.bmp",
+        "27abebcc44a445a7": "PV08_340238_1175975.bmp",
+        "2c2eef035c7d2466": "PV08_336630_1186231.bmp",
+        "2c338f62585c723f": "PV08_338312_1184877.bmp"
+      },
+      "episodes": [
+        {
+          "query": "PV08_333799_1191822.bmp",
+          "query_group": "0797acf8f4a75bbc",
+          "support": "PV08_344393_1187085.bmp",
+          "support_group": "088f8d5b97d61098"
+        },
+        {
+          "query": "PV08_333799_1191910.bmp",
+          "query_group": "0797acf8f4a75bbc",
+          "support": "PV08_344393_1187085.bmp",
+          "support_group": "088f8d5b97d61098"
+        },
+        {
+          "query": "PV08_333873_1191821.bmp",
+          "query_group": "0797acf8f4a75bbc",
+          "support": "PV08_344393_1187085.bmp",
+          "support_group": "088f8d5b97d61098"
+        },
+        {
+          "query": "PV08_344168_1186822.bmp",
+          "query_group": "088f8d5b97d61098",
+          "support": "PV08_323777_1213938.bmp",
+          "support_group": "0aebc95ea61e59fa"
+        },
+        {
+          "query": "PV08_344242_1186820.bmp",
+          "query_group": "088f8d5b97d61098",
+          "support": "PV08_323777_1213938.bmp",
+          "support_group": "0aebc95ea61e59fa"
+        },
+        {
+          "query": "PV08_344394_1187175.bmp",
+          "query_group": "088f8d5b97d61098",
+          "support": "PV08_323777_1213938.bmp",
+          "support_group": "0aebc95ea61e59fa"
+        },
+        {
+          "query": "PV08_344467_1187173.bmp",
+          "query_group": "088f8d5b97d61098",
+          "support": "PV08_323777_1213938.bmp",
+          "support_group": "0aebc95ea61e59fa"
+        },
+        {
+          "query": "PV08_323775_1214112.bmp",
+          "query_group": "0aebc95ea61e59fa",
+          "support": "PV08_341728_1199121.bmp",
+          "support_group": "0d9b230e070942be"
+        },
+        {
+          "query": "PV08_323776_1214025.bmp",
+          "query_group": "0aebc95ea61e59fa",
+          "support": "PV08_341728_1199121.bmp",
+          "support_group": "0d9b230e070942be"
+        },
+        {
+          "query": "PV08_323850_1214026.bmp",
+          "query_group": "0aebc95ea61e59fa",
+          "support": "PV08_341728_1199121.bmp",
+          "support_group": "0d9b230e070942be"
+        },
+        {
+          "query": "PV08_323851_1213939.bmp",
+          "query_group": "0aebc95ea61e59fa",
+          "support": "PV08_341728_1199121.bmp",
+          "support_group": "0d9b230e070942be"
+        },
+        {
+          "query": "PV08_323852_1213852.bmp",
+          "query_group": "0aebc95ea61e59fa",
+          "support": "PV08_341728_1199121.bmp",
+          "support_group": "0d9b230e070942be"
+        },
+        {
+          "query": "PV08_323925_1213853.bmp",
+          "query_group": "0aebc95ea61e59fa",
+          "support": "PV08_341728_1199121.bmp",
+          "support_group": "0d9b230e070942be"
+        },
+        {
+          "query": "PV08_323926_1213766.bmp",
+          "query_group": "0aebc95ea61e59fa",
+          "support": "PV08_341728_1199121.bmp",
+          "support_group": "0d9b230e070942be"
+        },
+        {
+          "query": "PV08_324000_1213768.bmp",
+          "query_group": "0aebc95ea61e59fa",
+          "support": "PV08_341728_1199121.bmp",
+          "support_group": "0d9b230e070942be"
+        },
+        {
+          "query": "PV08_341728_1198944.bmp",
+          "query_group": "0d9b230e070942be",
+          "support": "PV08_340542_1186079.bmp",
+          "support_group": "0e89bc0af1f13449"
+        },
+        {
+          "query": "PV08_341728_1199033.bmp",
+          "query_group": "0d9b230e070942be",
+          "support": "PV08_340542_1186079.bmp",
+          "support_group": "0e89bc0af1f13449"
+        },
+        {
+          "query": "PV08_341728_1199210.bmp",
+          "query_group": "0d9b230e070942be",
+          "support": "PV08_340542_1186079.bmp",
+          "support_group": "0e89bc0af1f13449"
+        },
+        {
+          "query": "PV08_340100_1186175.bmp",
+          "query_group": "0e89bc0af1f13449",
+          "support": "PV08_341133_1196636.bmp",
+          "support_group": "127a1303accb3684"
+        },
+        {
+          "query": "PV08_340174_1186174.bmp",
+          "query_group": "0e89bc0af1f13449",
+          "support": "PV08_341133_1196636.bmp",
+          "support_group": "127a1303accb3684"
+        },
+        {
+          "query": "PV08_340175_1186263.bmp",
+          "query_group": "0e89bc0af1f13449",
+          "support": "PV08_341133_1196636.bmp",
+          "support_group": "127a1303accb3684"
+        },
+        {
+          "query": "PV08_340248_1186173.bmp",
+          "query_group": "0e89bc0af1f13449",
+          "support": "PV08_341133_1196636.bmp",
+          "support_group": "127a1303accb3684"
+        },
+        {
+          "query": "PV08_340468_1186081.bmp",
+          "query_group": "0e89bc0af1f13449",
+          "support": "PV08_341133_1196636.bmp",
+          "support_group": "127a1303accb3684"
+        },
+        {
+          "query": "PV08_340543_1186168.bmp",
+          "query_group": "0e89bc0af1f13449",
+          "support": "PV08_341133_1196636.bmp",
+          "support_group": "127a1303accb3684"
+        },
+        {
+          "query": "PV08_340617_1186167.bmp",
+          "query_group": "0e89bc0af1f13449",
+          "support": "PV08_341133_1196636.bmp",
+          "support_group": "127a1303accb3684"
+        },
+        {
+          "query": "PV08_340618_1186256.bmp",
+          "query_group": "0e89bc0af1f13449",
+          "support": "PV08_341133_1196636.bmp",
+          "support_group": "127a1303accb3684"
+        },
+        {
+          "query": "PV08_340691_1186255.bmp",
+          "query_group": "0e89bc0af1f13449",
+          "support": "PV08_341133_1196636.bmp",
+          "support_group": "127a1303accb3684"
+        },
+        {
+          "query": "PV08_341059_1196725.bmp",
+          "query_group": "127a1303accb3684",
+          "support": "PV08_333228_1195875.bmp",
+          "support_group": "1732bffcf147cb25"
+        },
+        {
+          "query": "PV08_341133_1196725.bmp",
+          "query_group": "127a1303accb3684",
+          "support": "PV08_333228_1195875.bmp",
+          "support_group": "1732bffcf147cb25"
+        },
+        {
+          "query": "PV08_333154_1195787.bmp",
+          "query_group": "1732bffcf147cb25",
+          "support": "PV08_333452_1203178.bmp",
+          "support_group": "17c559ca128de4ce"
+        },
+        {
+          "query": "PV08_333154_1195875.bmp",
+          "query_group": "1732bffcf147cb25",
+          "support": "PV08_333452_1203178.bmp",
+          "support_group": "17c559ca128de4ce"
+        },
+        {
+          "query": "PV08_333228_1195699.bmp",
+          "query_group": "1732bffcf147cb25",
+          "support": "PV08_333452_1203178.bmp",
+          "support_group": "17c559ca128de4ce"
+        },
+        {
+          "query": "PV08_333228_1195787.bmp",
+          "query_group": "1732bffcf147cb25",
+          "support": "PV08_333452_1203178.bmp",
+          "support_group": "17c559ca128de4ce"
+        },
+        {
+          "query": "PV08_333301_1195698.bmp",
+          "query_group": "1732bffcf147cb25",
+          "support": "PV08_333452_1203178.bmp",
+          "support_group": "17c559ca128de4ce"
+        },
+        {
+          "query": "PV08_333302_1195786.bmp",
+          "query_group": "1732bffcf147cb25",
+          "support": "PV08_333452_1203178.bmp",
+          "support_group": "17c559ca128de4ce"
+        },
+        {
+          "query": "PV08_333743_1195256.bmp",
+          "query_group": "1732bffcf147cb25",
+          "support": "PV08_333452_1203178.bmp",
+          "support_group": "17c559ca128de4ce"
+        },
+        {
+          "query": "PV08_333817_1195256.bmp",
+          "query_group": "1732bffcf147cb25",
+          "support": "PV08_333452_1203178.bmp",
+          "support_group": "17c559ca128de4ce"
+        },
+        {
+          "query": "PV08_333817_1195344.bmp",
+          "query_group": "1732bffcf147cb25",
+          "support": "PV08_333452_1203178.bmp",
+          "support_group": "17c559ca128de4ce"
+        },
+        {
+          "query": "PV08_333526_1203354.bmp",
+          "query_group": "17c559ca128de4ce",
+          "support": "PV08_336627_1203808.bmp",
+          "support_group": "18356ff87aeae0cc"
+        },
+        {
+          "query": "PV08_333526_1203442.bmp",
+          "query_group": "17c559ca128de4ce",
+          "support": "PV08_336627_1203808.bmp",
+          "support_group": "18356ff87aeae0cc"
+        },
+        {
+          "query": "PV08_336479_1203807.bmp",
+          "query_group": "18356ff87aeae0cc",
+          "support": "PV08_314619_1199320.bmp",
+          "support_group": "1bfa53446c926511"
+        },
+        {
+          "query": "PV08_336479_1203896.bmp",
+          "query_group": "18356ff87aeae0cc",
+          "support": "PV08_314619_1199320.bmp",
+          "support_group": "1bfa53446c926511"
+        },
+        {
+          "query": "PV08_336553_1203808.bmp",
+          "query_group": "18356ff87aeae0cc",
+          "support": "PV08_314619_1199320.bmp",
+          "support_group": "1bfa53446c926511"
+        },
+        {
+          "query": "PV08_315505_1198888.bmp",
+          "query_group": "1bfa53446c926511",
+          "support": "PV08_342878_1191201.bmp",
+          "support_group": "1e531e74cba33deb"
+        },
+        {
+          "query": "PV08_315505_1198974.bmp",
+          "query_group": "1bfa53446c926511",
+          "support": "PV08_342878_1191201.bmp",
+          "support_group": "1e531e74cba33deb"
+        },
+        {
+          "query": "PV08_315505_1199061.bmp",
+          "query_group": "1bfa53446c926511",
+          "support": "PV08_342878_1191201.bmp",
+          "support_group": "1e531e74cba33deb"
+        },
+        {
+          "query": "PV08_315579_1198974.bmp",
+          "query_group": "1bfa53446c926511",
+          "support": "PV08_342878_1191201.bmp",
+          "support_group": "1e531e74cba33deb"
+        },
+        {
+          "query": "PV08_315579_1199061.bmp",
+          "query_group": "1bfa53446c926511",
+          "support": "PV08_342878_1191201.bmp",
+          "support_group": "1e531e74cba33deb"
+        },
+        {
+          "query": "PV08_342289_1191385.bmp",
+          "query_group": "1e531e74cba33deb",
+          "support": "PV08_346069_1193669.bmp",
+          "support_group": "20664b14c5353c9d"
+        },
+        {
+          "query": "PV08_342290_1191474.bmp",
+          "query_group": "1e531e74cba33deb",
+          "support": "PV08_346069_1193669.bmp",
+          "support_group": "20664b14c5353c9d"
+        },
+        {
+          "query": "PV08_342952_1191201.bmp",
+          "query_group": "1e531e74cba33deb",
+          "support": "PV08_346069_1193669.bmp",
+          "support_group": "20664b14c5353c9d"
+        },
+        {
+          "query": "PV08_342953_1191290.bmp",
+          "query_group": "1e531e74cba33deb",
+          "support": "PV08_346069_1193669.bmp",
+          "support_group": "20664b14c5353c9d"
+        },
+        {
+          "query": "PV08_343180_1192088.bmp",
+          "query_group": "1e531e74cba33deb",
+          "support": "PV08_346069_1193669.bmp",
+          "support_group": "20664b14c5353c9d"
+        },
+        {
+          "query": "PV08_343254_1192088.bmp",
+          "query_group": "1e531e74cba33deb",
+          "support": "PV08_346069_1193669.bmp",
+          "support_group": "20664b14c5353c9d"
+        },
+        {
+          "query": "PV08_346069_1193579.bmp",
+          "query_group": "20664b14c5353c9d",
+          "support": "PV08_340238_1175975.bmp",
+          "support_group": "27abebcc44a445a7"
+        },
+        {
+          "query": "PV08_346142_1193579.bmp",
+          "query_group": "20664b14c5353c9d",
+          "support": "PV08_340238_1175975.bmp",
+          "support_group": "27abebcc44a445a7"
+        },
+        {
+          "query": "PV08_340235_1175797.bmp",
+          "query_group": "27abebcc44a445a7",
+          "support": "PV08_336630_1186231.bmp",
+          "support_group": "2c2eef035c7d2466"
+        },
+        {
+          "query": "PV08_340236_1175886.bmp",
+          "query_group": "27abebcc44a445a7",
+          "support": "PV08_336630_1186231.bmp",
+          "support_group": "2c2eef035c7d2466"
+        },
+        {
+          "query": "PV08_340828_1175958.bmp",
+          "query_group": "27abebcc44a445a7",
+          "support": "PV08_336630_1186231.bmp",
+          "support_group": "2c2eef035c7d2466"
+        },
+        {
+          "query": "PV08_336703_1186230.bmp",
+          "query_group": "2c2eef035c7d2466",
+          "support": "PV08_338312_1184877.bmp",
+          "support_group": "2c338f62585c723f"
+        },
+        {
+          "query": "PV08_338015_1184705.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_338088_1184615.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_338089_1184704.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_338311_1184788.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_338627_1186553.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_338628_1186642.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_338701_1186552.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_338702_1186641.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_338977_1184865.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_339136_1185837.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_339276_1185214.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_339277_1185303.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_339349_1185124.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        },
+        {
+          "query": "PV08_339350_1185213.bmp",
+          "query_group": "2c338f62585c723f",
+          "support": "PV08_322732_1205836.bmp",
+          "support_group": "0596749815858483"
+        }
+      ]
+    }
+  }
+}
