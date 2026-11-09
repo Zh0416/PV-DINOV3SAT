@@ -68,3 +68,38 @@ kaggle kernels push -p "codex运行文件/dmsf_fusion_v1/kaggle"
 ```
 
 Notebook 中的环境变量可改成脚本顶部的默认路径，或把 `run-kaggle-inference.py` 复制到 Kaggle Notebook 单元格执行。推荐先在 Notebook 中运行并确认输入路径，再使用 CLI 提交批量任务。
+
+## 5. PV-512 指定样本
+
+如果 `PV-512` 已作为 Kaggle Dataset 挂载，并且数据集内包含以下两张正样本影像：
+
+```text
+0807_Q_934ae716b5714f_r00024_c00069.tif  # support
+0807_Q_934ae716b5714f_r00024_c00075.tif  # query
+```
+
+可以直接运行针对这对影像的入口。脚本会在 `PV-512` 下自动定位两张 TIFF 和 `c00069` 对应的标签文件（标签可以位于 `labels`/`mask`/`annotations` 目录，或使用 `_label`、`_mask` 等后缀）。
+
+```python
+import os
+os.environ['DMSF_CODE_ROOT'] = '/kaggle/working/PV-DINOV3SAT'
+os.environ['DMSF_PV512_ROOT'] = '/kaggle/input/pv-512'  # 按 Kaggle 右侧 Input 路径修改
+os.environ['DMSF_OUTPUT_DIR'] = '/kaggle/working/pv512_cam_outputs'
+os.environ['DMSF_DEVICE'] = 'cuda'
+# 如果标签文件命名不符合自动搜索规则，可以显式指定：
+# os.environ['DMSF_SUPPORT_MASK'] = '/kaggle/input/pv-512/.../c00069_label.tif'
+%run /kaggle/working/PV-DINOV3SAT/codex运行文件/dmsf_fusion_v1/kaggle/run-pv512-cams.py
+```
+
+输出目录中包含：
+
+```text
+spatial_cam.png
+semantic_cam.png
+fused_cam.png
+cam_panel.png
+prediction.npz
+prediction.json
+```
+
+脚本会自动将 TIFF 读取为 RGB，按比例放入 1024×1024 编码画布，推理后再恢复到查询图的原始尺寸；因此 512×512 输入会得到 512×512 CAM。`cam_panel.png` 使用同一个 0..1 色标显示三张 CAM，便于直接比较。
