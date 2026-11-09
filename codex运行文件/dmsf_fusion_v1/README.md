@@ -20,6 +20,8 @@ python "codex运行文件/dmsf_fusion_v1/infer.py" --features-npz "PATH/inputs.n
 python "codex运行文件/dmsf_fusion_v1/infer.py" --support-image "PATH/support.bmp" --support-mask "PATH/support_label.bmp" --query-image "PATH/query.bmp" --dino-repo "PATH/dinov3" --dino-weights "PATH/dinov3_vitl16_pretrain_sat493m-eadcf0ff.pth" --geo-weights "PATH/RS5M_ViT-B-32.pt" --output "PATH/prediction.npz"
 ```
 
-原图必须为 1024x1024 RGB，支持标签为 1024x1024 灰度 0/12。DINO 源码需位于固定提交 `6876159a11b4df116f30f667f8c9888617df0751`；编码使用四个独立 512px crop 拼成 64x64 patch 网格。GeoRSCLIP 权重加载时校验 SHA-256，若给定路径不存在，原加载器会尝试下载。需要 PyTorch、NumPy、Pillow、open_clip_torch 及 DINOv3 上游依赖；CUDA 推荐用于原图编码。
+原图可以是任意宽高的 RGB/RGBA 影像，支持标签尺寸必须与支持图相同，掩膜按“0=背景、非零=前景”读取。推理会将每张图等比例缩放到 1024x1024 画布，短边两侧用 SAT 均值填充，再使用四个独立 512px crop 拼成 64x64 patch 网格；输出 CAM、logits 和二值掩膜会裁掉填充并恢复到查询图原始宽高。超宽或超高影像的有效区域较小，目标很小时可能损失细节，需要滑窗/多尺度策略时应单独扩展推理协议。DINO 源码需位于固定提交 `6876159a11b4df116f30f667f8c9888617df0751`。GeoRSCLIP 权重加载时校验 SHA-256，若给定路径不存在，原加载器会尝试下载。需要 PyTorch、NumPy、Pillow、open_clip_torch 及 DINOv3 上游依赖；CUDA 推荐用于原图编码。
 
-输出 `.npz` 包含 64x64 的 `spatial_cam`、`semantic_cam`、`fused_cam`、`logits_patch`，1024x1024 的 `logits_full` 和 0/1 `mask_full`，以及标量 `spatial_weight`；旁边的 `.json` 记录版本与阈值。CAM 是模型内部响应图，不等同于独立阈值分割结果。运行 `python -m unittest discover -s "codex运行文件/dmsf_fusion_v1" -v` 检查固定权重和导出关系；本地验证探针缺失时相应测试跳过。第三阶段的完整评估与局限见 `dmsf_stage3/STAGE3_REPORT.md`。
+输出 `.npz` 在特征输入模式下包含 64x64 的 CAM 和 1024x1024 的 logits；在原图模式下 `spatial_cam`、`semantic_cam`、`fused_cam`、`logits_full`、`mask_full` 都是查询图原始尺寸，另外保留 `logits_patch` 和去填充前的 `logits_square`。旁边的 `.json` 记录版本、letterbox 几何和阈值。CAM 是模型内部响应图，不等同于独立阈值分割结果。运行 `python -m unittest discover -s "codex运行文件/dmsf_fusion_v1" -v` 检查固定权重和导出关系；本地验证探针缺失时相应测试跳过。第三阶段的完整评估与局限见 `dmsf_stage3/STAGE3_REPORT.md`。
+
+Kaggle Notebook 的输入、GPU、依赖和运行单元格见 [`kaggle/README.md`](kaggle/README.md)，入口脚本为 [`kaggle/run-kaggle-inference.py`](kaggle/run-kaggle-inference.py)。

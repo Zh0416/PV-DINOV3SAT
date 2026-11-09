@@ -4,9 +4,12 @@ import tempfile
 import unittest
 
 import numpy as np
+from PIL import Image
 import torch
 
-from infer import load_feature_input, load_model, predict, source_sha256, validate_inputs, version
+from infer import (letterbox_geometry, letterbox_support_mask, load_feature_input,
+                   load_model, predict, predict_original_size, restore_map_to_original,
+                   source_sha256, validate_inputs, version)
 
 
 HERE = Path(__file__).resolve().parent
@@ -49,6 +52,29 @@ class FusionVersionTests(unittest.TestCase):
         torch.testing.assert_close(
             maps['selected_cam'], maps['spatial_weight'] * maps['spatial_cam'] +
             (1 - maps['spatial_weight']) * maps['semantic_cam'])
+
+    def test_variable_size_letterbox_and_output_restore(self):
+        geometry = letterbox_geometry(720, 1280)
+        self.assertEqual((geometry['resized_height'], geometry['resized_width']), (576, 1024))
+        values = torch.zeros(1, 1, 64, 64)
+        restored = restore_map_to_original(values, geometry)
+        self.assertEqual(restored.shape, (720, 1280))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'mask.png'
+            raw = np.zeros((720, 1280), dtype=np.uint8)
+            raw[100:400, 200:800] = 255
+            Image.fromarray(raw, mode='L').save(path)
+            mask = letterbox_support_mask(path, geometry)
+            self.assertEqual(mask.shape, (1, 1, 64, 64))
+            self.assertGreater(float(mask.sum()), 0)
+        support = torch.randn(1, 1024, 8, 8)
+        query = torch.randn(1, 1024, 8, 8)
+        support_mask = torch.zeros(1, 1, 8, 8)
+        support_mask[:, :, :2, :2] = 1
+        text = torch.nn.functional.normalize(torch.randn(1, 512), dim=-1)
+        restored = predict_original_size(self.model, (support, query, support_mask, text), geometry)
+        self.assertEqual(restored['fused_cam'].shape, (720, 1280))
+        self.assertEqual(restored['mask_full'].shape, (720, 1280))
 
     def test_input_rejects_empty_support(self):
         arrays = (np.zeros((1, 1024, 64, 64), np.float32),

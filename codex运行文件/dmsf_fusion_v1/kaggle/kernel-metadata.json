@@ -1,0 +1,17 @@
+{
+  "id": "zh0416/pv-dmsf-fusion-inference-v1",
+  "title": "PV DMSF Fusion Inference Variable Size",
+  "code_file": "run-kaggle-inference.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "model_sources": [
+    "yadavdamodar/dinov3-vitl16-pretrain-sat493m/PyTorch/default/1"
+  ],
+  "kernel_sources": [],
+  "competition_sources": []
+}
