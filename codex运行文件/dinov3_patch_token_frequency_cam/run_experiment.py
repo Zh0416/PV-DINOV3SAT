@@ -335,13 +335,22 @@ def frequency_prototypes(descriptors: torch.Tensor, coverage: torch.Tensor,
     return positive, negative, diagnostics
 
 
-def cosine_difference(features: torch.Tensor, positive: torch.Tensor, negative: torch.Tensor) -> torch.Tensor:
-    if features.ndim == 3:
-        flattened = features.reshape(-1, features.shape[-1]).float()
-        scores = flattened @ positive.float() - flattened @ negative.float()
-        return scores.reshape(features.shape[:2])
-    unit = F.normalize(features.float(), dim=0, eps=EPS)
-    return (unit * positive[:, None, None]).sum(0) - (unit * negative[:, None, None]).sum(0)
+def cosine_difference(features: torch.Tensor, positive: torch.Tensor, negative: torch.Tensor,
+                      *, channels_first: bool = False) -> torch.Tensor:
+    if positive.ndim != 1 or negative.shape != positive.shape:
+        raise ValueError("Positive and negative prototypes must be same-sized vectors.")
+    if features.ndim != 3:
+        raise ValueError("Cosine CAM features must be a three-dimensional grid.")
+    if channels_first:
+        if features.shape[0] != positive.numel():
+            raise ValueError("Channel-first feature dimension and prototype size differ.")
+        unit = F.normalize(features.float(), dim=0, eps=EPS)
+        return (unit * positive[:, None, None]).sum(0) - (unit * negative[:, None, None]).sum(0)
+    if features.shape[-1] != positive.numel():
+        raise ValueError("Channel-last descriptor dimension and prototype size differ.")
+    flattened = features.reshape(-1, features.shape[-1]).float()
+    scores = flattened @ positive.float() - flattened @ negative.float()
+    return scores.reshape(features.shape[:2])
 
 
 def score_to_probability(score: torch.Tensor, output_hw: tuple[int, int]) -> np.ndarray:
@@ -505,7 +514,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             if image.mode != "RGB" or image.size != (1024, 1024):
                 raise ValueError("DINOv3 encoder contract expects RGB 1024x1024 Experiment A images.")
         query_features = encode_dino(model, query_pair.image, device).to(device=device, dtype=torch.float32)
-        spatial_score = cosine_difference(query_features, spatial_positive, spatial_negative)
+        spatial_score = cosine_difference(query_features, spatial_positive, spatial_negative,
+                                           channels_first=True)
         spatial_probability = score_to_probability(spatial_score, (1024, 1024))
         scale_probabilities = {}
         for scale, prototypes in scale_models.items():

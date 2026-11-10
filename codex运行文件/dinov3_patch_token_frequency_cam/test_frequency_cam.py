@@ -6,6 +6,7 @@ import torch
 from run_experiment import (
     aggregate_metrics,
     binary_counts,
+    cosine_difference,
     frequency_prototypes,
     local_fft_descriptors,
     patch_mask_fractions,
@@ -22,6 +23,10 @@ class PatchTokenFrequencyTests(unittest.TestCase):
         self.assertTrue(torch.isfinite(descriptors).all())
         norms = descriptors.norm(dim=-1)
         self.assertTrue(torch.allclose(norms, torch.ones_like(norms), atol=1e-5))
+        positive = torch.nn.functional.normalize(torch.randn(32), dim=0)
+        negative = torch.nn.functional.normalize(torch.randn(32), dim=0)
+        scores = cosine_difference(descriptors, positive, negative)
+        self.assertEqual(tuple(scores.shape), (9, 11))
 
     def test_window_coverage_uses_reflected_spatial_neighborhoods(self):
         mask = np.zeros((16, 16), dtype=bool)
@@ -45,6 +50,17 @@ class PatchTokenFrequencyTests(unittest.TestCase):
         self.assertEqual(stats["positive_windows"], 4)
         self.assertEqual(stats["background_candidates"], 9)
         self.assertEqual(stats["ignored_mixed_windows"], 12)
+
+    def test_spatial_cosine_cam_accepts_channel_first_dino_features(self):
+        torch.manual_seed(11)
+        features = torch.randn(8, 9, 11)
+        positive = torch.nn.functional.normalize(torch.randn(8), dim=0)
+        negative = torch.nn.functional.normalize(torch.randn(8), dim=0)
+        score = cosine_difference(features, positive, negative, channels_first=True)
+        unit = torch.nn.functional.normalize(features, dim=0)
+        expected = (unit * positive[:, None, None]).sum(0) - (unit * negative[:, None, None]).sum(0)
+        self.assertEqual(tuple(score.shape), (9, 11))
+        self.assertTrue(torch.allclose(score, expected))
 
     def test_fixed_threshold_metrics_aggregate_counts(self):
         truth = np.array([[1, 1, 0], [0, 0, 0]], dtype=bool)
