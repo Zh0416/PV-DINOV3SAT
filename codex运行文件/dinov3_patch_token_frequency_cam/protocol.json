@@ -29,6 +29,11 @@
   "fixed_probability_threshold": 0.5,
   "fusion": "equal-weight arithmetic mean of spatial and frequency CAM probabilities",
   "metrics": ["micro IoU", "micro Dice", "micro precision", "micro recall", "per-image metrics", "FP/FN counts"],
+  "fusion_cam_outputs": {
+    "directory": "fusion_cam/",
+    "raw_array": "One full-resolution float32 .npy probability map per query, range [0, 1]",
+    "visualizations": ["full-resolution color heatmap PNG", "RGB overlay PNG"]
+  },
   "query_masks_used_for_prototype_or_threshold_selection": false,
   "interpretation": "The fixed benchmark was previously used for development; all resulting query-mask metrics are development results, not an independent test.",
   "background_class": "All mask-zero pixels are a single class; no bare-soil/cropland subtype labels are used or required."

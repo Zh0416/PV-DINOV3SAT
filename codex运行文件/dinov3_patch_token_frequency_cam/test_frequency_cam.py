@@ -1,4 +1,6 @@
+import tempfile
 import unittest
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -10,6 +12,7 @@ from run_experiment import (
     frequency_prototypes,
     local_fft_descriptors,
     patch_mask_fractions,
+    save_fusion_cam,
     window_coverage,
 )
 
@@ -61,6 +64,22 @@ class PatchTokenFrequencyTests(unittest.TestCase):
         expected = (unit * positive[:, None, None]).sum(0) - (unit * negative[:, None, None]).sum(0)
         self.assertEqual(tuple(score.shape), (9, 11))
         self.assertTrue(torch.allclose(score, expected))
+
+    def test_fusion_cam_saves_full_precision_array_and_viewable_images(self):
+        probability = np.linspace(0.0, 1.0, 64, dtype=np.float32).reshape(8, 8)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            image_path = root / "query.bmp"
+            from PIL import Image
+            Image.new("RGB", (8, 8), (100, 120, 140)).save(image_path)
+            files = save_fusion_cam(probability, image_path, root / "fusion_cam")
+            restored = np.load(root / "fusion_cam" / files["array"], allow_pickle=False)
+            self.assertEqual(restored.dtype, np.float32)
+            self.assertTrue(np.array_equal(restored, probability))
+            for key in ("heatmap", "overlay"):
+                with Image.open(root / "fusion_cam" / files[key]) as visualization:
+                    self.assertEqual(visualization.size, (8, 8))
+                    self.assertEqual(visualization.mode, "RGB")
 
     def test_fixed_threshold_metrics_aggregate_counts(self):
         truth = np.array([[1, 1, 0], [0, 0, 0]], dtype=bool)

@@ -410,6 +410,31 @@ def _error_overlay(rgb: np.ndarray, truth: np.ndarray, probability: np.ndarray) 
     return output
 
 
+def save_fusion_cam(probability: np.ndarray, image_path: Path, output_dir: Path) -> dict[str, str]:
+    probability = np.asarray(probability, dtype=np.float32)
+    if probability.ndim != 2 or not np.isfinite(probability).all():
+        raise ValueError("Fusion CAM must be a finite two-dimensional probability map.")
+    if probability.min() < 0.0 or probability.max() > 1.0:
+        raise ValueError("Fusion CAM probabilities must be within [0, 1].")
+
+    stem = image_path.stem
+    output_dir.mkdir(parents=True, exist_ok=True)
+    array_path = output_dir / f"{stem}.npy"
+    heatmap_path = output_dir / f"{stem}_heatmap.png"
+    overlay_path = output_dir / f"{stem}_overlay.png"
+    np.save(array_path, probability, allow_pickle=False)
+
+    heatmap = _cam_color(probability)
+    Image.fromarray(heatmap).save(heatmap_path, optimize=True)
+    with Image.open(image_path) as image:
+        rgb = np.asarray(image.convert("RGB"), dtype=np.uint8).copy()
+    if rgb.shape[:2] != probability.shape:
+        raise ValueError("Fusion CAM and source image dimensions differ.")
+    overlay = (0.55 * rgb + 0.45 * heatmap).clip(0, 255).astype(np.uint8)
+    Image.fromarray(overlay).save(overlay_path, optimize=True)
+    return {"array": array_path.name, "heatmap": heatmap_path.name, "overlay": overlay_path.name}
+
+
 def save_diagnostics(image_path: Path, truth: np.ndarray, probabilities: dict[str, np.ndarray],
                      output_path: Path) -> None:
     with Image.open(image_path) as image:
@@ -507,6 +532,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     all_rows: dict[str, list[dict[str, Any]]] = {
         "dino_spatial": [], "token_fft": [], "fusion": []}
     per_image: dict[str, Any] = {}
+    fusion_cam_files: dict[str, dict[str, str]] = {}
+    fusion_cam_dir = args.output_dir / "fusion_cam"
     visuals_dir = args.output_dir / "diagnostics"
     for index, query_name in enumerate(query_names, start=1):
         query_pair = pairs[query_name]
@@ -528,6 +555,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         probabilities = {"dino_spatial": spatial_probability,
                          "token_fft": fft_probability,
                          "fusion": fusion_probability}
+        fusion_cam_files[query_name] = save_fusion_cam(
+            fusion_probability, query_pair.image, fusion_cam_dir)
 
         # Query masks enter only after all three prediction maps have been computed.
         truth = read_binary_mask(query_pair.mask)
@@ -623,6 +652,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "seed": args.seed,
         "metrics": aggregate,
         "per_image": per_image,
+        "fusion_cam_outputs": {
+            "directory": "fusion_cam/",
+            "raw_array": "<image_stem>.npy; float32 probabilities in [0, 1]",
+            "heatmap": "<image_stem>_heatmap.png; full-resolution color visualization",
+            "overlay": "<image_stem>_overlay.png; heatmap blended with the source RGB image",
+            "shape": [1024, 1024],
+            "files": fusion_cam_files,
+        },
         "visualizations": "diagnostics/<image>_diagnostics.jpg; green=TP, blue=FN, red=FP in fusion error panels",
         "background_semantics": "All mask-zero pixels are one background class. Bare-soil/cropland subtypes are not labeled, so category-specific effects are not separately measurable.",
         "dino_baseline_provenance": "DINO spatial CAM was recomputed from the mounted support image and frozen patch tokens in this run; no pre-existing notebook CAM artifact was assumed.",
