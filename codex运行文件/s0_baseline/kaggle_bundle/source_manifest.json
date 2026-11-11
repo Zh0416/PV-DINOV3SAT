@@ -1,0 +1,14 @@
+{
+  "sources": {
+    "s0_model.py": "d16573b4ce9500125af58d6e3545f33e18eba1018cfb3dbae94c2672144056cb",
+    "s0_data.py": "a9bc30675e9f488061a301d89412f1b7c738b6de1ec62f0722dfa3613d9f0124",
+    "train_s0.py": "308d81059eff40ac0e4989b6a1fa75590a0d702190a7aeb18ae97379e83ede54",
+    "requirements.txt": "5447c788d5cf08535b177d6873fa0853502bdf83a7a665481b70473eea449f68",
+    "protocol/s0_selection.json": "a876b52806d1102a465eac825ac7c9b73068c75c0181244cb918babc78629d29",
+    "protocol/s0_selection_ids.csv": "480989173f3ead9423b0dfbf974bae672fa99ed62d511c7bfa507a8231fdd6ed",
+    "protocol/protocol.json": "87b8fa4bfce8272011b62998fe0b1f7687a473488daf569b3815355c769a5b37",
+    "protocol/data_audit.json": "d3dfc34355b0ec65219864f871421c0abe326e58409653916f102401257f5faa"
+  },
+  "generated_script_sha256": "cdcee770aaa01b3bb0a50db74a2f04e50dd70df633f6d9be72661ce6dbea103b",
+  "note": "Attach PV-512 and SAT weights before running; no Kaggle input slug is assumed."
+}

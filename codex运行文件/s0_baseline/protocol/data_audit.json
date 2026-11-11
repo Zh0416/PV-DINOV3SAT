@@ -1,0 +1,40 @@
+{
+  "selection_sha256": "f591c05f62cf4c60e31bd4d19a97284d48323df36059bd5afb915430530c2062",
+  "pairs_verified": 1250,
+  "mask_values": [
+    0,
+    1
+  ],
+  "image_size": [
+    512,
+    512
+  ],
+  "image_mode": "RGB",
+  "positive_queries": 1199,
+  "empty_hard_negative_queries": 50,
+  "support_id": "0807_Q_934ae716b5714f_r00024_c00076",
+  "support_foreground_pixels": 55762,
+  "source_scenes": [
+    "0807_Q_934ae716b5714f",
+    "0812_Q_0a5aa4566e4f48",
+    "0812_Q_5746fe6e20e244",
+    "0817_Q_c6cd6e69bfce41",
+    "0820_Q_32f2300fdd3147",
+    "0820_Q_3c16aaef706f45",
+    "0820_Q_8a2f89c3a6d04f",
+    "0820_Q_921ef0a25d7045",
+    "0820_Q_f598280265d142",
+    "0825_Q_733feba5ac7648",
+    "0825_Q_89716191c11a4d",
+    "0825_Q_d92146f808cb47",
+    "0910_Q_f31b2f78ddfe4a",
+    "0918_Q_4a6bb66935b24c",
+    "0918_Q_d858345d662a44",
+    "0922_Q_039af681c3cb48"
+  ],
+  "source_counts": {
+    "positive": 1277,
+    "hard_negative": 2625
+  },
+  "query_validation_performed": false
+}

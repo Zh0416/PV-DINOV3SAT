@@ -1,0 +1,4 @@
+numpy
+pillow
+tifffile
+# Use Kaggle's existing CUDA torch (>=2.4); do not replace it with a CPU wheel.

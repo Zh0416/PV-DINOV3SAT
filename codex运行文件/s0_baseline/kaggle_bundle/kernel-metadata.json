@@ -1,0 +1,15 @@
+{
+  "id": "zh0416/pv-dinov3sat-s0-baseline",
+  "title": "PV DINOv3-SAT S0 Baseline",
+  "code_file": "run-s0-baseline.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "model_sources": [],
+  "kernel_sources": [],
+  "competition_sources": []
+}
