@@ -11,6 +11,7 @@ import sys
 import numpy as np
 from PIL import Image
 import torch
+import torch.nn.functional as F
 
 
 HERE = Path(__file__).resolve().parent
