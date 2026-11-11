@@ -18,7 +18,8 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
 CODE = REPO / "codex运行文件"
 MANIFEST_PATH = CODE / "experiment_a" / "benchmark_v1.json"
-DATASET_ROOT = Path("/kaggle/input")
+EXPERIMENT_A_ROOT = Path("/kaggle/input/datasets/zh0416/pv-dinov3sat-experiment-a")
+INPUT_ROOT = Path("/kaggle/input")
 WEIGHT_ROOT = Path("/kaggle/input")
 DINOV3_REPO = Path("/kaggle/working/dinov3")
 OUTPUT_DIR = Path("/kaggle/working/experiment_a_equal_fusion")
@@ -191,9 +192,23 @@ def main() -> None:
     expected = {support_name, *query_names}
 
     data_root_override = os.environ.get("DMSF_DATA_ROOT")
-    data_root = Path(data_root_override) if data_root_override else find_data_root(
-        DATASET_ROOT, expected
+    search_root = Path(data_root_override) if data_root_override else (
+        EXPERIMENT_A_ROOT if EXPERIMENT_A_ROOT.is_dir() else INPUT_ROOT
     )
+    mounted_manifest_path = Path(os.environ.get(
+        "DMSF_BENCHMARK_MANIFEST",
+        str(search_root / "spatial_cam_code" / "benchmark_v1.json"),
+    ))
+    if mounted_manifest_path.is_file():
+        mounted_manifest = json.loads(mounted_manifest_path.read_text(encoding="utf-8"))
+        mounted_support = Path(mounted_manifest["support_image"]).name
+        mounted_queries = [Path(name).name for name in mounted_manifest["query_images"]]
+        if mounted_support != support_name or mounted_queries != query_names:
+            raise ValueError(
+                "Mounted Experiment A benchmark differs from the repository benchmark_v1 split."
+            )
+        manifest = mounted_manifest
+    data_root = find_data_root(search_root, expected)
     images_dir, masks_dir = data_root / "images", data_root / "mask"
     for name in expected:
         if not (images_dir / name).is_file() or not (

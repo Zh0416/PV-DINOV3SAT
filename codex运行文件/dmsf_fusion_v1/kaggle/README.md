@@ -115,7 +115,7 @@ Notebook 右侧需要挂载 Experiment A 数据集和 Encoder Checkpoints 数据
 !pip install -q open_clip_torch==2.24.0
 ```
 
-然后运行批量入口。它从仓库的 `benchmark_v1.json` 读取固定支持图和 20 张查询图，在挂载目录中自动查找图片、掩膜、SAT-493M 权重和 GeoRSCLIP 权重：
+然后运行批量入口。它优先读取 Experiment A 数据集中的 `spatial_cam_code/benchmark_v1.json`，并核对与仓库固定清单一致；使用相同的 1 张支持图和 20 张查询图。在 `/kaggle/input/datasets/zh0416/pv-dinov3sat-experiment-a` 下自动查找图片与掩膜，并在所有已挂载输入中查找 SAT-493M 和 GeoRSCLIP 权重：
 
 ```python
 %run /kaggle/working/PV-DINOV3SAT/codex运行文件/dmsf_fusion_v1/kaggle/run-experiment-a-equal-fusion.py
@@ -123,4 +123,4 @@ Notebook 右侧需要挂载 Experiment A 数据集和 Encoder Checkpoints 数据
 
 默认融合阈值为 0.5，仅用于生成 CAM 二值图和诊断 IoU；查询掩膜不会输入模型。结果写入 `/kaggle/working/experiment_a_equal_fusion/`，包含逐图 CSV、JSON 汇总、每张图的六格对照面板、CAM 数组和全 20 张概览图。Notebook 会直接显示概览和第一张逐图面板。
 
-如果 Kaggle 将输入目录挂载到不同层级，可在运行前设置 `DMSF_DATA_ROOT` 为同时含 `images/` 与 `mask/` 的目录；若相同权重文件出现多份，也可分别设置 `DMSF_DINO_WEIGHTS`、`DMSF_GEO_WEIGHTS`。可用 `DMSF_CAM_THRESHOLD` 调整诊断阈值，正式对比时应固定阈值并记录，不要依据这 20 张查询标签调参。
+如果 Kaggle 将数据集挂载到不同层级，可设置 `DMSF_DATA_ROOT` 为 Experiment A 数据集根目录，或设置 `DMSF_BENCHMARK_MANIFEST` 指向其固定清单。若相同权重文件出现多份，也可分别设置 `DMSF_DINO_WEIGHTS`、`DMSF_GEO_WEIGHTS`。可用 `DMSF_CAM_THRESHOLD` 调整诊断阈值，正式对比时应固定阈值并记录，不要依据这 20 张查询标签调参。
