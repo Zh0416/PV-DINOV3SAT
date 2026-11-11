@@ -72,13 +72,17 @@ class SourceCalibrator(nn.Module):
 
 class Segmenter(nn.Module):
     def __init__(self, branch, normalization, text_kind='real', beta_init=0.7,
-                 config=None, random_text_seed=4242, calibration_shrink=0.25):
+                 config=None, random_text_seed=4242, calibration_shrink=0.25,
+                 fusion_mode='equal'):
         super().__init__()
         if branch not in ('spatial', 'fusion') or normalization not in ('minmax', 'calibrated'):
             raise ValueError('Unknown branch or normalization.')
         if text_kind not in ('real', 'random') or not math.isfinite(beta_init):
             raise ValueError('Unknown text kind or beta.')
+        if fusion_mode not in ('equal', 'learned'):
+            raise ValueError('fusion_mode must be equal or learned.')
         self.branch, self.normalization, self.text_kind = branch, normalization, text_kind
+        self.fusion_mode = fusion_mode
         c = replace(config, fusion_logit_init=beta_init) if config else DMSFConfig(fusion_logit_init=beta_init)
         self.dmsf = DMSF(c)
         self.head = nn.Sequential(nn.Conv2d(c.hidden_dim + 1, 64, 3, padding=1),
@@ -91,11 +95,14 @@ class Segmenter(nn.Module):
             for module in (self.dmsf.text_to_visual, self.dmsf.text_projection, self.dmsf.semantic_refiner):
                 module.requires_grad_(False)
             self.dmsf.fusion_logit.requires_grad_(False)
+        elif fusion_mode == 'equal':
+            self.dmsf.fusion_logit.requires_grad_(False)
 
     def identity(self):
         return {'branch': self.branch, 'normalization': self.normalization,
                 'text_kind': self.text_kind, 'beta_init': self.dmsf.config.fusion_logit_init,
-                'calibration_shrink': self.spatial_calibrator.shrink if self.spatial_calibrator else None}
+                'calibration_shrink': self.spatial_calibrator.shrink if self.spatial_calibrator else None,
+                'fusion_mode': self.fusion_mode}
 
     def forward(self, support, query, mask, text):
         c = self.dmsf.config
@@ -138,8 +145,12 @@ class Segmenter(nn.Module):
                 semantic_input, semantic_info = self.semantic_calibrator(
                     semantic_raw, support_semantic, mask, torch.ones_like(mask, dtype=torch.bool))
             semantic = self.dmsf.semantic_refiner(semantic_input)
-            weight = self.dmsf.fusion_logit.sigmoid()
-            selected = weight * spatial + (1 - weight) * semantic
+            if self.fusion_mode == 'equal':
+                weight = spatial.new_tensor(0.5)
+                selected = 0.5 * (spatial + semantic)
+            else:
+                weight = self.dmsf.fusion_logit.sigmoid()
+                selected = weight * spatial + (1 - weight) * semantic
         else:
             weight = spatial.new_tensor(1.)
             selected = spatial

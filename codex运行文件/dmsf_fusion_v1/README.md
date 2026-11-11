@@ -1,8 +1,8 @@
-# 固定版：空间、语义与融合 CAM
+# 固定版：空间、语义与等权融合 CAM
 
-这个分支固定第三阶段 `seed_42/fusion_minmax_beta07_real` 的第 18 轮检查点。它有已训练的空间 CAM、真实 GeoRSCLIP 文本生成的语义 CAM，以及一张送入分割头的融合 CAM。选择此版是为了固定原定 `beta_init=0.7` 的真实文本实现，不以是否优于空间单路作为条件。检查点包含可训练投影、CAM 修正器、融合标量和分割头；冻结 DINOv3-SAT 与 GeoRSCLIP 编码器权重需另行获取。
+推理固定使用第三阶段 `seed_42/fusion_minmax_beta07_real` 的第 18 轮检查点。CAM 融合已改为固定等权；检查点中旧的融合标量只为兼容权重文件而保留，在等权推理中冻结且不参与计算。投影层、CAM 修正器和分割头来自原检查点；原训练使用的融合权重约为 0.66/0.34，因此这里的等权结果属于推理期对照，不代表用等权重新训练过的分割头。冻结的 DINOv3-SAT 与 GeoRSCLIP 编码器权重需另行挂载。
 
-计算流程：DINOv3-SAT 第 24 层冻结特征经共享投影 `phi` 后，支持图前景特征平均形成原型。查询特征与原型的逐 patch 余弦相似经逐图 min-max 和空间修正器得到 `spatial_cam`。固定提示 `a satellite image of ground-mounted solar panel arrays` 的 GeoRSCLIP 文本向量经可训练 `g` 和独立 `psi` 投影，再与查询特征逐 patch 余弦相似，经逐图 min-max 和语义修正器得到 `semantic_cam`。`fused_cam = sigmoid(beta) * spatial_cam + (1-sigmoid(beta)) * semantic_cam`，其中 beta 是已训练标量，不再是初值 0.7。分割头输入仅为 `[phi(Fq), fused_cam]`，阈值为双线性上采样后的 logits `>= 0`。此处的语义 CAM 是 patch 级文本方向相似度，区别于早期 GeoRSCLIP 滑窗图；也不是完整 SSPNet 复现。
+计算流程：DINOv3-SAT 第 24 层冻结特征经共享投影 `phi` 后，支持图前景特征平均形成原型。查询特征与原型的逐 patch 余弦相似经逐图 min-max 和空间修正器得到 `spatial_cam`。固定提示 `a satellite image of ground-mounted solar panel arrays` 的 GeoRSCLIP 文本向量经可训练 `g` 和独立 `psi` 投影，再与查询特征逐 patch 余弦相似，经逐图 min-max 和语义修正器得到 `semantic_cam`。现在使用 `fused_cam = 0.5 * spatial_cam + 0.5 * semantic_cam`。分割头输入仅为 `[phi(Fq), fused_cam]`，阈值为双线性上采样后的 logits `>= 0`。此处的语义 CAM 是 patch 级文本方向相似度，区别于早期 GeoRSCLIP 滑窗图；也不是完整 SSPNet 复现。
 
 `version.json` 锁定检查点 SHA-256、源码哈希、输入契约和模型身份。`checkpoints/best.pt` 是 13.2 MB 的可训练模块权重，不包含冻结编码器。源码分别位于相邻的 `dmsf_v1/dmsf.py`、`dmsf_v1/feature_cache.py`、`dmsf_stage3/stage3_model.py`，以及文本编码器加载器 `georsclip_semantic_cam_e1/run_e1.py`。训练入口 `dmsf_stage3/run_stage3.py` 和固定协议、数据清单也在本分支。
 

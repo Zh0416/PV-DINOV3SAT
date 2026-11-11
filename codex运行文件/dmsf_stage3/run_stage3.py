@@ -36,7 +36,7 @@ def variants():
             for text_kind in ('real', 'random'):
                 yield f'fusion_{normalization}_{beta_name}_{text_kind}', {
                     'branch': 'fusion', 'normalization': normalization,
-                    'text_kind': text_kind, 'beta_init': beta}
+                    'text_kind': text_kind, 'beta_init': beta, 'fusion_mode': 'learned'}
 
 
 @torch.no_grad()

@@ -49,15 +49,20 @@ def load_model(device: torch.device, checkpoint_path: Path | None = None) -> Seg
     if checkpoint_path.stat().st_size != spec['checkpoint_bytes'] or sha256(checkpoint_path) != spec['checkpoint_sha256']:
         raise ValueError('Checkpoint size or SHA-256 differs from pinned version.')
     checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=True)
-    if (checkpoint['identity'] != spec['identity'] or checkpoint['seed'] != spec['seed']
+    checkpoint_identity = spec.get('checkpoint_identity', spec['identity'])
+    if (checkpoint['identity'] != checkpoint_identity or checkpoint['seed'] != spec['seed']
             or checkpoint['epoch'] != spec['best_epoch']):
         raise ValueError('Checkpoint identity differs from pinned version.')
-    for source, expected in [('dmsf.py', spec['source_sha256']['dmsf_v1/dmsf.py']),
-                             ('stage3_model.py', spec['source_sha256']['dmsf_stage3/stage3_model.py'])]:
+    checkpoint_sources = spec.get('checkpoint_source_sha256', {
+        'dmsf.py': spec['source_sha256']['dmsf_v1/dmsf.py'],
+        'stage3_model.py': spec['source_sha256']['dmsf_stage3/stage3_model.py'],
+    })
+    for source, expected in checkpoint_sources.items():
         if checkpoint['source_hashes'].get(source) != expected:
             raise ValueError('Checkpoint source manifest differs: ' + source)
-    model = Segmenter(**{key: spec['identity'][key] for key in
-                        ('branch', 'normalization', 'text_kind', 'beta_init')})
+    model = Segmenter(**{key: checkpoint_identity[key] for key in
+                        ('branch', 'normalization', 'text_kind', 'beta_init')},
+                      fusion_mode=spec.get('identity', {}).get('fusion_mode', 'learned'))
     model.load_state_dict(checkpoint['state_dict'], strict=True)
     return model.to(device).eval()
 

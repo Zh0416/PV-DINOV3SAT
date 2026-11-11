@@ -21,9 +21,11 @@ class ControlledFusionTests(unittest.TestCase):
                        torch.randn(2, 6))
         self.target = (torch.rand(2, 1, 8, 8) > .6).float()
 
-    def model(self, branch='fusion', normalization='minmax', text_kind='real', beta_init=.7):
+    def model(self, branch='fusion', normalization='minmax', text_kind='real', beta_init=.7,
+              fusion_mode='equal'):
         torch.manual_seed(42)
-        return Segmenter(branch, normalization, text_kind, beta_init, self.config)
+        return Segmenter(branch, normalization, text_kind, beta_init, self.config,
+                         fusion_mode=fusion_mode)
 
     def test_head_only_receives_visual_features_and_selected_cam(self):
         spatial = self.model('spatial')
@@ -34,12 +36,12 @@ class ControlledFusionTests(unittest.TestCase):
         a, b = spatial(*self.inputs), fusion(*self.inputs)
         torch.testing.assert_close(a['spatial_cam'], b['spatial_cam'])
         torch.testing.assert_close(a['selected_cam'], a['spatial_cam'])
-        torch.testing.assert_close(b['selected_cam'], b['spatial_weight'] * b['spatial_cam'] +
-                                   (1 - b['spatial_weight']) * b['semantic_cam'])
-        self.assertAlmostEqual(float(b['spatial_weight'].detach()), 1 / (1 + math.exp(-.7)), places=6)
+        torch.testing.assert_close(b['selected_cam'], .5 * (b['spatial_cam'] + b['semantic_cam']))
+        self.assertEqual(float(b['spatial_weight']), .5)
+        self.assertFalse(fusion.dmsf.fusion_logit.requires_grad)
 
-    def test_beta_is_the_only_cam_route_to_fusion_head(self):
-        model = self.model()
+    def test_legacy_learned_fusion_remains_explicit_for_reproduction(self):
+        model = self.model(fusion_mode='learned')
         maps = model(*self.inputs)
         loss, _ = supervised_loss(maps, self.target)
         loss.backward()
@@ -50,8 +52,9 @@ class ControlledFusionTests(unittest.TestCase):
             changed = model(*self.inputs)['logits']
         self.assertFalse(torch.equal(initial, changed))
 
-    def test_random_text_fixed_and_weight_085(self):
-        model = self.model(text_kind='random', beta_init=math.log(.85 / .15))
+    def test_random_text_fixed_and_legacy_weight_085(self):
+        model = self.model(text_kind='random', beta_init=math.log(.85 / .15),
+                           fusion_mode='learned')
         changed = list(self.inputs)
         changed[-1] = torch.randn_like(changed[-1])
         torch.testing.assert_close(model(*self.inputs)['logits'], model(*changed)['logits'], rtol=0, atol=0)

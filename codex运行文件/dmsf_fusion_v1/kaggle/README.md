@@ -20,7 +20,9 @@ query.png            # 查询影像，任意宽高，RGB/RGBA 均可
 
 ```python
 !git clone -b codex/dmsf-global-fusion-v1 https://github.com/Zh0416/PV-DINOV3SAT.git /kaggle/working/PV-DINOV3SAT
-!pip install -q open_clip_torch==2.24.0
+!git clone https://github.com/facebookresearch/dinov3.git /kaggle/working/dinov3
+!git -C /kaggle/working/dinov3 checkout --detach 6876159a11b4df116f30f667f8c9888617df0751
+!pip install -q -e /kaggle/working/dinov3 open_clip_torch==2.24.0
 ```
 
 如果分支尚未推送，把本分支的代码目录作为 Kaggle Dataset 挂载，并把 `CODE_ROOT` 改为该目录。当前固定权重在 `codex运行文件/dmsf_fusion_v1/checkpoints/best.pt`，也可以单独作为 Dataset 挂载。
@@ -103,3 +105,22 @@ prediction.json
 ```
 
 脚本会自动将 TIFF 读取为 RGB，按比例放入 1024×1024 编码画布，推理后再恢复到查询图的原始尺寸；因此 512×512 输入会得到 512×512 CAM。`cam_panel.png` 使用同一个 0..1 色标显示三张 CAM，便于直接比较。
+
+## Experiment A 固定集等权融合
+
+Notebook 右侧需要挂载 Experiment A 数据集和 Encoder Checkpoints 数据集，并开启 GPU 与 Internet。先拉取此分支并安装 GeoRSCLIP 文本编码依赖：
+
+```python
+!git clone -b codex/dmsf-global-fusion-v1 https://github.com/Zh0416/PV-DINOV3SAT.git /kaggle/working/PV-DINOV3SAT
+!pip install -q open_clip_torch==2.24.0
+```
+
+然后运行批量入口。它从仓库的 `benchmark_v1.json` 读取固定支持图和 20 张查询图，在挂载目录中自动查找图片、掩膜、SAT-493M 权重和 GeoRSCLIP 权重：
+
+```python
+%run /kaggle/working/PV-DINOV3SAT/codex运行文件/dmsf_fusion_v1/kaggle/run-experiment-a-equal-fusion.py
+```
+
+默认融合阈值为 0.5，仅用于生成 CAM 二值图和诊断 IoU；查询掩膜不会输入模型。结果写入 `/kaggle/working/experiment_a_equal_fusion/`，包含逐图 CSV、JSON 汇总、每张图的六格对照面板、CAM 数组和全 20 张概览图。Notebook 会直接显示概览和第一张逐图面板。
+
+如果 Kaggle 将输入目录挂载到不同层级，可在运行前设置 `DMSF_DATA_ROOT` 为同时含 `images/` 与 `mask/` 的目录；若相同权重文件出现多份，也可分别设置 `DMSF_DINO_WEIGHTS`、`DMSF_GEO_WEIGHTS`。可用 `DMSF_CAM_THRESHOLD` 调整诊断阈值，正式对比时应固定阈值并记录，不要依据这 20 张查询标签调参。

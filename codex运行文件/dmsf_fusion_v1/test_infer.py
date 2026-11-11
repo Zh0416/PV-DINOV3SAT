@@ -26,6 +26,8 @@ class FusionVersionTests(unittest.TestCase):
     def test_pinned_model_routes_three_cams(self):
         self.assertEqual(self.model.identity()['branch'], 'fusion')
         self.assertEqual(self.model.identity()['text_kind'], 'real')
+        self.assertEqual(self.model.identity()['fusion_mode'], 'equal')
+        self.assertFalse(self.model.dmsf.fusion_logit.requires_grad)
         self.assertEqual(self.model.head[0].in_channels, 257)
         self.assertTrue(bool(self.model.dmsf.semantic_refiner.net[2].weight.abs().sum() > 0))
         self.assertTrue(bool(self.model.dmsf.spatial_refiner.net[2].weight.abs().sum() > 0))
@@ -50,8 +52,8 @@ class FusionVersionTests(unittest.TestCase):
         self.assertEqual(maps['spatial_cam'].shape, (1, 1, 8, 8))
         self.assertEqual(maps['semantic_cam'].shape, (1, 1, 8, 8))
         torch.testing.assert_close(
-            maps['selected_cam'], maps['spatial_weight'] * maps['spatial_cam'] +
-            (1 - maps['spatial_weight']) * maps['semantic_cam'])
+            maps['selected_cam'], 0.5 * (maps['spatial_cam'] + maps['semantic_cam']))
+        self.assertEqual(float(maps['spatial_weight']), 0.5)
 
     def test_variable_size_letterbox_and_output_restore(self):
         geometry = letterbox_geometry(720, 1280)
@@ -80,7 +82,7 @@ class FusionVersionTests(unittest.TestCase):
         arrays = (np.zeros((1, 1024, 64, 64), np.float32),
                   np.zeros((1, 1024, 64, 64), np.float32),
                   np.zeros((1, 1, 64, 64), np.float32),
-                  np.ones((1, 512), np.float32) / np.sqrt(512))
+                  np.ones((1, 512), np.float32) / np.float32(np.sqrt(512)))
         with self.assertRaisesRegex(ValueError, 'nonempty binary'):
             validate_inputs(arrays, torch.device('cpu'))
 
@@ -91,14 +93,13 @@ class FusionVersionTests(unittest.TestCase):
         self.assertEqual(result['semantic_cam'].shape, (64, 64))
         self.assertEqual(result['fused_cam'].shape, (64, 64))
         self.assertEqual(result['mask_full'].shape, (1024, 1024))
-        self.assertAlmostEqual(float(result['spatial_weight']), 0.6602444649, places=5)
+        self.assertAlmostEqual(float(result['spatial_weight']), 0.5, places=6)
         self.assertAlmostEqual(float(result['spatial_cam'].mean()), 0.0578892902, places=4)
         self.assertAlmostEqual(float(result['semantic_cam'].mean()), 0.3735718131, places=4)
-        self.assertAlmostEqual(float(result['logits_patch'].mean()), -12.9190216064, places=3)
+        self.assertAlmostEqual(float(result['logits_patch'].mean()), -12.9160013199, places=3)
         np.testing.assert_allclose(
             result['fused_cam'],
-            result['spatial_weight'] * result['spatial_cam'] +
-            (1 - result['spatial_weight']) * result['semantic_cam'],
+            0.5 * (result['spatial_cam'] + result['semantic_cam']),
             rtol=1e-6, atol=1e-7)
         np.testing.assert_array_equal(result['mask_full'], result['logits_full'] >= 0)
 
