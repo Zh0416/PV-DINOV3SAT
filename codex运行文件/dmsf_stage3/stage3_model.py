@@ -104,7 +104,7 @@ class Segmenter(nn.Module):
                 'calibration_shrink': self.spatial_calibrator.shrink if self.spatial_calibrator else None,
                 'fusion_mode': self.fusion_mode}
 
-    def forward(self, support, query, mask, text):
+    def forward(self, support, query, mask, text, include_logits=True):
         c = self.dmsf.config
         if support.ndim != 4 or query.ndim != 4 or support.shape[0] != query.shape[0] or support.shape[1] != c.visual_dim or query.shape[1] != c.visual_dim:
             raise ValueError('Invalid frozen visual feature shape.')
@@ -154,7 +154,7 @@ class Segmenter(nn.Module):
         else:
             weight = spatial.new_tensor(1.)
             selected = spatial
-        logits = self.head(torch.cat((fq, selected), dim=1))
+        logits = self.head(torch.cat((fq, selected), dim=1)) if include_logits else None
         return {'logits': logits, 'spatial_cam': spatial, 'semantic_cam': semantic,
                 'selected_cam': selected, 'query_features': fq, 'spatial_raw': spatial_raw,
                 'semantic_raw': semantic_raw,

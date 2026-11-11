@@ -11,7 +11,6 @@ import sys
 import numpy as np
 from PIL import Image
 import torch
-import torch.nn.functional as F
 
 
 HERE = Path(__file__).resolve().parent
@@ -268,29 +267,29 @@ def main() -> None:
         print(f"[{index:02d}/{len(query_names)}] {query_name}", flush=True)
         query_features = encode_dino(dino, query_image, device).unsqueeze(0).to(device)
         with torch.inference_mode():
-            maps = model(support_features, query_features, support_mask, text)
+            maps = model(
+                support_features,
+                query_features,
+                support_mask,
+                text,
+                include_logits=False,
+            )
         spatial = upsample_cam(maps["spatial_cam"])
         semantic = upsample_cam(maps["semantic_cam"])
         fused = upsample_cam(maps["selected_cam"])
-        head_logits = F.interpolate(
-            maps["logits"], size=(1024, 1024), mode="bilinear", align_corners=False
-        )[0, 0].float().cpu().numpy()
         target = read_mask(masks_dir / f"{Path(query_name).stem}_label.bmp")
 
         spatial_result = counts(target, spatial >= threshold)
         semantic_result = counts(target, semantic >= threshold)
         fusion_result = counts(target, fused >= threshold)
-        head_result = counts(target, head_logits >= 0)
         row = {
             "query_image": query_name,
             "spatial_iou": spatial_result["iou"],
             "semantic_iou": semantic_result["iou"],
             "equal_fusion_iou": fusion_result["iou"],
-            "segmentation_head_iou": head_result["iou"],
             "spatial_dice": spatial_result["dice"],
             "semantic_dice": semantic_result["dice"],
             "equal_fusion_dice": fusion_result["dice"],
-            "segmentation_head_dice": head_result["dice"],
             "tp": fusion_result["tp"],
             "fp": fusion_result["fp"],
             "fn": fusion_result["fn"],
@@ -306,7 +305,6 @@ def main() -> None:
             semantic_cam=semantic.astype(np.float32),
             equal_fusion_cam=fused.astype(np.float32),
             equal_fusion_mask=(fused >= threshold).astype(np.uint8),
-            segmentation_head_mask=(head_logits >= 0).astype(np.uint8),
             query_mask=target.astype(np.uint8),
             threshold=np.asarray(threshold, dtype=np.float32),
         )
@@ -359,7 +357,6 @@ def main() -> None:
         "spatial_cam_iou": aggregate("spatial"),
         "semantic_cam_iou": aggregate("semantic"),
         "equal_fusion_iou": aggregate("equal_fusion"),
-        "segmentation_head_iou": aggregate("segmentation_head"),
         "dino": dino_info,
         "georsclip_text": geo_info,
         "rows": rows,
@@ -372,7 +369,6 @@ def main() -> None:
     print(f"Results: {output_dir}", flush=True)
     print(json.dumps({
         "equal_fusion": summary["equal_fusion_iou"],
-        "segmentation_head": summary["segmentation_head_iou"],
         "overview": str(overview_path),
     }, ensure_ascii=False, indent=2), flush=True)
     try:

@@ -55,6 +55,23 @@ class FusionVersionTests(unittest.TestCase):
             maps['selected_cam'], 0.5 * (maps['spatial_cam'] + maps['semantic_cam']))
         self.assertEqual(float(maps['spatial_weight']), 0.5)
 
+    def test_cam_only_forward_skips_segmentation_head(self):
+        support = torch.ones(1, 1024, 8, 8)
+        query = torch.randn(1, 1024, 8, 8)
+        mask = torch.zeros(1, 1, 8, 8)
+        mask[:, :, :2, :2] = 1
+        text = torch.nn.functional.normalize(torch.ones(1, 512), dim=-1)
+        original_head = self.model.head
+        self.model.head = torch.nn.Identity()
+        try:
+            with torch.inference_mode():
+                maps = self.model(support, query, mask, text, include_logits=False)
+        finally:
+            self.model.head = original_head
+        self.assertIsNone(maps['logits'])
+        torch.testing.assert_close(
+            maps['selected_cam'], 0.5 * (maps['spatial_cam'] + maps['semantic_cam']))
+
     def test_variable_size_letterbox_and_output_restore(self):
         geometry = letterbox_geometry(720, 1280)
         self.assertEqual((geometry['resized_height'], geometry['resized_width']), (576, 1024))

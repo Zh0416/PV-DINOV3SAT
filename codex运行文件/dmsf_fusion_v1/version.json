@@ -36,6 +36,6 @@
     "dmsf_v1/dmsf.py": "1ce22a533668f254a44cf86224a0ff9d202aff53ee7adebabd9c85a1099c37b2",
     "dmsf_v1/feature_cache.py": "00eb86536939f25aefbfee5e2d51a1b195d7083ce3c42fbfb96c96c00641fa02",
     "georsclip_semantic_cam_e1/run_e1.py": "7cdfe4e406e9f2001fdb387fd396e0db72a8a90566f8c9d3e4189af32305664c",
-    "dmsf_stage3/stage3_model.py": "7b49e295466c66a9f3bc2f84bef74ff433e58a6c79c35275699ae21354cd3b1a"
+    "dmsf_stage3/stage3_model.py": "62bdcd7240ffd65b4b6ec5eee4f0ad2672ee28e6fd549f9f08fdad61ba312c0c"
   }
 }
