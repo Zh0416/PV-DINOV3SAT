@@ -15,7 +15,7 @@ import torch.nn.functional as F
 
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[3]
+REPO = HERE.parents[2]
 CODE = REPO / "codex运行文件"
 MANIFEST_PATH = CODE / "experiment_a" / "benchmark_v1.json"
 DATASET_ROOT = Path("/kaggle/input")
