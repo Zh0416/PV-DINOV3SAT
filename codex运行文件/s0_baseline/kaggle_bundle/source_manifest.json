@@ -1,14 +1,16 @@
 {
   "sources": {
-    "s0_model.py": "d16573b4ce9500125af58d6e3545f33e18eba1018cfb3dbae94c2672144056cb",
-    "s0_data.py": "a9bc30675e9f488061a301d89412f1b7c738b6de1ec62f0722dfa3613d9f0124",
-    "train_s0.py": "308d81059eff40ac0e4989b6a1fa75590a0d702190a7aeb18ae97379e83ede54",
-    "requirements.txt": "5447c788d5cf08535b177d6873fa0853502bdf83a7a665481b70473eea449f68",
+    "s0_model.py": "127c19ab0af82c5a8bae3348290704bc4a05e7871c931e5b98686853bf35bef3",
+    "s0_data.py": "a889278120ee16ba88d2b2e1801425e66fb226912c775f73c750004b08bea4f8",
+    "s0_merged_validation.py": "47e15fd82e0597c7b098b7c182baa89fd0c5debca9c6c2b2739d1c3ee0a809eb",
+    "train_s0.py": "e81006fe0fb5a8a1d20291578c1042a5501fd2351775a3e8c084052cb7bd490d",
+    "requirements.txt": "f5ba98ec5eb1d7cb47a6ea496ca05bd911a6ceb79d0707e3bb439446cd46de73",
     "protocol/s0_selection.json": "a876b52806d1102a465eac825ac7c9b73068c75c0181244cb918babc78629d29",
     "protocol/s0_selection_ids.csv": "480989173f3ead9423b0dfbf974bae672fa99ed62d511c7bfa507a8231fdd6ed",
+    "protocol/merged_validation_reference.json": "e58be0586527dc6304e55aa81485ace56aa42e606ca38fb708474c4c34f33806",
     "protocol/protocol.json": "87b8fa4bfce8272011b62998fe0b1f7687a473488daf569b3815355c769a5b37",
     "protocol/data_audit.json": "d3dfc34355b0ec65219864f871421c0abe326e58409653916f102401257f5faa"
   },
-  "generated_script_sha256": "cdcee770aaa01b3bb0a50db74a2f04e50dd70df633f6d9be72661ce6dbea103b",
+  "generated_script_sha256": "80083c4fef4b732a3d3225eb7f0d2d17136270d878d91f77bdd30a4ff49b45ea",
   "note": "Attach PV-512 and SAT weights before running; no Kaggle input slug is assumed."
 }

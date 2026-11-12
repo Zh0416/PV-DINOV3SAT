@@ -10,8 +10,9 @@ import zipfile
 
 
 HERE = Path(__file__).resolve().parent
-SOURCES = ("s0_model.py", "s0_data.py", "train_s0.py", "requirements.txt",
+SOURCES = ("s0_model.py", "s0_data.py", "s0_merged_validation.py", "train_s0.py", "requirements.txt",
            "protocol/s0_selection.json", "protocol/s0_selection_ids.csv",
+           "protocol/merged_validation_reference.json",
            "protocol/protocol.json", "protocol/data_audit.json")
 
 

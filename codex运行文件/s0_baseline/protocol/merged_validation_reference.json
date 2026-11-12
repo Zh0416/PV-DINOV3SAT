@@ -1,0 +1,9 @@
+{
+  "schema": "s0-merged-validation-reference-v1",
+  "selection_sha256": "f591c05f62cf4c60e31bd4d19a97284d48323df36059bd5afb915430530c2062",
+  "manifest_sha256": "412251b0a6458360ca891469800dc5ee0a0ffe4ec155815819a41d07d8bd1508",
+  "summary_sha256": "2539a1efc6830369413b6c9b44b10b9cd4ea8a4b6fb4f686b8473e3428317c78",
+  "lock_sha256": "ec1b13b9175533ebe0c5b1b56a562151c46227407fedcef494ada41c94c3f2f8",
+  "cohort_counts": {"PV-512-unused": 77, "PV-512TEST": 108},
+  "selection_rule": "All 185 images are evaluated each joint epoch; only PV-512TEST scene-macro Dice selects the checkpoint."
+}

@@ -19,10 +19,11 @@ from s0_data import (SEED, SUPPORT_ID, cache_tokens, canonical_sha256,
                      checked_mask, checked_rgb, find_dataset_root, find_weights, inventory,
                      load_tokens, lock_selection, scene_key, sha256_file, write_json)
 from s0_model import S0Segmenter, s0_loss
+from s0_merged_validation import evaluate_merged, load_merged_validation
 
 
 PROTOCOL = {
-    "schema": "s0-pv512-training-v1", "seed": SEED, "support_id": SUPPORT_ID,
+    "schema": "s0-pv512-training-v2", "seed": SEED, "support_id": SUPPORT_ID,
     "epochs_max": 20, "warmup_epochs": 3, "joint_start_epoch": 4,
     "batch_size": 1, "gradient_accumulation": 4,
     "optimizer": "AdamW", "learning_rate": 1e-4, "weight_decay": 1e-4,
@@ -33,7 +34,7 @@ PROTOCOL = {
     "positive_loss": "BCEWithLogits(pos_weight=2.0)+soft Dice+0.1*raw CAM BCE(pos_weight=2.0)",
     "hard_negative_loss": "BCEWithLogits(empty target)+0.1*raw CAM BCE(empty target); no Dice",
     "prediction_threshold": "logits >= 0", "empty_dice": "1 iff predicted mask empty, else 0",
-    "validation_score": "positive source-scene macro Dice - empty source-scene macro false-positive pixel rate; earliest exact tie wins",
+    "validation_score": "merged PV-512TEST scene-macro Dice; legacy positive/empty validation keeps its original score; earliest exact tie wins",
     "validation_eligible": "joint phase only, start/reset best and patience at epoch 4",
     "early_stopping_patience": 5,
 }
@@ -337,10 +338,24 @@ def train(args: argparse.Namespace) -> None:
         "support_id": SUPPORT_ID, "support_foreground_pixels": support_foreground_pixels,
         "source_scenes": sorted({e["source_scene"] for e in selected}),
         "source_counts": selection.get("source_counts"), "query_validation_performed": False})
-    validation, validation_root, validation_sha = load_validation(
-        args.validation_manifest, args.validation_root, selected, output)
+    merged_arg = getattr(args, "merged_validation_root", None)
+    if merged_arg is not None and args.validation_manifest is not None:
+        raise ValueError("Choose either --merged-validation-root or --validation-manifest.")
+    if merged_arg is not None:
+        merged_rows, merged_root, validation_sha = load_merged_validation(
+            merged_arg, selected, selection["selection_sha256"], output,
+            reference_path=Path(__file__).parent / "protocol" / "merged_validation_reference.json")
+        validation, validation_root = [], None
+        validation_mode = "merged_185"
+    else:
+        if (output / "merged_validation_lock.json").exists():
+            raise ValueError("Resume requires the original --merged-validation-root.")
+        validation, validation_root, validation_sha = load_validation(
+            args.validation_manifest, args.validation_root, selected, output)
+        merged_rows, merged_root = [], None
+        validation_mode = "external_positive_empty" if validation else "none"
     locked_protocol = {**PROTOCOL, "selection_sha256": selection["selection_sha256"],
-                       "validation_sha256": validation_sha}
+                       "validation_sha256": validation_sha, "validation_mode": validation_mode}
     protocol_path = output / "protocol.json"
     if protocol_path.exists() and json.loads(protocol_path.read_text(encoding="utf-8")) != locked_protocol:
         raise ValueError("The existing run protocol differs; use the original options or a new output.")
@@ -348,6 +363,7 @@ def train(args: argparse.Namespace) -> None:
     if args.mode == "prepare":
         print(json.dumps({"selection_sha256": selection["selection_sha256"],
                           "positive_queries": 1199, "hard_negative_queries": 50,
+                          "merged_validation_images": len(merged_rows),
                           "output": str(output)}, ensure_ascii=False), flush=True)
         return
     weights = find_weights(args.input_root, args.dino_weights)
@@ -368,8 +384,10 @@ def train(args: argparse.Namespace) -> None:
                          weights, device, selection["selection_sha256"])
     validation_cache = output / "validation_tokens"
     validation_index = None
-    if validation and args.mode != "smoke":
-        validation_index = cache_tokens(validation_root, validation, validation_cache,
+    validation_entries = merged_rows if merged_rows else validation
+    validation_data_root = merged_root if merged_rows else validation_root
+    if validation_entries and args.mode != "smoke":
+        validation_index = cache_tokens(validation_data_root, validation_entries, validation_cache,
                                         args.dino_repo or output / "dinov3", weights, device, validation_sha)
     support = load_tokens(cache_dir, index, SUPPORT_ID, device)
     support_mask = torch.from_numpy(checked_mask(root / support_entry["mask"], positive=True).copy())[None, None].to(device=device, dtype=torch.float32)
@@ -381,7 +399,7 @@ def train(args: argparse.Namespace) -> None:
     scaler = torch.amp.GradScaler("cuda", enabled=device.type == "cuda", init_scale=PROTOCOL["amp_initial_scale"])
     run_identity = {"weight_sha256": index["weight_sha256"],
                     "sources": {name: sha256_file(Path(__file__).parent / name)
-                                for name in ("s0_data.py", "s0_model.py", "train_s0.py")},
+                                for name in ("s0_data.py", "s0_model.py", "s0_merged_validation.py", "train_s0.py")},
                     "torch": str(torch.__version__), "device_type": device.type}
     write_json(output / "runtime.json", {**run_identity, "device": str(device),
                 "gpu": torch.cuda.get_device_name(device) if device.type == "cuda" else None})
@@ -479,13 +497,18 @@ def train(args: argparse.Namespace) -> None:
         record = {"epoch": epoch, "phase": phase, "train": train_summary, "validation": None,
                   "training_metric_source": "decoder logits" if phase == "joint" else "raw CAM only, decoder not evaluated",
                   "selection_sha256": selection["selection_sha256"]}
-        if validation and phase == "joint" and args.mode != "smoke":
-            summary, per_image = evaluate(model, support, support_mask, validation,
-                                          validation_root, validation_cache, validation_index, device)
+        if validation_entries and phase == "joint" and args.mode != "smoke":
+            if merged_rows:
+                summary, per_image = evaluate_merged(model, support, support_mask, merged_rows,
+                                                     merged_root, validation_cache, validation_index, device)
+                key = (summary["selection_score"], 0.0)
+            else:
+                summary, per_image = evaluate(model, support, support_mask, validation,
+                                              validation_root, validation_cache, validation_index, device)
+                key = validation_key(summary)
             record["validation"] = summary
             write_json(output / f"validation_epoch_{epoch:02d}.json",
-                       {"summary": summary, "per_image": per_image})
-            key = validation_key(summary)
+                       {"summary": summary, "per_image": per_image, "validation_mode": validation_mode})
             improved = key[0] > best_key[0]
             if improved:
                 best_key, best_epoch, stale_epochs = key, epoch, 0
@@ -520,7 +543,8 @@ def train(args: argparse.Namespace) -> None:
             break
     write_json(output / "run_status.json", {"completed_epoch": epoch,
                "best_epoch": best_epoch, "best_model_selected": best_epoch is not None,
-               "validation_available": bool(validation), "optimizer_steps": optimizer_steps,
+               "validation_available": bool(validation_entries), "validation_mode": validation_mode,
+               "optimizer_steps": optimizer_steps,
                "selection_sha256": selection["selection_sha256"],
                "timing_100_steps_completed_this_invocation": timing_reported,
                "note": "Without external validation, last.pt is resumable only and is not a selected best model."})
@@ -538,6 +562,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, default=Path("/kaggle/working/s0_baseline"))
     parser.add_argument("--validation-manifest", type=Path)
     parser.add_argument("--validation-root", type=Path)
+    parser.add_argument("--merged-validation-root", type=Path,
+                        help="PV-512-MERGED-185 root or its Kaggle input wrapper")
     parser.add_argument("--epochs", type=int, default=20)
     parser.add_argument("--allow-cpu", action="store_true", help="Local diagnostic only")
     return parser.parse_args()

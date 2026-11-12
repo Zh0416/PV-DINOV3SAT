@@ -1,5 +1,7 @@
 # S0：PV-512 空间原型基线
 
+本分支的 **185 张合并集随训练逐轮验证**流程和 Kaggle 命令见 [INTEGRATED_VALIDATION.md](INTEGRATED_VALIDATION.md)。下文保留原始 S0 v1 训练协议，供比较与审计；新的集成验证运行使用 v2 协议和独立输出目录。
+
 用于用户随后在 Kaggle 单张 T4 上运行。本次只完成代码、CPU 测试和真实数据的 prepare 校验，未运行 DINO 编码、CUDA FP16 或正式训练。无 GeoRSCLIP、RGB 解码支路、局部交叉注意力、Mamba 或频域模块。
 
 ## 已锁定数据
